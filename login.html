@@ -317,6 +317,69 @@
     }
     .error-msg.show { display: block; }
 
+    .auth-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    .auth-right-logo img {
+      height: 34px;
+      width: auto;
+      object-fit: contain;
+    }
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--dark);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-back-home:hover {
+      background: var(--dark);
+      color: #FFFFFF;
+      border-color: var(--dark);
+    }
+    .role-selector-wrap {
+      display: flex;
+      background: var(--bg);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      margin: 18px 0;
+      gap: 4px;
+    }
+    .role-btn {
+      flex: 1;
+      padding: 9px 12px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-xs);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .role-btn.active {
+      background: #FFFFFF;
+      color: var(--accent);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      font-weight: 700;
+    }
+
     @media (max-width: 900px) {
       .auth-left { display: none; }
       .auth-right { padding: 32px 20px; width: 100%; }
@@ -325,6 +388,7 @@
       .auth-right { padding: 20px 14px; }
       .auth-card { padding: 24px 18px; width: 100%; }
       .auth-card-header h1 { font-size: 1.5rem; }
+      .auth-top-bar { flex-direction: row; gap: 8px; }
     }
   </style>
 </head>
@@ -370,9 +434,31 @@
   <!-- RIGHT FORM PANEL -->
   <div class="auth-right">
     <div class="auth-card">
+      
+      <!-- TOP BAR: STACKLY LOGO & BACK TO HOME -->
+      <div class="auth-top-bar">
+        <a href="index.html" class="auth-right-logo" title="Stackly Logistics">
+          <img src="images/logo.webp" alt="Stackly Logo" />
+        </a>
+        <a href="index.html" class="btn-back-home" id="btn-back-home">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Back to Home
+        </a>
+      </div>
+
       <div class="auth-card-header">
         <h1>Sign in to LogiTech</h1>
         <p>New to the platform? <a href="signup.html">Create a free account &rarr;</a></p>
+      </div>
+
+      <!-- ROLE SELECTOR: USER VS ADMIN -->
+      <div class="role-selector-wrap" id="role-selector">
+        <button type="button" class="role-btn active" id="role-user" onclick="selectRole('user')">
+          <span>👤 User / Shipper</span>
+        </button>
+        <button type="button" class="role-btn" id="role-admin" onclick="selectRole('admin')">
+          <span>⚙️ Administrator</span>
+        </button>
       </div>
 
       <div class="error-msg" id="login-error">Invalid email or password. Please try again.</div>
@@ -423,6 +509,14 @@
   </div>
 
   <script>
+    let activeRole = 'user';
+
+    function selectRole(role) {
+      activeRole = role;
+      document.getElementById('role-user').classList.toggle('active', role === 'user');
+      document.getElementById('role-admin').classList.toggle('active', role === 'admin');
+    }
+
     function togglePw(id, btn) {
       const el = document.getElementById(id);
       const isPass = el.type === 'password';
@@ -454,18 +548,18 @@
             name = prefix.charAt(0).toUpperCase() + prefix.slice(1);
           }
 
-          const role = existing.role || (email.toLowerCase().includes('admin') ? 'Administrator' : 'Logistics Manager');
+          const chosenRole = activeRole === 'admin' ? 'Administrator' : 'Logistics Manager';
           const userData = {
             name: name,
             email: email,
-            role: role,
+            role: chosenRole,
             company: existing.company || 'LogiTech Logistics'
           };
 
           localStorage.setItem('logitech_user', JSON.stringify(userData));
           sessionStorage.setItem('logitech_user', JSON.stringify(userData));
 
-          if (role === 'Administrator' || email.toLowerCase().includes('admin')) {
+          if (activeRole === 'admin' || email.toLowerCase().includes('admin')) {
             window.location.href = 'admin.html';
           } else {
             window.location.href = 'dashboard.html';
@@ -475,7 +569,7 @@
           btn.textContent = 'Sign In →';
           btn.disabled = false;
         }
-      }, 700);
+      }, 600);
     }
   </script>
 </body>

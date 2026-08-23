@@ -394,6 +394,69 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes scaleIn { from { transform: scale(0.6); } to { transform: scale(1); } }
 
+    .auth-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+    .auth-right-logo img {
+      height: 34px;
+      width: auto;
+      object-fit: contain;
+    }
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--dark);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-back-home:hover {
+      background: var(--dark);
+      color: #FFFFFF;
+      border-color: var(--dark);
+    }
+    .role-selector-wrap {
+      display: flex;
+      background: var(--bg);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      margin: 16px 0;
+      gap: 4px;
+    }
+    .role-btn {
+      flex: 1;
+      padding: 9px 12px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-xs);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .role-btn.active {
+      background: #FFFFFF;
+      color: var(--accent);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      font-weight: 700;
+    }
+
     @media (max-width: 900px) {
       .auth-left { display: none; }
       .auth-right { padding: 32px 20px; width: 100%; }
@@ -405,6 +468,7 @@
       .auth-card-header h1 { font-size: 1.5rem; }
       .step-indicator { gap: 8px; }
       .step-item span { font-size: 0.72rem; }
+      .auth-top-bar { flex-direction: row; gap: 8px; }
     }
   </style>
 </head>
@@ -437,10 +501,32 @@
   <!-- RIGHT FORM PANEL -->
   <div class="auth-right">
     <div class="auth-card">
+      
+      <!-- TOP BAR: STACKLY LOGO & BACK TO HOME -->
+      <div class="auth-top-bar">
+        <a href="index.html" class="auth-right-logo" title="Stackly Logistics">
+          <img src="images/logo.webp" alt="Stackly Logo" />
+        </a>
+        <a href="index.html" class="btn-back-home" id="btn-back-home">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Back to Home
+        </a>
+      </div>
+
       <div class="auth-form-panel" id="form-panel">
         <div class="auth-card-header">
           <h1>Create your Account</h1>
           <p>Already registered? <a href="login.html">Sign in &rarr;</a></p>
+        </div>
+
+        <!-- ROLE SELECTOR: USER VS ADMIN -->
+        <div class="role-selector-wrap" id="role-selector">
+          <button type="button" class="role-btn active" id="role-user" onclick="selectRole('user')">
+            <span>👤 User / Shipper</span>
+          </button>
+          <button type="button" class="role-btn" id="role-admin" onclick="selectRole('admin')">
+            <span>⚙️ Administrator</span>
+          </button>
         </div>
 
         <!-- Step Indicator -->
@@ -567,6 +653,18 @@
   </div>
 
   <script>
+    let activeRole = 'user';
+
+    function selectRole(role) {
+      activeRole = role;
+      document.getElementById('role-user').classList.toggle('active', role === 'user');
+      document.getElementById('role-admin').classList.toggle('active', role === 'admin');
+      const companyRoleSelect = document.getElementById('company-role');
+      if (companyRoleSelect) {
+        companyRoleSelect.value = role;
+      }
+    }
+
     function togglePw(id, btn) {
       const el = document.getElementById(id);
       const isPass = el.type === 'password';
@@ -605,16 +703,19 @@
       const fn = document.getElementById('first-name').value.trim();
       const ln = document.getElementById('last-name').value.trim();
       const email = document.getElementById('signup-email').value.trim();
-      const role = document.getElementById('company-role').value || 'Administrator';
+      const companyRoleSelect = document.getElementById('company-role');
+      const selectedRoleVal = companyRoleSelect ? companyRoleSelect.value : activeRole;
       const company = document.getElementById('company-name').value.trim() || 'LogiTech Logistics';
       const fullName = fn + (ln ? ' ' + ln : '');
+
+      const finalRole = (activeRole === 'admin' || selectedRoleVal === 'admin') ? 'Administrator' : 'Logistics Manager';
 
       const userData = {
         firstName: fn,
         lastName: ln,
-        name: fullName || (email ? email.split('@')[0] : 'Lingalamanasa123'),
-        email: email || 'lingalamanasa123@gmail.com',
-        role: role === 'admin' ? 'Administrator' : (role === 'user' ? 'Logistics Manager' : role),
+        name: fullName || (email ? email.split('@')[0] : 'User'),
+        email: email || 'user@example.com',
+        role: finalRole,
         company: company
       };
 
