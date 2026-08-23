@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us - LogiTech Logistics Technology</title>
-  <meta name="description" content="Get in touch with LogiTech to discuss your logistics technology needs, request a demo, or get a custom quote for enterprise supply chain solutions." />
+  <meta name="description" content="Get in touch with LogiTech to discuss freight solutions, request an enterprise rate quote, or speak with our 24/7 logistics control tower." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
@@ -13,208 +13,140 @@
     /* Contact Page Specific */
     .contact-layout {
       display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 72px;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 56px;
       align-items: start;
     }
-
-    /* Info Cards */
-    .contact-info { display: flex; flex-direction: column; gap: 24px; }
+    .contact-info { display: flex; flex-direction: column; gap: 20px; }
     .contact-info-card {
       background: var(--color-white);
       border-radius: var(--radius-md);
-      padding: 28px;
+      padding: 24px;
       border: 1px solid var(--color-border);
       box-shadow: var(--shadow-sm);
       display: flex;
-      gap: 18px;
-      align-items: flex-start;
+      gap: 16px;
       transition: all var(--transition);
     }
     .contact-info-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       box-shadow: var(--shadow-md);
-      border-color: var(--color-accent);
+      border-color: var(--color-primary);
     }
-    .contact-info-icon {
-      width: 50px; height: 50px;
-      border-radius: var(--radius-sm);
-      background: rgba(139,0,0,0.08);
+    .contact-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--color-accent-subtle);
+      color: var(--color-primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       flex-shrink: 0;
-      color: var(--color-accent);
     }
-    .contact-info-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--color-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-    }
-    .contact-info-value {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--color-dark);
+    .contact-info-card h4 {
+      font-size: 1.05rem;
       margin-bottom: 4px;
     }
-    .contact-info-sub {
-      font-size: 0.825rem;
+    .contact-info-card p {
+      font-size: 0.875rem;
       color: var(--color-text-light);
+      margin-bottom: 4px;
     }
-
-    /* Form */
-    .contact-form-wrap {
+    .contact-info-card a {
+      color: var(--color-primary);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    .contact-form-card {
       background: var(--color-white);
       border-radius: var(--radius-lg);
-      padding: 48px 44px;
-      box-shadow: var(--shadow-md);
+      padding: 36px 32px;
       border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-md);
     }
-    .contact-form-wrap h2 {
-      font-family: var(--font-serif);
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: var(--color-dark);
-      margin-bottom: 8px;
-    }
-    .contact-form-wrap p {
-      font-size: 0.9rem;
-      color: var(--color-text-light);
-      margin-bottom: 32px;
-    }
-    .form-row {
+    .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 18px;
+      margin-top: 24px;
     }
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 20px;
+      gap: 6px;
+    }
+    .form-group.full {
+      grid-column: span 2;
     }
     .form-group label {
-      font-size: 0.85rem;
+      font-size: 0.825rem;
       font-weight: 600;
       color: var(--color-dark);
     }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1.5px solid var(--color-border);
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 12px 16px;
+      background: var(--color-bg-2);
+      border: 1px solid var(--color-border);
       border-radius: var(--radius-sm);
-      font-family: var(--font-sans);
       font-size: 0.9rem;
       color: var(--color-text);
-      background: var(--color-bg);
       outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition);
+      transition: all var(--transition);
     }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--color-accent);
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--color-primary);
+      background: var(--color-white);
       box-shadow: 0 0 0 3px rgba(139,0,0,0.1);
-      background: var(--color-white);
     }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .form-group select { cursor: pointer; }
-
-    .form-submit { width: 100%; justify-content: center; padding: 15px; font-size: 1rem; margin-top: 8px; }
-
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 32px;
-    }
-    .form-success-icon {
-      font-size: 3rem;
-      margin-bottom: 16px;
-    }
-    .form-success h3 {
-      font-family: var(--font-serif);
-      font-size: 1.5rem;
-      color: var(--color-dark);
-      margin-bottom: 8px;
-    }
-    .form-success p { color: var(--color-text-light); font-size: 0.9rem; }
-
-    /* Map placeholder */
-    .map-placeholder {
-      background: var(--color-bg-2);
-      border-radius: var(--radius-md);
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 32px;
-      border: 1px solid var(--color-border);
-      margin-top: 24px;
-    }
-    .map-placeholder p { color: var(--color-text-muted); font-size: 0.9rem; }
-
-    /* FAQ */
-    .faq-grid {
+    .hubs-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 56px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 36px;
     }
-    .faq-item {
+    .hub-card {
       background: var(--color-white);
-      border-radius: var(--radius-md);
       border: 1px solid var(--color-border);
-      overflow: hidden;
+      border-radius: var(--radius-md);
+      padding: 28px 22px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      transition: all var(--transition);
     }
-    .faq-question {
-      width: 100%;
-      text-align: left;
-      padding: 20px 24px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--color-dark);
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      transition: color var(--transition);
+    .hub-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-primary);
     }
-    .faq-question:hover { color: var(--color-accent); }
-    .faq-toggle {
-      font-size: 1.2rem;
-      color: var(--color-accent);
-      flex-shrink: 0;
-      transition: transform var(--transition);
+    .hub-flag {
+      font-size: 2rem;
+      margin-bottom: 12px;
     }
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
+    .hub-card h4 {
+      font-size: 1.15rem;
+      margin-bottom: 6px;
     }
-    .faq-answer.open { max-height: 200px; }
-    .faq-answer-inner {
-      padding: 0 24px 20px;
-      font-size: 0.875rem;
+    .hub-card p {
+      font-size: 0.85rem;
       color: var(--color-text-light);
-      line-height: 1.7;
+      margin-bottom: 12px;
     }
-    .faq-item.open .faq-toggle { transform: rotate(45deg); }
-
-    @media (max-width: 768px) {
-      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
-      .form-row { grid-template-columns: 1fr; }
-      .contact-form-wrap { padding: 32px 24px; }
-      .faq-grid { grid-template-columns: 1fr; }
+    .hub-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--color-accent-subtle);
+      color: var(--color-primary);
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    @media (max-width: 992px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .hubs-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
     }
   </style>
 </head>
@@ -242,6 +174,8 @@
       </button>
     </div>
   </nav>
+
+  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul>
       <li><a href="index.html" class="nav-link">Home</a></li>
@@ -250,18 +184,26 @@
       <li><a href="blog.html" class="nav-link">Blog</a></li>
       <li><a href="contact.html" class="nav-link active">Contact</a></li>
     </ul>
-    <div class="nav-actions">
+    <div class="nav-actions" style="margin-top:16px;">
       <a href="login.html" class="btn btn-dark">Login</a>
       <a href="signup.html" class="btn btn-accent">Signup</a>
     </div>
   </div>
 
-  <!-- PAGE HERO -->
-  <section class="page-hero" aria-label="Contact page hero">
+  <!-- ==========================================
+       SECTION 1: HERO & SUPPORT BANNER
+       ========================================== -->
+  <section class="page-hero" aria-label="Contact Hero">
     <div class="container">
-      <span class="section-tag">Get In Touch</span>
-      <h1>Let's Build Your<br/>Logistics Future Together</h1>
-      <p>Whether you're looking for a custom quote, a product demo, or just have a question — we're here to help you move forward.</p>
+      <div class="hanging-card-wrap" style="margin-bottom: 12px;">
+        <div class="hanging-pin"></div>
+        <div class="hanging-line"></div>
+        <div class="hanging-badge">
+          <span>🎧 24/7 Global Dispatch & Control Tower</span>
+        </div>
+      </div>
+      <h1>Connect with Our Logistics<br/>Engineering Team</h1>
+      <p>Whether you require spot rates, custom API integration, or 24/7 priority freight support, our global control towers are on standby.</p>
       <div class="breadcrumb">
         <a href="index.html">Home</a>
         <span class="sep">›</span>
@@ -270,192 +212,238 @@
     </div>
   </section>
 
-  <!-- CONTACT MAIN -->
-  <section class="section" id="contact-main" aria-label="Contact information and form">
+  <!-- ==========================================
+       SECTION 2: INQUIRY & RATE ESTIMATOR FORM (SLIDING)
+       ========================================== -->
+  <section class="section" aria-label="Contact Form & Info">
     <div class="container">
       <div class="contact-layout">
-        <!-- LEFT: Info -->
-        <div class="contact-info reveal-left">
-          <div>
-            <span class="section-tag">Contact Information</span>
-            <h2 class="section-title" style="font-size:2rem;margin-bottom:8px;">We'd love to hear from you</h2>
-            <p style="color:var(--color-text-light);margin-bottom:32px;font-size:0.95rem;">Reach out through any of the channels below or fill in the form and a member of our team will respond within one business day.</p>
-          </div>
+        <!-- Contact Details -->
+        <div class="contact-info slide-left">
+          <span class="section-tag">Direct Lines</span>
+          <h2 class="section-title">We Are Here For You Around the Clock</h2>
+          <p style="margin-bottom:12px;">Get immediate assistance from certified freight coordinators and supply chain architects.</p>
 
           <div class="contact-info-card">
-            <div class="contact-info-icon">📍</div>
+            <div class="contact-icon-box">📍</div>
             <div>
-              <div class="contact-info-label">Headquarters</div>
-              <div class="contact-info-value">LogiTech Tower, Whitefield</div>
-              <div class="contact-info-sub">Bengaluru, Karnataka 560066, India</div>
+              <h4>Global Headquarters</h4>
+              <p>100 Logistics Blvd, Suite 400</p>
+              <p>Chicago, IL 60606, United States</p>
             </div>
           </div>
 
           <div class="contact-info-card">
-            <div class="contact-info-icon">📞</div>
+            <div class="contact-icon-box">📞</div>
             <div>
-              <div class="contact-info-label">Phone</div>
-              <div class="contact-info-value">+91 80 4567 8900</div>
-              <div class="contact-info-sub">Monday – Friday, 9 AM – 6 PM IST</div>
+              <h4>24/7 Freight Operations Hotline</h4>
+              <p>Immediate dispatch & tracking support</p>
+              <a href="tel:+18005550199">+1 (800) 555-0199</a>
             </div>
           </div>
 
           <div class="contact-info-card">
-            <div class="contact-info-icon">✉️</div>
+            <div class="contact-icon-box">✉️</div>
             <div>
-              <div class="contact-info-label">Email</div>
-              <div class="contact-info-value">hello@logitech-logistics.com</div>
-              <div class="contact-info-sub">We respond within 24 business hours</div>
-            </div>
-          </div>
-
-          <div class="contact-info-card">
-            <div class="contact-info-icon">🌐</div>
-            <div>
-              <div class="contact-info-label">Global Offices</div>
-              <div class="contact-info-value">Singapore · London · Chicago</div>
-              <div class="contact-info-sub">Regional support available 24/7</div>
-            </div>
-          </div>
-
-          <div class="map-placeholder" role="img" aria-label="Office location map placeholder">
-            <div>
-              <div style="font-size:2rem;margin-bottom:8px;">🗺️</div>
-              <p>Interactive map of our Bengaluru headquarters<br/>
-              <a href="https://maps.google.com" target="_blank" rel="noopener" style="color:var(--color-accent);font-weight:600;font-size:0.875rem;">Open in Google Maps →</a></p>
+              <h4>Enterprise Inquiries & Rates</h4>
+              <p>Guaranteed response in &lt;15 minutes</p>
+              <a href="mailto:support@logitech.io">support@logitech.io</a>
             </div>
           </div>
         </div>
 
-        <!-- RIGHT: Form -->
-        <div class="contact-form-wrap reveal-right">
-          <h2>Send us a Message</h2>
-          <p>Fill out the form below and our team will get back to you within one business day.</p>
+        <!-- Form Card -->
+        <div class="contact-form-card slide-right">
+          <h3 style="font-size:1.4rem; margin-bottom:8px;">Request a Custom Freight Solution</h3>
+          <p style="font-size:0.875rem; color:var(--color-text-light);">Fill out the details below and an operations lead will contact you promptly.</p>
 
-          <form id="contact-form" novalidate>
-            <div class="form-row">
+          <form id="contact-form" onsubmit="event.preventDefault(); alert('Thank you! Your quote inquiry has been dispatched to our operations team.');">
+            <div class="form-grid">
               <div class="form-group">
-                <label for="first-name">First Name *</label>
-                <input type="text" id="first-name" name="firstName" placeholder="Arjun" required />
+                <label for="contact-name">Your Full Name *</label>
+                <input type="text" id="contact-name" placeholder="John Doe" required />
               </div>
               <div class="form-group">
-                <label for="last-name">Last Name *</label>
-                <input type="text" id="last-name" name="lastName" placeholder="Kumar" required />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" placeholder="arjun@company.com" required />
+                <label for="contact-email">Work Email *</label>
+                <input type="email" id="contact-email" placeholder="john@company.com" required />
               </div>
               <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" />
+                <label for="contact-company">Company Name</label>
+                <input type="text" id="contact-company" placeholder="Acme Logistics" />
+              </div>
+              <div class="form-group">
+                <label for="service-type">Service Required</label>
+                <select id="service-type">
+                  <option value="ocean">Ocean Freight (FCL/LCL)</option>
+                  <option value="air">Air Cargo Charter</option>
+                  <option value="warehouse">Smart Warehousing / 3PL</option>
+                  <option value="lastmile">Last-Mile Distribution</option>
+                  <option value="api">API Cloud Integration</option>
+                </select>
+              </div>
+              <div class="form-group full">
+                <label for="contact-message">Shipment Details / Requirements *</label>
+                <textarea id="contact-message" rows="4" placeholder="Origin, destination, cargo volume, or timeline specifications..." required></textarea>
+              </div>
+              <div class="form-group full">
+                <button type="submit" class="btn btn-accent" style="width:100%; padding:14px; font-size:1rem;">Submit Inquiry &rarr;</button>
               </div>
             </div>
-
-            <div class="form-group">
-              <label for="company">Company Name *</label>
-              <input type="text" id="company" name="company" placeholder="Your Company Ltd." required />
-            </div>
-
-            <div class="form-group">
-              <label for="service">Service Interested In</label>
-              <select id="service" name="service">
-                <option value="">Select a service...</option>
-                <option value="freight">Global Freight Management</option>
-                <option value="lastmile">Last-Mile Delivery Solutions</option>
-                <option value="warehouse">Warehouse Automation</option>
-                <option value="analytics">Supply Chain Analytics</option>
-                <option value="enterprise">Enterprise Custom Solution</option>
-                <option value="demo">Product Demo</option>
-                <option value="other">Other / General Inquiry</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message *</label>
-              <textarea id="message" name="message" placeholder="Tell us about your logistics challenges and what you're looking for..." required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-accent form-submit" id="contact-submit">
-              Send Message →
-            </button>
           </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <div class="form-success" id="form-success">
-            <div class="form-success-icon">✅</div>
-            <h3>Message Sent!</h3>
-            <p>Thank you for reaching out. A member of our team will be in touch within one business day.</p>
+  <!-- ==========================================
+       SECTION 3: GLOBAL REGIONAL HUBS (FLOATING CARDS)
+       ========================================== -->
+  <section class="section" style="background: var(--color-bg-2);" aria-label="Global Hubs">
+    <div class="container">
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
+        <span class="section-tag">Global Presence</span>
+        <h2 class="section-title">Regional Control Towers</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Strategically located hubs delivering synchronized timezone coverage across international trade lanes.</p>
+      </div>
+
+      <div class="hubs-grid">
+        <div class="hub-card slide-up">
+          <div class="hub-flag">🇺🇸</div>
+          <h4>Americas Control Hub</h4>
+          <p>Chicago, IL • GMT-5</p>
+          <p style="font-size:0.8rem; color:var(--color-text-muted);">Handles Transpacific, North American Rail & Cross-Border Mexico</p>
+          <span class="hub-badge">Live Operations</span>
+        </div>
+
+        <div class="hub-card slide-up" style="transition-delay:0.1s;">
+          <div class="hub-flag">🇳🇱</div>
+          <h4>EMEA Gateway Hub</h4>
+          <p>Rotterdam, Netherlands • GMT+1</p>
+          <p style="font-size:0.8rem; color:var(--color-text-muted);">Oversees Port of Rotterdam, European Roadways & Silk Rail</p>
+          <span class="hub-badge">Live Operations</span>
+        </div>
+
+        <div class="hub-card slide-up" style="transition-delay:0.2s;">
+          <div class="hub-flag">🇸🇬</div>
+          <h4>Asia-Pacific Command</h4>
+          <p>Singapore • GMT+8</p>
+          <p style="font-size:0.8rem; color:var(--color-text-muted);">Coordinates ASEAN Air Cargo, China Freight & Oceania Corridors</p>
+          <span class="hub-badge">Live Operations</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 4: EMERGENCY DISPATCH & SLA METRICS
+       ========================================== -->
+  <section class="section" aria-label="Support SLA">
+    <div class="container">
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
+        <span class="section-tag">Response Guarantee</span>
+        <h2 class="section-title">Priority Support Standards</h2>
+        <p class="section-subtitle" style="margin:0 auto;">When time-critical freight is on the line, every second counts.</p>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card slide-up">
+          <div class="metric-number" data-target="3" data-suffix=" min">&lt;3 min</div>
+          <div class="metric-title">Critical Escalation SLA</div>
+          <div class="metric-desc">Direct line to control room engineer</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width:98%;"></div></div>
+        </div>
+
+        <div class="metric-card slide-up" style="transition-delay:0.1s;">
+          <div class="metric-number" data-target="24" data-suffix="/7">24/7</div>
+          <div class="metric-title">Continuous Operations</div>
+          <div class="metric-desc">Follow-the-sun monitoring desks</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width:100%;"></div></div>
+        </div>
+
+        <div class="metric-card slide-up" style="transition-delay:0.2s;">
+          <div class="metric-number" data-target="99.8" data-suffix="%">99.8%</div>
+          <div class="metric-title">First-Contact Resolution</div>
+          <div class="metric-desc">Immediate booking updates & fixes</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width:97%;"></div></div>
+        </div>
+
+        <div class="metric-card slide-up" style="transition-delay:0.3s;">
+          <div class="metric-number" data-target="15" data-suffix=" min">&lt;15 min</div>
+          <div class="metric-title">Custom Rate Quotes</div>
+          <div class="metric-desc">Instant dynamic rate calculations</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width:94%;"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 5: FREQUENTLY ASKED QUESTIONS (ACCORDION)
+       ========================================== -->
+  <section class="section" style="background: var(--color-bg-2);" aria-label="Frequently Asked Questions">
+    <div class="container">
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
+        <span class="section-tag">Got Questions?</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Clear answers about onboarding, integrations, carrier rates, and tracking.</p>
+      </div>
+
+      <div class="faq-accordion slide-up">
+        <div class="faq-item active">
+          <button class="faq-question">
+            <span>How fast can our team integrate with LogiTech's API?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Our RESTful APIs and webhooks allow standard TMS and ERP systems (like SAP, Oracle, and NetSuite) to complete full bi-directional integration within 48 to 72 hours using our SDKs and sandboxes.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do you support multi-temperature cold-chain monitoring?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Yes. Every refrigerated container is equipped with active cellular/satellite IoT telemetry logging ambient temperature (-25°C to +25°C), humidity, shock, and door opening events in real time with automated SMS/email alerts.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How does automated customs pre-clearance work?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Our digital compliance engine verifies packing lists, commercial invoices, and HS tariff classifications before cargo departure, submitting electronic manifests to port customs authorities 48 hours ahead of arrival.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is there a free trial available for new enterprise accounts?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            Yes! We offer a full-featured 14-day free trial that includes up to 50 test dispatches, complete telemetry dashboards, and personalized onboarding from a dedicated logistics specialist.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="section section-bg" id="faq" aria-label="Frequently asked questions">
+  <!-- ==========================================
+       SECTION 6: CALL TO ACTION
+       ========================================== -->
+  <section id="cta" aria-label="Call to action">
+    <div class="cta-bg" aria-hidden="true"></div>
     <div class="container">
-      <div style="text-align:center;">
-        <span class="section-tag">FAQs</span>
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-subtitle" style="margin:0 auto;">Can't find the answer you're looking for? Our support team is always here to help.</p>
-      </div>
-      <div class="faq-grid">
-        <div class="faq-item">
-          <button class="faq-question" id="faq-q1" aria-expanded="false">
-            How long does onboarding take?
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a1">
-            <div class="faq-answer-inner">Most clients are fully onboarded within 2–4 weeks, depending on the complexity of integrations. Our dedicated onboarding team handles everything from carrier connections to ERP integrations.</div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" id="faq-q2" aria-expanded="false">
-            Do you integrate with our existing ERP/WMS?
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a2">
-            <div class="faq-answer-inner">Yes. LogiTech integrates with SAP, Oracle, NetSuite, Microsoft Dynamics, and 100+ other platforms via our REST API, EDI connectors, and pre-built modules.</div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" id="faq-q3" aria-expanded="false">
-            Is there a free trial available?
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a3">
-            <div class="faq-answer-inner">Absolutely. We offer a 30-day free trial on our Starter and Professional plans. No credit card required. Enterprise clients receive a guided proof-of-concept program.</div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" id="faq-q4" aria-expanded="false">
-            What security certifications do you hold?
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a4">
-            <div class="faq-answer-inner">LogiTech is SOC 2 Type II certified, ISO 27001 certified, and GDPR compliant. All data is encrypted in transit (TLS 1.3) and at rest (AES-256).</div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" id="faq-q5" aria-expanded="false">
-            What is your uptime SLA?
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a5">
-            <div class="faq-answer-inner">Enterprise clients receive a 99.9% uptime SLA. Our platform is hosted on redundant cloud infrastructure across multiple availability zones with automatic failover.</div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" id="faq-q6" aria-expanded="false">
-            Do you offer 24/7 support?
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a6">
-            <div class="faq-answer-inner">Yes. Professional and Enterprise plans include 24/7 support via chat, email, and phone. Enterprise clients also receive a dedicated Customer Success Manager.</div>
-          </div>
+      <div class="cta-inner slide-up">
+        <h2 class="section-title">Ready to Experience Modern Logistics?</h2>
+        <p class="section-subtitle">Create your free account now and start optimizing your freight routes in under 5 minutes.</p>
+        <div class="cta-actions">
+          <a href="signup.html" class="btn btn-accent" style="padding:15px 36px;font-size:1rem;">Start Free 14-Day Trial &rarr;</a>
+          <a href="index.html" class="btn btn-outline-white" style="padding:15px 36px;font-size:1rem;">Back to Home</a>
         </div>
       </div>
     </div>
@@ -490,18 +478,18 @@
         <div class="footer-col">
           <h4>Solutions</h4>
           <ul class="footer-links">
-            <li><a href="404.html">Freight Management</a></li>
-            <li><a href="404.html">Last-Mile Delivery</a></li>
-            <li><a href="404.html">Warehouse Automation</a></li>
-            <li><a href="404.html">Supply Chain Analytics</a></li>
-            <li><a href="404.html">Pricing</a></li>
+            <li><a href="services.html">Freight Management</a></li>
+            <li><a href="services.html">Last-Mile Delivery</a></li>
+            <li><a href="services.html">Warehouse Automation</a></li>
+            <li><a href="services.html">Customs & Compliance</a></li>
+            <li><a href="dashboard.html">Client Dashboard</a></li>
           </ul>
         </div>
         <div class="footer-col footer-newsletter">
           <h4>Stay Updated</h4>
-          <p>Get weekly logistics insights and market intelligence reports.</p>
+          <p>Get weekly freight market intelligence and logistics technology updates.</p>
           <form class="newsletter-form" id="newsletter-form" onsubmit="return false;">
-            <input type="email" id="newsletter-email" placeholder="Enter your email" aria-label="Email for newsletter" />
+            <input type="email" id="newsletter-email" placeholder="Enter your business email" aria-label="Email for newsletter" required />
             <button type="submit" id="newsletter-submit">Subscribe</button>
           </form>
         </div>
@@ -518,45 +506,5 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script>
-    // Contact form submission
-    const contactForm = document.getElementById('contact-form');
-    const formSuccess = document.getElementById('form-success');
-    if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const btn = document.getElementById('contact-submit');
-        btn.textContent = 'Sending...';
-        btn.disabled = true;
-        setTimeout(() => {
-          contactForm.style.display = 'none';
-          formSuccess.style.display = 'block';
-        }, 1500);
-      });
-    }
-
-    // FAQ accordion
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.faq-item');
-        const answer = item.querySelector('.faq-answer');
-        const isOpen = item.classList.contains('open');
-
-        // Close all
-        document.querySelectorAll('.faq-item').forEach(i => {
-          i.classList.remove('open');
-          i.querySelector('.faq-answer').classList.remove('open');
-          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-        });
-
-        // Open clicked if it was closed
-        if (!isOpen) {
-          item.classList.add('open');
-          answer.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-  </script>
 </body>
 </html>

@@ -147,22 +147,62 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ---- Active nav link on scroll ----
-const sections = document.querySelectorAll('section[id]');
-if (sections.length) {
-  const navObserver = new IntersectionObserver((entries) => {
+// ---- Generic Metric Counters ----
+const metricCards = document.querySelectorAll('.metric-number[data-target]');
+if (metricCards.length) {
+  const metricObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        document.querySelectorAll('.nav-link').forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${entry.target.id}` ||
-              link.getAttribute('href') === `${entry.target.id}.html` ||
-              link.getAttribute('href') === `html/${entry.target.id}.html`) {
-            link.classList.add('active');
+      if (entry.isIntersecting && !entry.target.dataset.animated) {
+        entry.target.dataset.animated = 'true';
+        const target = parseFloat(entry.target.getAttribute('data-target'));
+        const prefix = entry.target.getAttribute('data-prefix') || '';
+        const suffix = entry.target.getAttribute('data-suffix') || '';
+        const isDecimal = target % 1 !== 0;
+        let start = 0;
+        const duration = 1800;
+        const steps = 50;
+        const increment = target / steps;
+        const stepTime = duration / steps;
+        const timer = setInterval(() => {
+          start += increment;
+          if (start >= target) {
+            start = target;
+            clearInterval(timer);
           }
-        });
+          entry.target.textContent = prefix + (isDecimal ? start.toFixed(1) : Math.floor(start).toLocaleString()) + suffix;
+        }, stepTime);
       }
     });
-  }, { threshold: 0.4 });
-  sections.forEach(s => navObserver.observe(s));
+  }, { threshold: 0.2 });
+  metricCards.forEach(card => metricObserver.observe(card));
 }
+
+// ---- Slide In Observer ----
+const slideEls = document.querySelectorAll('.slide-left, .slide-right, .slide-up');
+if (slideEls.length) {
+  const slideObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        slideObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  slideEls.forEach(el => slideObserver.observe(el));
+}
+
+// ---- FAQ Accordion Toggle ----
+document.addEventListener('DOMContentLoaded', () => {
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+});
+

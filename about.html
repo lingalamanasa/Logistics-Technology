@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us - LogiTech Logistics Technology</title>
-  <meta name="description" content="Learn about LogiTech's mission, story, and the team dedicated to powering the future of logistics technology and supply chain management." />
+  <meta name="description" content="Learn about LogiTech's mission, story, leadership, and global infrastructure powering the next generation of logistics technology." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
@@ -15,7 +15,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
-      margin-top: 56px;
+      margin-top: 48px;
     }
     .mission-card {
       background: var(--color-white);
@@ -24,155 +24,76 @@
       border: 1px solid var(--color-border);
       box-shadow: var(--shadow-sm);
       transition: all var(--transition);
-      text-align: center;
     }
     .mission-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
-      border-color: transparent;
+      border-color: var(--color-primary);
     }
-    .mission-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+    .mission-card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
     }
     .mission-card h3 {
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--color-dark);
+      font-size: 1.25rem;
       margin-bottom: 12px;
     }
-    .mission-card p {
-      font-size: 0.9rem;
-      color: var(--color-text-light);
-      line-height: 1.6;
-    }
-
-    /* Team */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 28px;
-      margin-top: 56px;
+      gap: 24px;
+      margin-top: 48px;
     }
     .team-card {
       background: var(--color-white);
+      border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
       overflow: hidden;
       box-shadow: var(--shadow-sm);
-      border: 1px solid var(--color-border);
-      transition: all var(--transition);
       text-align: center;
+      padding: 28px 20px;
+      transition: all var(--transition);
+      position: relative;
     }
     .team-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-lg);
+      border-color: var(--color-primary);
     }
     .team-avatar {
-      width: 100%;
-      aspect-ratio: 1;
-      background: var(--color-bg-2);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-dark), var(--color-primary));
+      color: #FFF;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-serif);
-      font-size: 3rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      color: var(--color-accent);
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 14px rgba(139,0,0,0.2);
     }
-    .team-body { padding: 20px; }
-    .team-name {
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--color-dark);
+    .team-card h4 {
+      font-size: 1.1rem;
       margin-bottom: 4px;
     }
     .team-role {
       font-size: 0.825rem;
-      color: var(--color-accent);
+      color: var(--color-primary);
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
-    .team-bio {
+    .team-desc {
       font-size: 0.8rem;
       color: var(--color-text-light);
-      line-height: 1.5;
+      line-height: 1.45;
     }
-
-    /* Timeline */
-    .timeline {
-      position: relative;
-      max-width: 760px;
-      margin: 56px auto 0;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      top: 0; bottom: 0;
-      width: 2px;
-      background: var(--color-border);
-    }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
-      position: relative;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 12px;
-      transform: translateX(-50%);
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      background: var(--color-accent);
-      border: 3px solid var(--color-white);
-      box-shadow: 0 0 0 2px var(--color-accent);
-      z-index: 1;
-    }
-    .timeline-content {
-      background: var(--color-white);
-      border-radius: var(--radius-md);
-      padding: 24px 28px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--color-border);
-    }
-    .timeline-item:nth-child(odd) .timeline-content { grid-column: 1; }
-    .timeline-item:nth-child(even) .timeline-content { grid-column: 2; }
-    .timeline-year {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--color-accent);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 8px;
-    }
-    .timeline-content h3 {
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--color-dark);
-      margin-bottom: 8px;
-    }
-    .timeline-content p {
-      font-size: 0.875rem;
-      color: var(--color-text-light);
-      line-height: 1.5;
-    }
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       .mission-grid { grid-template-columns: 1fr; }
-      .team-grid { grid-template-columns: 1fr 1fr; }
-      .timeline::before { left: 16px; }
-      .timeline-item { grid-template-columns: 1fr; gap: 0; padding-left: 44px; }
-      .timeline-item::before { left: 16px; }
-      .timeline-item:nth-child(odd) .timeline-content,
-      .timeline-item:nth-child(even) .timeline-content { grid-column: 1; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 480px) {
+    @media (max-width: 576px) {
       .team-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -201,6 +122,8 @@
       </button>
     </div>
   </nav>
+
+  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul>
       <li><a href="index.html" class="nav-link">Home</a></li>
@@ -209,180 +132,215 @@
       <li><a href="blog.html" class="nav-link">Blog</a></li>
       <li><a href="contact.html" class="nav-link">Contact</a></li>
     </ul>
-    <div class="nav-actions">
+    <div class="nav-actions" style="margin-top:16px;">
       <a href="login.html" class="btn btn-dark">Login</a>
       <a href="signup.html" class="btn btn-accent">Signup</a>
     </div>
   </div>
 
-  <!-- PAGE HERO -->
-  <section class="page-hero" aria-label="About page hero">
+  <!-- ==========================================
+       SECTION 1: HERO & MISSION OVERVIEW
+       ========================================== -->
+  <section class="page-hero" aria-label="About Hero">
     <div class="container">
-      <span class="section-tag">Our Story</span>
-      <h1>Powering the Future of<br/>Global Logistics</h1>
-      <p>We started with a simple belief: that logistics technology should be as smart, fast, and reliable as the businesses that depend on it.</p>
+      <div class="hanging-card-wrap" style="margin-bottom: 12px;">
+        <div class="hanging-pin"></div>
+        <div class="hanging-line"></div>
+        <div class="hanging-badge">
+          <span>🏛️ Pioneering Supply Chain Intelligence</span>
+        </div>
+      </div>
+      <h1>Empowering Global Trade with<br/>Next-Gen Technology</h1>
+      <p>LogiTech is built on the belief that global supply chains should be predictable, autonomous, and transparent from origin to destination.</p>
       <div class="breadcrumb">
         <a href="index.html">Home</a>
         <span class="sep">›</span>
-        <span>About</span>
+        <span>About Us</span>
       </div>
     </div>
   </section>
 
-  <!-- MISSION / VALUES -->
-  <section class="section" id="mission" aria-label="Our mission">
+  <!-- ==========================================
+       SECTION 2: CORE VALUES & OPERATIONAL PILLARS (SLIDING)
+       ========================================== -->
+  <section class="section" aria-label="Core Pillars">
     <div class="container">
-      <div style="text-align:center;">
-        <span class="section-tag">What Drives Us</span>
-        <h2 class="section-title">Our Mission & Core Values</h2>
-        <p class="section-subtitle" style="margin:0 auto;">We are on a mission to eliminate inefficiency from global logistics through technology, intelligence, and an unwavering commitment to our clients.</p>
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
+        <span class="section-tag">Our Philosophy</span>
+        <h2 class="section-title">Built on Four Foundations</h2>
+        <p class="section-subtitle" style="margin:0 auto;">We engineer technology that removes friction, lowers emissions, and accelerates delivery times.</p>
       </div>
+
       <div class="mission-grid">
-        <div class="mission-card reveal">
-          <div class="mission-icon">🎯</div>
-          <h3>Our Mission</h3>
-          <p>To make global supply chains smarter, faster, and more resilient through technology that empowers people and businesses to deliver on their promises.</p>
+        <div class="mission-card slide-left">
+          <div class="mission-card-icon">⚡</div>
+          <h3>Continuous Innovation</h3>
+          <p>Deploying cutting-edge AI routing engines, digital twins, and autonomous telemetry sensors to stay ahead of global congestion.</p>
         </div>
-        <div class="mission-card reveal" style="transition-delay:0.1s">
-          <div class="mission-icon">👁️</div>
-          <h3>Our Vision</h3>
-          <p>A world where logistics is seamlessly connected — where every shipment, every carrier, and every customer touchpoint works in perfect harmony.</p>
+
+        <div class="mission-card slide-up" style="transition-delay:0.1s;">
+          <div class="mission-card-icon">🔒</div>
+          <h3>Enterprise Reliability</h3>
+          <p>99.98% cloud infrastructure uptime guarantee with redundant server nodes and bank-grade end-to-end data encryption.</p>
         </div>
-        <div class="mission-card reveal" style="transition-delay:0.2s">
-          <div class="mission-icon">💡</div>
-          <h3>Our Values</h3>
-          <p>Innovation, transparency, reliability, and partnership. We build lasting relationships by delivering technology that works when it matters most.</p>
+
+        <div class="mission-card slide-right" style="transition-delay:0.2s;">
+          <div class="mission-card-icon">🌱</div>
+          <h3>Sustainable Logistics</h3>
+          <p>Pioneering green transport corridors and automated carbon offset calculations to help clients achieve net-zero targets.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- COMPANY STORY -->
-  <section class="section section-bg" id="story" aria-label="Company history">
+  <!-- ==========================================
+       SECTION 3: GROWTH MILESTONES (CHAIN MODEL TIMELINE)
+       ========================================== -->
+  <section class="section" style="background: var(--color-bg-2);" aria-label="Growth Milestones">
     <div class="container">
-      <div style="text-align:center;">
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
         <span class="section-tag">Our Journey</span>
-        <h2 class="section-title">From Startup to Global Platform</h2>
-        <p class="section-subtitle" style="margin:0 auto;">A decade of innovation, resilience, and relentless focus on transforming how the world moves goods.</p>
+        <h2 class="section-title">Key Milestones & Growth Chain</h2>
+        <p class="section-subtitle" style="margin:0 auto;">A timeline of transforming manual freight forwarding into a global digital platform.</p>
       </div>
-      <div class="timeline">
-        <div class="timeline-item reveal">
-          <div class="timeline-content">
-            <div class="timeline-year">2015 — Founded</div>
-            <h3>The Beginning</h3>
-            <p>Three logistics veterans founded LogiTech in Bangalore with a vision to bring Silicon Valley-grade technology to global supply chains.</p>
-          </div>
+
+      <div class="chain-flow-container">
+        <div class="chain-node slide-up">
+          <div class="chain-node-num">2020</div>
+          <div class="chain-node-icon">🚀</div>
+          <h4>Founded</h4>
+          <p>Launched first digital booking API for cross-border freight</p>
         </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-content">
-            <div class="timeline-year">2017 — Series A</div>
-            <h3>First Major Funding</h3>
-            <p>Raised $12M Series A to expand our engineering team and launch our freight management platform across Southeast Asia.</p>
-          </div>
+
+        <div class="chain-node slide-up" style="transition-delay:0.1s;">
+          <div class="chain-node-num">2022</div>
+          <div class="chain-node-icon">🛰️</div>
+          <h4>IoT Telemetry</h4>
+          <p>Integrated real-time container sensors & temperature alerts</p>
         </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-content">
-            <div class="timeline-year">2019 — Global Launch</div>
-            <h3>Going International</h3>
-            <p>Expanded operations to Europe and North America. Reached 100 enterprise clients and 1 million shipments tracked on the platform.</p>
-          </div>
+
+        <div class="chain-node slide-up" style="transition-delay:0.2s;">
+          <div class="chain-node-num">2024</div>
+          <div class="chain-node-icon">🤖</div>
+          <h4>AI Predictive Core</h4>
+          <p>Deployed machine learning routing for ocean & rail networks</p>
         </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-content">
-            <div class="timeline-year">2022 — AI Integration</div>
-            <h3>Intelligence at Scale</h3>
-            <p>Launched our AI-powered route optimization and predictive analytics engine, reducing client logistics costs by an average of 28%.</p>
-          </div>
+
+        <div class="chain-node slide-up" style="transition-delay:0.3s;">
+          <div class="chain-node-num">2025</div>
+          <div class="chain-node-icon">🌐</div>
+          <h4>Global Expansion</h4>
+          <p>Connected 60+ seaports & established EU/Asia control towers</p>
         </div>
-        <div class="timeline-item reveal">
-          <div class="timeline-content">
-            <div class="timeline-year">2026 — Today</div>
-            <h3>500+ Enterprises Served</h3>
-            <p>Serving 500+ enterprise clients across 60 countries, processing 12,000+ daily shipments with 98% on-time delivery rates.</p>
-          </div>
+
+        <div class="chain-node slide-up" style="transition-delay:0.4s;">
+          <div class="chain-node-num">2026</div>
+          <div class="chain-node-icon">✨</div>
+          <h4>Enterprise Cloud</h4>
+          <p>Over 12,000 daily dispatches and 500+ global corporate partners</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TEAM -->
-  <section class="section" id="team" aria-label="Our team">
+  <!-- ==========================================
+       SECTION 4: LEADERSHIP TEAM & BOARD
+       ========================================== -->
+  <section class="section" aria-label="Leadership Team">
     <div class="container">
-      <div style="text-align:center;">
-        <span class="section-tag">The People</span>
-        <h2 class="section-title">Meet the Leadership Team</h2>
-        <p class="section-subtitle" style="margin:0 auto;">Our diverse team combines deep logistics expertise with cutting-edge technology talent from around the world.</p>
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
+        <span class="section-tag">Executive Board</span>
+        <h2 class="section-title">Leadership Behind LogiTech</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Decades of deep freight forwarding and enterprise software engineering experience.</p>
       </div>
+
       <div class="team-grid">
-        <div class="team-card reveal">
+        <div class="team-card slide-left">
           <div class="team-avatar">AK</div>
-          <div class="team-body">
-            <div class="team-name">Arjun Kumar</div>
-            <div class="team-role">CEO & Co-Founder</div>
-            <p class="team-bio">15 years in supply chain operations. Former Head of Logistics at a Fortune 500 company.</p>
-          </div>
+          <h4>Alexander King</h4>
+          <div class="team-role">Chief Executive Officer</div>
+          <p class="team-desc">Former global shipping director with 18+ years running multimodal maritime trade lanes.</p>
         </div>
-        <div class="team-card reveal" style="transition-delay:0.1s">
-          <div class="team-avatar">PR</div>
-          <div class="team-body">
-            <div class="team-name">Priya Rao</div>
-            <div class="team-role">CTO & Co-Founder</div>
-            <p class="team-bio">Ex-Google engineer. PhD in Distributed Systems. Architect of our AI optimization engine.</p>
-          </div>
+
+        <div class="team-card slide-up" style="transition-delay:0.1s;">
+          <div class="team-avatar">SC</div>
+          <h4>Sarah Chen</h4>
+          <div class="team-role">Chief Technology Officer</div>
+          <p class="team-desc">AI research veteran specializing in distributed telemetry systems and combinatorial optimization.</p>
         </div>
-        <div class="team-card reveal" style="transition-delay:0.2s">
-          <div class="team-avatar">MN</div>
-          <div class="team-body">
-            <div class="team-name">Marcus Nakamura</div>
-            <div class="team-role">Chief Revenue Officer</div>
-            <p class="team-bio">20 years in B2B SaaS sales. Built enterprise sales teams across 3 continents.</p>
-          </div>
+
+        <div class="team-card slide-up" style="transition-delay:0.2s;">
+          <div class="team-avatar">MD</div>
+          <h4>Marcus Davies</h4>
+          <div class="team-role">Head of 3PL & Robotics</div>
+          <p class="team-desc">Pioneered automated sortation and high-density warehouse robotics deployments.</p>
         </div>
-        <div class="team-card reveal" style="transition-delay:0.3s">
-          <div class="team-avatar">SL</div>
-          <div class="team-body">
-            <div class="team-name">Sofia Lindberg</div>
-            <div class="team-role">VP of Customer Success</div>
-            <p class="team-bio">Former logistics consultant. Passionate about helping clients achieve measurable ROI from day one.</p>
-          </div>
+
+        <div class="team-card slide-right" style="transition-delay:0.3s;">
+          <div class="team-avatar">ER</div>
+          <h4>Elena Rostova</h4>
+          <div class="team-role">Director of Global Operations</div>
+          <p class="team-desc">Oversees 24/7 global control towers across Singapore, Rotterdam, and Chicago.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- STATS -->
-  <section id="stats" aria-label="Company statistics">
+  <!-- ==========================================
+       SECTION 5: GLOBAL INFRASTRUCTURE & METRIC STATS
+       ========================================== -->
+  <section class="section" style="background: var(--color-bg-2);" aria-label="Infrastructure Metrics">
     <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item reveal">
-          <div class="stat-num">12<span>K</span><span style="font-size:1.5rem">+</span></div>
-          <div class="stat-label">Daily Shipments</div>
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
+        <span class="section-tag">Global Scale</span>
+        <h2 class="section-title">Infrastructure by the Numbers</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Operating an unyielding network that powers commerce 24 hours a day, 365 days a year.</p>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card slide-up">
+          <div class="metric-number" data-target="150" data-suffix="+">150+</div>
+          <div class="metric-title">Countries Served</div>
+          <div class="metric-desc">Worldwide customs clearance</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width:92%;"></div></div>
         </div>
-        <div class="stat-item reveal" style="transition-delay:0.1s">
-          <div class="stat-num">500<span>+</span></div>
-          <div class="stat-label">Enterprise Clients</div>
+
+        <div class="metric-card slide-up" style="transition-delay:0.1s;">
+          <div class="metric-number" data-target="99.98" data-suffix="%">99.98%</div>
+          <div class="metric-title">Telemetry Uptime</div>
+          <div class="metric-desc">High-availability cloud nodes</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width:99%;"></div></div>
         </div>
-        <div class="stat-item reveal" style="transition-delay:0.2s">
-          <div class="stat-num">60<span>+</span></div>
-          <div class="stat-label">Countries Served</div>
+
+        <div class="metric-card slide-up" style="transition-delay:0.2s;">
+          <div class="metric-number" data-target="500" data-suffix="+">500+</div>
+          <div class="metric-title">Enterprise Partners</div>
+          <div class="metric-desc">Integrated logistics accounts</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width:85%;"></div></div>
         </div>
-        <div class="stat-item reveal" style="transition-delay:0.3s">
-          <div class="stat-num">98<span>%</span></div>
-          <div class="stat-label">On-Time Delivery</div>
+
+        <div class="metric-card slide-up" style="transition-delay:0.3s;">
+          <div class="metric-number" data-target="0" data-suffix=" Net Zero">0</div>
+          <div class="metric-title">Green Corridor Initiative</div>
+          <div class="metric-desc">Targeting 2030 ESG standards</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width:100%;"></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- ==========================================
+       SECTION 6: CALL TO ACTION
+       ========================================== -->
   <section id="cta" aria-label="Call to action">
     <div class="cta-bg" aria-hidden="true"></div>
     <div class="container">
-      <div class="cta-inner reveal">
-        <h2 class="section-title">Join us in shaping the<br/>future of logistics</h2>
-        <p class="section-subtitle">Partner with a team that combines industry expertise with world-class technology to deliver supply chain excellence.</p>
+      <div class="cta-inner slide-up">
+        <h2 class="section-title">Join Us in Shaping the Future of Logistics</h2>
+        <p class="section-subtitle">Partner with an engineering-first team dedicated to transforming global supply chain efficiency.</p>
         <div class="cta-actions">
-          <a href="404.html" class="btn btn-outline-white" id="cta-contact-btn" style="padding:15px 36px;font-size:1rem;">Let's Talk</a>
+          <a href="contact.html" class="btn btn-accent" style="padding:15px 36px;font-size:1rem;">Contact Our Team &rarr;</a>
+          <a href="signup.html" class="btn btn-outline-white" style="padding:15px 36px;font-size:1rem;">Get Started Free</a>
         </div>
       </div>
     </div>
@@ -417,11 +375,11 @@
         <div class="footer-col">
           <h4>Solutions</h4>
           <ul class="footer-links">
-            <li><a href="404.html">Freight Management</a></li>
-            <li><a href="404.html">Last-Mile Delivery</a></li>
-            <li><a href="404.html">Warehouse Automation</a></li>
-            <li><a href="404.html">Customs & Compliance</a></li>
-            <li><a href="404.html">Supply Chain Analytics</a></li>
+            <li><a href="services.html">Freight Management</a></li>
+            <li><a href="services.html">Last-Mile Delivery</a></li>
+            <li><a href="services.html">Warehouse Automation</a></li>
+            <li><a href="services.html">Customs & Compliance</a></li>
+            <li><a href="dashboard.html">Client Dashboard</a></li>
           </ul>
         </div>
         <div class="footer-col footer-newsletter">

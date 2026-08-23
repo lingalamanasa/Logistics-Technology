@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LogiTech – Next-Gen Logistics Technology & Global Supply Chain</title>
-  <meta name="description" content="LogiTech powers modern global supply chains with AI route optimization, IoT fleet tracking, warehouse automation, and end-to-end freight intelligence." />
+  <title>LogiTech - Intelligent Logistics Technology & Global Supply Chain</title>
+  <meta name="description" content="Next-generation logistics cloud platform powering multimodal freight forwarding, predictive AI routing, warehouse robotics, and real-time IoT cargo telemetry." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
@@ -12,20 +12,17 @@
   <style>
     /* Home Page Specific Styles */
     .hero {
-      padding: 140px 0 80px;
-      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      background: linear-gradient(135deg, var(--color-dark) 0%, #160303 60%, #2A0808 100%);
       color: var(--color-white);
+      padding: 130px 0 80px;
       position: relative;
       overflow: hidden;
     }
     .hero::before {
       content: '';
       position: absolute;
-      top: -150px;
-      right: -150px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(139,0,0,0.3) 0%, transparent 70%);
+      inset: 0;
+      background: radial-gradient(circle at 75% 30%, rgba(139, 0, 0, 0.28) 0%, transparent 60%);
       pointer-events: none;
     }
     .hero-grid {
@@ -33,51 +30,44 @@
       grid-template-columns: 1.15fr 0.85fr;
       gap: 56px;
       align-items: center;
-      position: relative;
-      z-index: 2;
     }
     .hero-content h1 {
-      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
       color: var(--color-white);
       line-height: 1.15;
-      margin-bottom: 20px;
+      margin: 16px 0 20px;
+      font-weight: 700;
     }
     .hero-content h1 span {
-      color: #EF4444;
+      color: #FFA5A5;
       font-style: italic;
     }
     .hero-desc {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #CBD5E1;
-      line-height: 1.65;
-      margin-bottom: 32px;
-      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 540px;
     }
     .hero-actions {
       display: flex;
-      align-items: center;
       gap: 16px;
-      margin-bottom: 40px;
       flex-wrap: wrap;
+      margin-bottom: 36px;
     }
-
-    /* Live Tracking Bar */
     .hero-tracker-box {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius-lg);
-      padding: 20px;
-      max-width: 540px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
     .tracker-title {
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #FFA5A5;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #E2E8F0;
       margin-bottom: 12px;
       display: flex;
       align-items: center;
@@ -88,13 +78,7 @@
       height: 8px;
       background: #22C55E;
       border-radius: 50%;
-      box-shadow: 0 0 10px #22C55E;
-      animation: pulse 1.8s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+      animation: pulseGlow 1.8s infinite;
     }
     .tracker-form {
       display: flex;
@@ -102,165 +86,157 @@
     }
     .tracker-input {
       flex: 1;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(15, 23, 42, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: var(--radius-sm);
-      color: var(--color-white);
+      padding: 10px 16px;
+      color: #FFFFFF;
       font-size: 0.9rem;
       outline: none;
-      transition: all var(--transition);
     }
-    .tracker-input::placeholder { color: #94A3B8; }
     .tracker-input:focus {
-      background: rgba(255, 255, 255, 0.18);
-      border-color: #EF4444;
+      border-color: #FFA5A5;
     }
     .tracker-btn {
-      padding: 12px 22px;
-      background: var(--color-accent);
-      color: var(--color-white);
+      padding: 10px 22px;
+      background: var(--color-primary);
+      color: #FFFFFF;
       border: none;
       border-radius: var(--radius-sm);
       font-weight: 600;
-      font-size: 0.9rem;
       cursor: pointer;
-      transition: all var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      transition: background var(--transition);
     }
     .tracker-btn:hover {
-      background: var(--color-accent-hover);
-      transform: translateY(-1px);
+      background: var(--color-primary-light);
     }
     .tracker-quick {
-      font-size: 0.75rem;
-      color: #94A3B8;
       margin-top: 10px;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
+      font-size: 0.775rem;
+      color: #94A3B8;
     }
-    .tracker-quick span { cursor: pointer; text-decoration: underline; color: #CBD5E1; }
-    .tracker-quick span:hover { color: var(--color-white); }
-
-    /* Tracking Result Modal / Box */
+    .tracker-quick span {
+      color: #FFA5A5;
+      cursor: pointer;
+      text-decoration: underline;
+    }
     .track-result {
       margin-top: 14px;
-      padding: 14px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(34, 197, 94, 0.4);
+      padding: 12px 14px;
+      background: rgba(15, 23, 42, 0.85);
       border-radius: var(--radius-sm);
-      display: none;
+      border-left: 3px solid #22C55E;
       font-size: 0.85rem;
-      color: #F8FAFC;
+      color: #E2E8F0;
+      display: none;
     }
-    .track-result.active { display: block; animation: fadeIn 0.3s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* Hero Visual Card */
+    .track-result.active { display: block; }
     .hero-media-wrap {
       position: relative;
     }
     .hero-img-main {
-      width: 100%;
       border-radius: var(--radius-lg);
-      box-shadow: 0 24px 48px -12px rgba(0,0,0,0.5);
-      border: 2px solid rgba(255,255,255,0.1);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      height: 440px;
       object-fit: cover;
-      max-height: 480px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .hero-float-card {
       position: absolute;
-      bottom: -24px;
-      left: -24px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      padding: 18px 22px;
+      bottom: -20px;
+      left: -20px;
+      background: #FFFFFF;
+      color: var(--color-dark);
+      padding: 16px 20px;
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-xl);
-      border: 1px solid var(--color-border);
       display: flex;
       align-items: center;
-      gap: 16px;
-      color: var(--color-dark);
-      animation: float 4s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      gap: 14px;
+      border: 1px solid var(--color-border);
+      animation: floating 4s ease-in-out infinite;
     }
     .hero-float-icon {
       width: 44px;
       height: 44px;
-      background: rgba(139,0,0,0.1);
-      color: var(--color-accent);
+      background: rgba(139, 0, 0, 0.1);
+      color: var(--color-primary);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 700;
     }
-    .hero-float-title { font-weight: 700; font-size: 0.95rem; }
-    .hero-float-sub { font-size: 0.8rem; color: var(--color-text-light); }
-
-    /* Features Grid */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      margin-top: 56px;
+      gap: 28px;
+      margin-top: 48px;
     }
     .feature-card {
       background: var(--color-white);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
-      padding: 36px 30px;
-      transition: all var(--transition);
+      padding: 32px 26px;
       box-shadow: var(--shadow-sm);
-      position: relative;
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
     }
     .feature-card:hover {
       transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
-      border-color: transparent;
+      border-color: var(--color-primary);
     }
     .feature-icon-wrap {
-      width: 56px;
-      height: 56px;
-      border-radius: var(--radius-sm);
-      background: var(--color-accent-subtle);
-      color: var(--color-accent);
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+    }
+    .about-teaser {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .about-teaser-img {
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+    }
+    .about-feature-list {
+      list-style: none;
+      margin: 22px 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .about-feature-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-      margin-bottom: 22px;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--color-text);
+      font-weight: 500;
     }
-    .feature-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
+    .about-check {
+      color: var(--color-primary);
+      font-weight: 700;
     }
-    .feature-card p {
-      font-size: 0.925rem;
-      line-height: 1.6;
-    }
-
-    /* Services Section Preview */
     .services-showcase {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      margin-top: 56px;
+      gap: 28px;
+      margin-top: 48px;
     }
     .service-card {
       background: var(--color-white);
       border-radius: var(--radius-md);
-      overflow: hidden;
       border: 1px solid var(--color-border);
+      overflow: hidden;
       box-shadow: var(--shadow-sm);
       transition: all var(--transition);
       display: flex;
@@ -268,33 +244,34 @@
     }
     .service-card:hover {
       transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
+      box-shadow: var(--shadow-xl);
+    }
+    .service-card-img-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
     }
     .service-card-img {
       width: 100%;
-      height: 220px;
+      height: 100%;
       object-fit: cover;
       transition: transform 0.5s ease;
     }
     .service-card:hover .service-card-img {
-      transform: scale(1.04);
-    }
-    .service-card-img-wrap {
-      overflow: hidden;
-      position: relative;
+      transform: scale(1.06);
     }
     .service-card-body {
-      padding: 28px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
     .service-card-tag {
-      font-size: 0.725rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--color-accent);
+      color: var(--color-primary);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       margin-bottom: 8px;
     }
     .service-card-body h3 {
@@ -302,74 +279,132 @@
       margin-bottom: 10px;
     }
     .service-card-body p {
-      font-size: 0.875rem;
-      margin-bottom: 20px;
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      margin-bottom: 18px;
       flex: 1;
     }
     .service-card-link {
       font-size: 0.875rem;
       font-weight: 600;
-      color: var(--color-accent);
+      color: var(--color-primary);
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
-    .service-card-link:hover {
-      gap: 10px;
-    }
-
-    /* About Section Teaser */
-    .about-teaser {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-    .about-teaser-img {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-xl);
+    /* Simulator Styles */
+    .simulator-container {
+      background: var(--color-white);
       border: 1px solid var(--color-border);
-      object-fit: cover;
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      margin-top: 36px;
     }
-    .about-feature-list {
-      list-style: none;
-      margin: 28px 0;
+    .sim-nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .sim-btn {
+      padding: 10px 20px;
+      background: var(--color-bg-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .sim-btn.active, .sim-btn:hover {
+      background: var(--color-primary);
+      color: #FFF;
+      border-color: var(--color-primary);
+    }
+    .sim-display {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      background: var(--color-bg-2);
+      padding: 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+    .sim-stat-box {
+      text-align: center;
+    }
+    .sim-stat-val {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+    .sim-stat-lbl {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    /* Testimonials Grid */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .testimonial-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      justify-content: space-between;
+      transition: all var(--transition);
     }
-    .about-feature-item {
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-primary);
+    }
+    .testimonial-quote {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--color-text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .testimonial-author {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--color-dark);
     }
-    .about-check {
-      width: 24px;
-      height: 24px;
+    .author-avatar {
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: #DCFCE7;
-      color: #16A34A;
+      background: var(--color-dark);
+      color: #FFF;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.8rem;
-      flex-shrink: 0;
+      font-size: 0.9rem;
     }
-
+    .author-info h4 {
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    .author-info span {
+      font-size: 0.775rem;
+      color: var(--color-text-muted);
+    }
     @media (max-width: 992px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-      .hero-desc { margin: 0 auto 32px; }
-      .hero-actions { justify-content: center; }
-      .hero-tracker-box { margin: 0 auto; }
-      .hero-float-card { left: 16px; bottom: 16px; }
-      .features-grid { grid-template-columns: 1fr; }
-      .services-showcase { grid-template-columns: 1fr; }
-      .about-teaser { grid-template-columns: 1fr; gap: 40px; }
+      .hero-grid, .about-teaser { grid-template-columns: 1fr; }
+      .features-grid, .services-showcase, .testimonials-grid { grid-template-columns: 1fr; }
+      .sim-display { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -413,11 +448,13 @@
     </div>
   </div>
 
-  <!-- HERO SECTION -->
+  <!-- ==========================================
+       SECTION 1: HERO & REAL-TIME TRACKING ENGINE
+       ========================================== -->
   <header class="hero" id="home">
     <div class="container">
       <div class="hero-grid">
-        <div class="hero-content reveal">
+        <div class="hero-content slide-left">
           <span class="section-tag" style="background: rgba(139,0,0,0.3); color:#FFA5A5;">Next-Gen Logistics</span>
           <h1>Intelligent Supply Chain & <span>Logistics</span> Cloud</h1>
           <p class="hero-desc">
@@ -448,13 +485,13 @@
           </div>
         </div>
 
-        <div class="hero-media-wrap reveal" style="transition-delay: 0.15s;">
+        <div class="hero-media-wrap slide-right" style="transition-delay: 0.15s;">
           <img src="images/hero_img.webp" alt="LogiTech Operations Platform" class="hero-img-main" />
-          <div class="hero-float-card">
+          <div class="hero-float-card anim-floating">
             <div class="hero-float-icon">✓</div>
             <div>
-              <div class="hero-float-title">99.4% On-Time SLA</div>
-              <div class="hero-float-sub">Across 60+ global transport corridors</div>
+              <div class="hero-float-title" style="font-weight:700;">99.4% On-Time SLA</div>
+              <div class="hero-float-sub" style="font-size:0.8rem;color:#64748B;">Across 60+ global corridors</div>
             </div>
           </div>
         </div>
@@ -462,8 +499,99 @@
     </div>
   </header>
 
-  <!-- FEATURES / VALUE PROPOSITION -->
-  <section class="section" style="background: var(--color-bg-2);" aria-label="Core features">
+  <!-- ==========================================
+       SECTION 2: LIVE METRIC COUNTERS (METRIC ANIMATION)
+       ========================================== -->
+  <section class="section" id="metrics" style="background: var(--color-white); padding: 50px 0;" aria-label="Platform Metrics">
+    <div class="container">
+      <div class="metric-grid">
+        <div class="metric-card slide-up">
+          <div class="metric-number" data-target="12450" data-suffix="+">12,450+</div>
+          <div class="metric-title">Daily Dispatches</div>
+          <div class="metric-desc">Autonomous freight routing</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width: 94%;"></div></div>
+        </div>
+        <div class="metric-card slide-up" style="transition-delay:0.1s;">
+          <div class="metric-number" data-target="99.4" data-suffix="%">99.4%</div>
+          <div class="metric-title">On-Time Reliability</div>
+          <div class="metric-desc">Carrier SLA guarantee</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width: 99%;"></div></div>
+        </div>
+        <div class="metric-card slide-up" style="transition-delay:0.2s;">
+          <div class="metric-number" data-target="60" data-suffix="+">60+</div>
+          <div class="metric-title">Connected Seaports & Air Hubs</div>
+          <div class="metric-desc">Across Asia, Americas & EMEA</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width: 88%;"></div></div>
+        </div>
+        <div class="metric-card slide-up" style="transition-delay:0.3s;">
+          <div class="metric-number" data-target="0.4" data-suffix="s">0.4s</div>
+          <div class="metric-title">Telemetry Sensor Latency</div>
+          <div class="metric-desc">Real-time IoT sync speed</div>
+          <div class="metric-bar-wrap"><div class="metric-bar-fill" style="width: 96%;"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 3: SUPPLY CHAIN NETWORK (CHAIN MODEL ANIMATION)
+       ========================================== -->
+  <section class="section" id="supply-chain" style="background: var(--color-bg-2);" aria-label="Supply Chain Network Chain Model">
+    <div class="container">
+      <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+        <span class="section-tag">Chain Model Architecture</span>
+        <h2 class="section-title">The Connected Digital Supply Chain</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">Every link from manufacturing origin to door-to-door delivery operates on unified real-time telemetry.</p>
+      </div>
+
+      <div class="chain-flow-container">
+        <!-- Node 1 -->
+        <div class="chain-node slide-up">
+          <div class="chain-node-num">1</div>
+          <div class="chain-node-icon">🏭</div>
+          <h4>Supplier Origin</h4>
+          <p>Factory inventory check & automated e-manifest generation</p>
+        </div>
+
+        <!-- Node 2 -->
+        <div class="chain-node slide-up" style="transition-delay:0.1s;">
+          <div class="chain-node-num">2</div>
+          <div class="chain-node-icon">🛂</div>
+          <h4>Customs Gate</h4>
+          <p>Digital HS tariff classification & pre-cleared bills of lading</p>
+        </div>
+
+        <!-- Node 3 -->
+        <div class="chain-node slide-up" style="transition-delay:0.2s;">
+          <div class="chain-node-num">3</div>
+          <div class="chain-node-icon">🚢</div>
+          <h4>Multimodal Transit</h4>
+          <p>Ocean & air carrier GPS tracking with temperature IoT sensors</p>
+        </div>
+
+        <!-- Node 4 -->
+        <div class="chain-node slide-up" style="transition-delay:0.3s;">
+          <div class="chain-node-num">4</div>
+          <div class="chain-node-icon">🤖</div>
+          <h4>3PL Smart Hub</h4>
+          <p>Robotic sortation, automated staging & dynamic pallet batching</p>
+        </div>
+
+        <!-- Node 5 -->
+        <div class="chain-node slide-up" style="transition-delay:0.4s;">
+          <div class="chain-node-num">5</div>
+          <div class="chain-node-icon">🚚</div>
+          <h4>Last-Mile Courier</h4>
+          <p>AI turn-by-turn routing & contactless digital ePOD confirmation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 4: CORE CAPABILITIES & TECH PILLARS
+       ========================================== -->
+  <section class="section" id="features" aria-label="Core features">
     <div class="container">
       <div style="text-align: center; max-width: 700px; margin: 0 auto;">
         <span class="section-tag">Why LogiTech</span>
@@ -472,19 +600,19 @@
       </div>
 
       <div class="features-grid">
-        <div class="feature-card reveal">
+        <div class="feature-card slide-left">
           <div class="feature-icon-wrap">🌐</div>
           <h3>Global Multimodal Freight</h3>
           <p>Seamless orchestration across ocean, air, rail, and road networks with unified documentation and automated carrier selection.</p>
         </div>
 
-        <div class="feature-card reveal" style="transition-delay: 0.1s;">
+        <div class="feature-card slide-up" style="transition-delay: 0.1s;">
           <div class="feature-icon-wrap">⚡</div>
           <h3>AI Predictive Routing</h3>
           <p>Dynamic routing algorithms evaluate weather, port congestion, and fuel dynamics to avoid delays and reduce transit costs up to 23%.</p>
         </div>
 
-        <div class="feature-card reveal" style="transition-delay: 0.2s;">
+        <div class="feature-card slide-right" style="transition-delay: 0.2s;">
           <div class="feature-icon-wrap">📡</div>
           <h3>IoT Telemetry & Cold Chain</h3>
           <p>Continuous sensor monitoring of temperature, humidity, shock, and exact geolocation with automated compliance alerting.</p>
@@ -493,14 +621,26 @@
     </div>
   </section>
 
-  <!-- ABOUT PREVIEW SECTION -->
-  <section class="section" aria-label="About LogiTech">
+  <!-- ==========================================
+       SECTION 5: ABOUT LOGITECH PREVIEW (HANGING ANIMATION)
+       ========================================== -->
+  <section class="section" id="about-preview" style="background: var(--color-bg-2);" aria-label="About LogiTech">
     <div class="container">
       <div class="about-teaser">
-        <div class="reveal">
+        <div class="slide-left" style="position: relative;">
           <img src="images/about_img.webp" alt="Supply Chain Team" class="about-teaser-img" />
+          
+          <!-- HANGING BADGE -->
+          <div class="hanging-card-wrap" style="position: absolute; top: 16px; right: 24px;">
+            <div class="hanging-pin"></div>
+            <div class="hanging-line"></div>
+            <div class="hanging-badge">
+              <span>🏅 ISO 9001 Certified</span>
+            </div>
+          </div>
         </div>
-        <div class="reveal" style="transition-delay:0.15s;">
+
+        <div class="slide-right" style="transition-delay:0.15s;">
           <span class="section-tag">About LogiTech</span>
           <h2 class="section-title">Driving Excellence Across Every Mile</h2>
           <p>
@@ -518,8 +658,10 @@
     </div>
   </section>
 
-  <!-- SERVICES SHOWCASE -->
-  <section class="section" style="background: var(--color-bg-2);" aria-label="Our key services">
+  <!-- ==========================================
+       SECTION 6: TAILORED SERVICES SHOWCASE
+       ========================================== -->
+  <section class="section" id="services" aria-label="Our key services">
     <div class="container">
       <div style="text-align: center; max-width: 700px; margin: 0 auto;">
         <span class="section-tag">Our Capabilities</span>
@@ -528,7 +670,7 @@
       </div>
 
       <div class="services-showcase">
-        <div class="service-card reveal">
+        <div class="service-card slide-left">
           <div class="service-card-img-wrap">
             <img src="images/service_1.webp" alt="Air and Ocean Freight Forwarding" class="service-card-img" />
           </div>
@@ -540,7 +682,7 @@
           </div>
         </div>
 
-        <div class="service-card reveal" style="transition-delay:0.1s;">
+        <div class="service-card slide-up" style="transition-delay:0.1s;">
           <div class="service-card-img-wrap">
             <img src="images/service_2.webp" alt="Warehouse Automation & Distribution" class="service-card-img" />
           </div>
@@ -552,7 +694,7 @@
           </div>
         </div>
 
-        <div class="service-card reveal" style="transition-delay:0.2s;">
+        <div class="service-card slide-right" style="transition-delay:0.2s;">
           <div class="service-card-img-wrap">
             <img src="images/service_3.webp" alt="Last-Mile Dispatch & Urban Logistics" class="service-card-img" />
           </div>
@@ -567,35 +709,97 @@
     </div>
   </section>
 
-  <!-- STATS -->
-  <section id="stats" aria-label="Platform Statistics">
+  <!-- ==========================================
+       SECTION 7: GLOBAL CORRIDOR & TELEMETRY SIMULATOR
+       ========================================== -->
+  <section class="section" id="corridor-simulator" style="background: var(--color-bg-2);" aria-label="Global Route Simulator">
     <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item reveal">
-          <div class="stat-num">12<span>K</span><span style="font-size:1.5rem">+</span></div>
-          <div class="stat-label">Daily Shipments Dispatched</div>
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+        <span class="section-tag">Interactive Simulation</span>
+        <h2 class="section-title">Global Corridor Route Telemetry</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">Select an active corridor to inspect live transit telemetry, transit times, and compliance metrics.</p>
+      </div>
+
+      <div class="simulator-container slide-up">
+        <div class="sim-nav">
+          <button class="sim-btn active" onclick="switchCorridor('apac-na', this)">🌏 Asia-Pacific &rarr; North America</button>
+          <button class="sim-btn" onclick="switchCorridor('trans-atl', this)">🚢 Transatlantic (EU &rarr; US)</button>
+          <button class="sim-btn" onclick="switchCorridor('asia-eu', this)">🚆 Silk Rail (Asia &rarr; Europe)</button>
         </div>
-        <div class="stat-item reveal" style="transition-delay:0.1s">
-          <div class="stat-num">500<span>+</span></div>
-          <div class="stat-label">Enterprise Cargo Partners</div>
-        </div>
-        <div class="stat-item reveal" style="transition-delay:0.2s">
-          <div class="stat-num">60<span>+</span></div>
-          <div class="stat-label">Global Ports & Hubs Connected</div>
-        </div>
-        <div class="stat-item reveal" style="transition-delay:0.3s">
-          <div class="stat-num">98<span>%</span></div>
-          <div class="stat-label">On-Time Delivery Rate</div>
+
+        <div class="sim-display" id="sim-stats-container">
+          <div class="sim-stat-box">
+            <div class="sim-stat-val" id="sim-speed">18.4 kts</div>
+            <div class="sim-stat-lbl">Average Vessel Speed</div>
+          </div>
+          <div class="sim-stat-box">
+            <div class="sim-stat-val" id="sim-temp">3.8 °C</div>
+            <div class="sim-stat-lbl">Cargo Bay Temperature</div>
+          </div>
+          <div class="sim-stat-box">
+            <div class="sim-stat-val" id="sim-time">9.2 Days</div>
+            <div class="sim-stat-lbl">Estimated Transit Time</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CALL TO ACTION -->
+  <!-- ==========================================
+       SECTION 8: CLIENT TESTIMONIALS & TRUST
+       ========================================== -->
+  <section class="section" id="testimonials" aria-label="Enterprise Testimonials">
+    <div class="container">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+        <span class="section-tag">Trusted Globally</span>
+        <h2 class="section-title">What Supply Chain Leaders Say</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">Powering operations for fast-growing businesses and multinational brands worldwide.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card slide-left">
+          <p class="testimonial-quote">"LogiTech reduced our ocean transit dwell times by 28% and gave our operations team 100% visibility over our cold-chain shipments."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">DW</div>
+            <div class="author-info">
+              <h4>David Wong</h4>
+              <span>VP Supply Chain, Apex Global</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card slide-up" style="transition-delay:0.1s;">
+          <p class="testimonial-quote">"The automated customs pre-clearance and API integration saved our warehouse dispatchers over 40 hours of manual paperwork every week."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MR</div>
+            <div class="author-info">
+              <h4>Maria Rodriguez</h4>
+              <span>Logistics Director, MedTech Pharma</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card slide-right" style="transition-delay:0.2s;">
+          <p class="testimonial-quote">"Switching to LogiTech's dynamic last-mile dispatch improved our on-time delivery rate to 99.6% across 14 European metropolitan markets."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">JL</div>
+            <div class="author-info">
+              <h4>Julian Laurent</h4>
+              <span>Operations Lead, FastDeliver EU</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 9: CALL TO ACTION
+       ========================================== -->
   <section id="cta" aria-label="Call to action">
     <div class="cta-bg" aria-hidden="true"></div>
     <div class="container">
-      <div class="cta-inner reveal">
+      <div class="cta-inner slide-up">
         <span class="section-tag" style="background:rgba(255,255,255,0.15); color:#FFFFFF;">Get Started Today</span>
         <h2 class="section-title">Ready to Upgrade Your Supply Chain?</h2>
         <p class="section-subtitle">Join hundreds of global enterprises managing their logistics with LogiTech. Start your 14-day free trial now.</p>
@@ -702,6 +906,27 @@
           <div>Tracking ID: <strong>${val.toUpperCase()}</strong> | Consignment Batch #9921</div>
           <div style="font-size:0.78rem;color:#94A3B8;margin-top:4px;">Delivered at Dock 4A, Chicago Fulfillment Center. All 140 crates verified.</div>
         `;
+      }
+    }
+
+    function switchCorridor(type, btn) {
+      document.querySelectorAll('.sim-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const speed = document.getElementById('sim-speed');
+      const temp = document.getElementById('sim-temp');
+      const time = document.getElementById('sim-time');
+      if (type === 'apac-na') {
+        speed.textContent = '18.4 kts';
+        temp.textContent = '3.8 °C';
+        time.textContent = '9.2 Days';
+      } else if (type === 'trans-atl') {
+        speed.textContent = '21.0 kts';
+        temp.textContent = '2.4 °C';
+        time.textContent = '5.8 Days';
+      } else {
+        speed.textContent = '65 km/h';
+        temp.textContent = '5.1 °C';
+        time.textContent = '14.0 Days';
       }
     }
   </script>
