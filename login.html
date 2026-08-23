@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login – LogiTech Logistics Technology</title>
+  <meta name="description" content="Sign in to your LogiTech account to manage shipments, track freight, and access your supply chain dashboard." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #8B0000;
+      --accent-hover: #700000;
+      --dark: #0F172A;
+      --dark-2: #1E293B;
+      --text: #1E293B;
+      --text-light: #64748B;
+      --border: #E2E8F0;
+      --bg: #F8FAFC;
+      --white: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', sans-serif;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --shadow-lg: 0 20px 48px -6px rgba(15,23,42,0.16);
+      --transition: 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* LEFT PANEL */
+    .auth-left {
+      width: 48%;
+      background: linear-gradient(145deg, #0F172A 0%, #1a0505 50%, #0F172A 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-left::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(139,0,0,0.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .auth-left::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -150px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(139,0,0,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      position: relative; z-index: 1;
+    }
+    .auth-logo img {
+      height: 40px; width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .auth-panel-content {
+      position: relative; z-index: 1;
+    }
+    .auth-panel-content h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      color: #FFFFFF;
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+    .auth-panel-content p {
+      color: #94A3B8;
+      font-size: 1rem;
+      line-height: 1.65;
+      margin-bottom: 36px;
+      max-width: 380px;
+    }
+    .auth-stats {
+      display: flex;
+      gap: 32px;
+    }
+    .auth-stat-num {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+    .auth-stat-num span { color: #EF4444; }
+    .auth-stat-label {
+      font-size: 0.8rem;
+      color: #64748B;
+      margin-top: 4px;
+    }
+    .auth-testimonial {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 24px;
+      position: relative; z-index: 1;
+    }
+    .auth-testimonial p {
+      color: #CBD5E1;
+      font-size: 0.9rem;
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+    .auth-testimonial-author {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .auth-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem;
+    }
+    .auth-author-name { font-weight: 600; color: var(--white); font-size: 0.875rem; }
+    .auth-author-role { color: #64748B; font-size: 0.775rem; }
+
+    /* RIGHT PANEL */
+    .auth-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 32px;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+    }
+    .auth-card-header { margin-bottom: 36px; }
+    .auth-card-header h1 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .auth-card-header p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+    .auth-card-header a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .auth-card-header a:hover { text-decoration: underline; }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .input-wrap {
+      position: relative;
+    }
+    .input-wrap input {
+      width: 100%;
+      padding: 13px 16px 13px 44px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.925rem;
+      color: var(--text);
+      background: var(--white);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      font-family: var(--font-sans);
+    }
+    .input-wrap input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(139,0,0,0.1);
+    }
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94A3B8;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .input-toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #94A3B8;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      padding: 4px;
+    }
+    .input-toggle:hover { color: var(--dark); }
+
+    .form-row-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .remember-me {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.875rem; color: var(--text-light);
+      cursor: pointer;
+    }
+    .remember-me input { cursor: pointer; accent-color: var(--accent); }
+    .forgot-link {
+      font-size: 0.875rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .forgot-link:hover { text-decoration: underline; }
+
+    .btn-auth {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-auth:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139,0,0,0.3);
+    }
+    .btn-auth:active { transform: translateY(0); }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .auth-divider span { font-size: 0.8rem; color: #94A3B8; }
+
+    .social-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .btn-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+      font-family: var(--font-sans);
+      text-decoration: none;
+    }
+    .btn-social:hover {
+      border-color: var(--dark);
+      background: var(--bg);
+    }
+
+    .error-msg {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #DC2626;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+
+    @media (max-width: 900px) {
+      .auth-left { display: none; }
+      .auth-right { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LEFT BRANDING PANEL -->
+  <div class="auth-left">
+    <a href="index.html" class="auth-logo">
+      <img src="images/logo.webp" alt="LogiTech Logo" />
+    </a>
+
+    <div class="auth-panel-content">
+      <h2>Welcome back to your command center</h2>
+      <p>Manage global freight, monitor live shipments, and optimize your supply chain — all from one intelligent platform.</p>
+      <div class="auth-stats">
+        <div>
+          <div class="auth-stat-num">12K<span>+</span></div>
+          <div class="auth-stat-label">Daily Shipments</div>
+        </div>
+        <div>
+          <div class="auth-stat-num">98<span>%</span></div>
+          <div class="auth-stat-label">On-Time Delivery</div>
+        </div>
+        <div>
+          <div class="auth-stat-num">60<span>+</span></div>
+          <div class="auth-stat-label">Countries</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-testimonial">
+      <p>"LogiTech reduced our freight delays by 34% in the first quarter. The dashboard gives real-time visibility we never had before."</p>
+      <div class="auth-testimonial-author">
+        <div class="auth-avatar">AK</div>
+        <div>
+          <div class="auth-author-name">Arjun Kumar</div>
+          <div class="auth-author-role">VP Supply Chain, GlobalEdge Corp</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM PANEL -->
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <h1>Sign in to LogiTech</h1>
+        <p>New to the platform? <a href="signup.html">Create a free account &rarr;</a></p>
+      </div>
+
+      <div class="error-msg" id="login-error">Invalid email or password. Please try again.</div>
+
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="login-email">Business Email</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉</span>
+            <input type="email" id="login-email" placeholder="you@company.com" required autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="login-password" placeholder="Enter your password" required autocomplete="current-password" />
+            <button type="button" class="input-toggle" onclick="togglePw('login-password', this)">Show</button>
+          </div>
+        </div>
+
+        <div class="form-row-flex">
+          <label class="remember-me">
+            <input type="checkbox" id="remember-me" /> Remember me
+          </label>
+          <a href="404.html" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-auth" id="btn-login-submit">
+          Sign In &rarr;
+        </button>
+      </form>
+
+      <div class="auth-divider"><span>or continue with</span></div>
+
+      <div class="social-btns">
+        <a href="404.html" class="btn-social">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </a>
+        <a href="404.html" class="btn-social">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2" fill="#0A66C2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePw(id, btn) {
+      const el = document.getElementById(id);
+      const isPass = el.type === 'password';
+      el.type = isPass ? 'text' : 'password';
+      btn.textContent = isPass ? 'Hide' : 'Show';
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const pass = document.getElementById('login-password').value;
+      const btn = document.getElementById('btn-login-submit');
+      const err = document.getElementById('login-error');
+
+      btn.textContent = 'Signing in...';
+      btn.disabled = true;
+      err.classList.remove('show');
+
+      setTimeout(() => {
+        if (email && pass.length >= 6) {
+          let existing = {};
+          try {
+            existing = JSON.parse(localStorage.getItem('logitech_user') || '{}');
+          } catch(e) {}
+
+          let name = existing.name;
+          if (!name || (existing.email && existing.email.toLowerCase() !== email.toLowerCase())) {
+            const prefix = email.split('@')[0];
+            name = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+          }
+
+          const role = existing.role || (email.toLowerCase().includes('admin') ? 'Administrator' : 'Logistics Manager');
+          const userData = {
+            name: name,
+            email: email,
+            role: role,
+            company: existing.company || 'LogiTech Logistics'
+          };
+
+          localStorage.setItem('logitech_user', JSON.stringify(userData));
+          sessionStorage.setItem('logitech_user', JSON.stringify(userData));
+
+          if (role === 'Administrator' || email.toLowerCase().includes('admin')) {
+            window.location.href = 'admin.html';
+          } else {
+            window.location.href = 'dashboard.html';
+          }
+        } else {
+          err.classList.add('show');
+          btn.textContent = 'Sign In →';
+          btn.disabled = false;
+        }
+      }, 700);
+    }
+  </script>
+</body>
+</html>

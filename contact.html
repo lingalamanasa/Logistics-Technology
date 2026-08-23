@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - LogiTech Logistics Technology</title>
+  <meta name="description" content="Get in touch with LogiTech to discuss your logistics technology needs, request a demo, or get a custom quote for enterprise supply chain solutions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Contact Page Specific */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    /* Info Cards */
+    .contact-info { display: flex; flex-direction: column; gap: 24px; }
+    .contact-info-card {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: all var(--transition);
+    }
+    .contact-info-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-accent);
+    }
+    .contact-info-icon {
+      width: 50px; height: 50px;
+      border-radius: var(--radius-sm);
+      background: rgba(139,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      color: var(--color-accent);
+    }
+    .contact-info-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+    .contact-info-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-dark);
+      margin-bottom: 4px;
+    }
+    .contact-info-sub {
+      font-size: 0.825rem;
+      color: var(--color-text-light);
+    }
+
+    /* Form */
+    .contact-form-wrap {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: 48px 44px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
+    }
+    .contact-form-wrap h2 {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--color-dark);
+      margin-bottom: 8px;
+    }
+    .contact-form-wrap p {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      margin-bottom: 32px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-dark);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--color-text);
+      background: var(--color-bg);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(139,0,0,0.1);
+      background: var(--color-white);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select { cursor: pointer; }
+
+    .form-submit { width: 100%; justify-content: center; padding: 15px; font-size: 1rem; margin-top: 8px; }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 32px;
+    }
+    .form-success-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    .form-success h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-dark);
+      margin-bottom: 8px;
+    }
+    .form-success p { color: var(--color-text-light); font-size: 0.9rem; }
+
+    /* Map placeholder */
+    .map-placeholder {
+      background: var(--color-bg-2);
+      border-radius: var(--radius-md);
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px;
+      border: 1px solid var(--color-border);
+      margin-top: 24px;
+    }
+    .map-placeholder p { color: var(--color-text-muted); font-size: 0.9rem; }
+
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .faq-item {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 20px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-dark);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: color var(--transition);
+    }
+    .faq-question:hover { color: var(--color-accent); }
+    .faq-toggle {
+      font-size: 1.2rem;
+      color: var(--color-accent);
+      flex-shrink: 0;
+      transition: transform var(--transition);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-answer.open { max-height: 200px; }
+    .faq-answer-inner {
+      padding: 0 24px 20px;
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+    @media (max-width: 768px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-wrap { padding: 32px 24px; }
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo stackly-logo" id="logo-link">
+        <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+        <li><a href="about.html" class="nav-link" id="nav-about">About</a></li>
+        <li><a href="services.html" class="nav-link" id="nav-services">Services</a></li>
+        <li><a href="blog.html" class="nav-link" id="nav-blog">Blog</a></li>
+        <li><a href="contact.html" class="nav-link active" id="nav-contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-dark" id="btn-login">Login</a>
+        <a href="signup.html" class="btn btn-accent" id="btn-signup">Signup</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="contact.html" class="nav-link active">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-dark">Login</a>
+      <a href="signup.html" class="btn btn-accent">Signup</a>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" aria-label="Contact page hero">
+    <div class="container">
+      <span class="section-tag">Get In Touch</span>
+      <h1>Let's Build Your<br/>Logistics Future Together</h1>
+      <p>Whether you're looking for a custom quote, a product demo, or just have a question — we're here to help you move forward.</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <span>Contact</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT MAIN -->
+  <section class="section" id="contact-main" aria-label="Contact information and form">
+    <div class="container">
+      <div class="contact-layout">
+        <!-- LEFT: Info -->
+        <div class="contact-info reveal-left">
+          <div>
+            <span class="section-tag">Contact Information</span>
+            <h2 class="section-title" style="font-size:2rem;margin-bottom:8px;">We'd love to hear from you</h2>
+            <p style="color:var(--color-text-light);margin-bottom:32px;font-size:0.95rem;">Reach out through any of the channels below or fill in the form and a member of our team will respond within one business day.</p>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="contact-info-icon">📍</div>
+            <div>
+              <div class="contact-info-label">Headquarters</div>
+              <div class="contact-info-value">LogiTech Tower, Whitefield</div>
+              <div class="contact-info-sub">Bengaluru, Karnataka 560066, India</div>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="contact-info-icon">📞</div>
+            <div>
+              <div class="contact-info-label">Phone</div>
+              <div class="contact-info-value">+91 80 4567 8900</div>
+              <div class="contact-info-sub">Monday – Friday, 9 AM – 6 PM IST</div>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="contact-info-icon">✉️</div>
+            <div>
+              <div class="contact-info-label">Email</div>
+              <div class="contact-info-value">hello@logitech-logistics.com</div>
+              <div class="contact-info-sub">We respond within 24 business hours</div>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
+            <div class="contact-info-icon">🌐</div>
+            <div>
+              <div class="contact-info-label">Global Offices</div>
+              <div class="contact-info-value">Singapore · London · Chicago</div>
+              <div class="contact-info-sub">Regional support available 24/7</div>
+            </div>
+          </div>
+
+          <div class="map-placeholder" role="img" aria-label="Office location map placeholder">
+            <div>
+              <div style="font-size:2rem;margin-bottom:8px;">🗺️</div>
+              <p>Interactive map of our Bengaluru headquarters<br/>
+              <a href="https://maps.google.com" target="_blank" rel="noopener" style="color:var(--color-accent);font-weight:600;font-size:0.875rem;">Open in Google Maps →</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Form -->
+        <div class="contact-form-wrap reveal-right">
+          <h2>Send us a Message</h2>
+          <p>Fill out the form below and our team will get back to you within one business day.</p>
+
+          <form id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name">First Name *</label>
+                <input type="text" id="first-name" name="firstName" placeholder="Arjun" required />
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name *</label>
+                <input type="text" id="last-name" name="lastName" placeholder="Kumar" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" placeholder="arjun@company.com" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="company">Company Name *</label>
+              <input type="text" id="company" name="company" placeholder="Your Company Ltd." required />
+            </div>
+
+            <div class="form-group">
+              <label for="service">Service Interested In</label>
+              <select id="service" name="service">
+                <option value="">Select a service...</option>
+                <option value="freight">Global Freight Management</option>
+                <option value="lastmile">Last-Mile Delivery Solutions</option>
+                <option value="warehouse">Warehouse Automation</option>
+                <option value="analytics">Supply Chain Analytics</option>
+                <option value="enterprise">Enterprise Custom Solution</option>
+                <option value="demo">Product Demo</option>
+                <option value="other">Other / General Inquiry</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" placeholder="Tell us about your logistics challenges and what you're looking for..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-accent form-submit" id="contact-submit">
+              Send Message →
+            </button>
+          </form>
+
+          <div class="form-success" id="form-success">
+            <div class="form-success-icon">✅</div>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. A member of our team will be in touch within one business day.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-bg" id="faq" aria-label="Frequently asked questions">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="section-tag">FAQs</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Can't find the answer you're looking for? Our support team is always here to help.</p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <button class="faq-question" id="faq-q1" aria-expanded="false">
+            How long does onboarding take?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer" id="faq-a1">
+            <div class="faq-answer-inner">Most clients are fully onboarded within 2–4 weeks, depending on the complexity of integrations. Our dedicated onboarding team handles everything from carrier connections to ERP integrations.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" id="faq-q2" aria-expanded="false">
+            Do you integrate with our existing ERP/WMS?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer" id="faq-a2">
+            <div class="faq-answer-inner">Yes. LogiTech integrates with SAP, Oracle, NetSuite, Microsoft Dynamics, and 100+ other platforms via our REST API, EDI connectors, and pre-built modules.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" id="faq-q3" aria-expanded="false">
+            Is there a free trial available?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer" id="faq-a3">
+            <div class="faq-answer-inner">Absolutely. We offer a 30-day free trial on our Starter and Professional plans. No credit card required. Enterprise clients receive a guided proof-of-concept program.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" id="faq-q4" aria-expanded="false">
+            What security certifications do you hold?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer" id="faq-a4">
+            <div class="faq-answer-inner">LogiTech is SOC 2 Type II certified, ISO 27001 certified, and GDPR compliant. All data is encrypted in transit (TLS 1.3) and at rest (AES-256).</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" id="faq-q5" aria-expanded="false">
+            What is your uptime SLA?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer" id="faq-a5">
+            <div class="faq-answer-inner">Enterprise clients receive a 99.9% uptime SLA. Our platform is hosted on redundant cloud infrastructure across multiple availability zones with automatic failover.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" id="faq-q6" aria-expanded="false">
+            Do you offer 24/7 support?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer" id="faq-a6">
+            <div class="faq-answer-inner">Yes. Professional and Enterprise plans include 24/7 support via chat, email, and phone. Enterprise clients also receive a dedicated Customer Success Manager.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo stackly-logo">
+            <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img stackly-logo-footer" />
+          </a>
+          <p>Empowering companies with modern logistics technology and intelligent supply chain solutions.</p>
+          <div class="footer-social">
+            <a href="404.html" aria-label="LinkedIn">in</a>
+            <a href="404.html" aria-label="Twitter">𝕏</a>
+            <a href="404.html" aria-label="Instagram">ig</a>
+            <a href="404.html" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="404.html">Freight Management</a></li>
+            <li><a href="404.html">Last-Mile Delivery</a></li>
+            <li><a href="404.html">Warehouse Automation</a></li>
+            <li><a href="404.html">Supply Chain Analytics</a></li>
+            <li><a href="404.html">Pricing</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-newsletter">
+          <h4>Stay Updated</h4>
+          <p>Get weekly logistics insights and market intelligence reports.</p>
+          <form class="newsletter-form" id="newsletter-form" onsubmit="return false;">
+            <input type="email" id="newsletter-email" placeholder="Enter your email" aria-label="Email for newsletter" />
+            <button type="submit" id="newsletter-submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 LogiTech Logistics Technology. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+          <a href="404.html">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Contact form submission
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('contact-submit');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        setTimeout(() => {
+          contactForm.style.display = 'none';
+          formSuccess.style.display = 'block';
+        }, 1500);
+      });
+    }
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-answer').classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked if it was closed
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

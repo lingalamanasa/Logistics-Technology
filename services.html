@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services – LogiTech Logistics Technology</title>
+  <meta name="description" content="Explore LogiTech's end-to-end logistics services: Ocean & Air Freight Forwarding, Warehousing & Fulfillment, Last-Mile Distribution, and IoT Cold Chain solutions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Services Page Specific Styles */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+    }
+    .service-detail-card {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .service-detail-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+    .service-media {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+    .service-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .service-detail-card:hover .service-media img {
+      transform: scale(1.05);
+    }
+    .service-media-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      color: #F8FAFC;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .service-content {
+      padding: 30px 26px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .service-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: var(--color-dark);
+    }
+    .service-content p {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .service-perks {
+      list-style: none;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .service-perks li {
+      font-size: 0.85rem;
+      color: var(--color-dark-2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .service-perks li span {
+      color: #16A34A;
+      font-weight: 700;
+    }
+    .service-content .btn {
+      margin-top: auto;
+      align-self: flex-start;
+      padding: 10px 20px;
+      font-size: 0.875rem;
+    }
+
+    /* Process Workflow */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+      position: relative;
+    }
+    .process-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+      transition: all var(--transition);
+    }
+    .process-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-accent);
+    }
+    .process-num {
+      width: 44px;
+      height: 44px;
+      background: var(--color-accent);
+      color: var(--color-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 0 auto 20px;
+    }
+    .process-card h4 {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .process-card p {
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 992px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo stackly-logo" id="logo-link">
+        <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+        <li><a href="about.html" class="nav-link" id="nav-about">About</a></li>
+        <li><a href="services.html" class="nav-link active" id="nav-services">Services</a></li>
+        <li><a href="blog.html" class="nav-link" id="nav-blog">Blog</a></li>
+        <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-dark" id="btn-login">Login</a>
+        <a href="signup.html" class="btn btn-accent" id="btn-signup">Signup</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="services.html" class="nav-link active">Services</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-actions" style="margin-top:16px;">
+      <a href="login.html" class="btn btn-dark">Login</a>
+      <a href="signup.html" class="btn btn-accent">Signup</a>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" aria-label="Services hero">
+    <div class="container">
+      <span class="section-tag">Logistics Capabilities</span>
+      <h1>Comprehensive Logistics &<br/>Freight Solutions</h1>
+      <p>From international air and ocean forwarding to automated fulfillment centers and last-mile dispatch networks.</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <span>Services</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN SERVICES GRID -->
+  <section class="section" aria-label="Detailed service offerings">
+    <div class="container">
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
+        <span class="section-tag">End-to-End Excellence</span>
+        <h2 class="section-title">Core Logistics Services</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Designed to scale with your volume, minimize transit cycle times, and optimize supply chain costs.</p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-detail-card reveal">
+          <div class="service-media">
+            <img src="images/service_1.webp" alt="Freight Forwarding" />
+            <span class="service-media-badge">Multimodal</span>
+          </div>
+          <div class="service-content">
+            <h3>Global Freight Forwarding</h3>
+            <p>Reliable ocean (FCL/LCL), air cargo charter, and cross-border rail connections with integrated carrier booking and consolidated customs clearance.</p>
+            <ul class="service-perks">
+              <li><span>✓</span> Real-time vessel and flight telemetry</li>
+              <li><span>✓</span> Instant digital bills of lading (e-BL)</li>
+              <li><span>✓</span> Guaranteed space allocations</li>
+            </ul>
+            <a href="contact.html" class="btn btn-dark">Book Freight &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-detail-card reveal" style="transition-delay:0.1s;">
+          <div class="service-media">
+            <img src="images/service_2.webp" alt="Warehouse Automation" />
+            <span class="service-media-badge">Automated</span>
+          </div>
+          <div class="service-content">
+            <h3>Smart Warehousing & 3PL</h3>
+            <p>High-density automated storage and retrieval systems (ASRS), barcode sortation, and multi-channel fulfillment with 99.9% inventory accuracy.</p>
+            <ul class="service-perks">
+              <li><span>✓</span> WMS real-time API integrations</li>
+              <li><span>✓</span> Same-day pick, pack & dispatch</li>
+              <li><span>✓</span> Climate-controlled storage zones</li>
+            </ul>
+            <a href="contact.html" class="btn btn-dark">Explore Hubs &rarr;</a>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-detail-card reveal" style="transition-delay:0.2s;">
+          <div class="service-media">
+            <img src="images/service_3.webp" alt="Last-Mile Logistics" />
+            <span class="service-media-badge">Hyperlocal</span>
+          </div>
+          <div class="service-content">
+            <h3>Last-Mile Fleet Logistics</h3>
+            <p>High-density urban distribution networks powered by route optimization, dynamic parcel batching, and automated recipient SMS notifications.</p>
+            <ul class="service-perks">
+              <li><span>✓</span> Dynamic courier dispatching</li>
+              <li><span>✓</span> Contactless digital proof of delivery</li>
+              <li><span>✓</span> Real-time driver turn-by-turn routing</li>
+            </ul>
+            <a href="contact.html" class="btn btn-dark">Request Dispatch &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS STEP WORKFLOW -->
+  <section class="section" style="background: var(--color-bg-2);" aria-label="How we work">
+    <div class="container">
+      <div style="text-align:center; max-width:700px; margin:0 auto;">
+        <span class="section-tag">Seamless Process</span>
+        <h2 class="section-title">How LogiTech Delivers For You</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Four simple steps to streamline your supply chain from procurement to final destination.</p>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-card reveal">
+          <div class="process-num">1</div>
+          <h4>Instant Booking</h4>
+          <p>Submit freight requirements or integrate our API to get instant competitive carrier quotes and lane schedules.</p>
+        </div>
+
+        <div class="process-card reveal" style="transition-delay:0.1s;">
+          <div class="process-num">2</div>
+          <h4>Automated Customs</h4>
+          <p>Our digital engine pre-clears documentation, harmonized tariff codes, and compliances before arrival.</p>
+        </div>
+
+        <div class="process-card reveal" style="transition-delay:0.2s;">
+          <div class="process-num">3</div>
+          <h4>IoT Live Tracking</h4>
+          <p>Monitor temperature, speed, location, and milestone events in real time from your custom dashboard.</p>
+        </div>
+
+        <div class="process-card reveal" style="transition-delay:0.3s;">
+          <div class="process-num">4</div>
+          <h4>Proof & Analytics</h4>
+          <p>Receive digital ePOD, instant cargo health reports, and analytics to optimize upcoming shipments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" aria-label="Call to action">
+    <div class="cta-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2 class="section-title">Ready to Automate Your Freight Operations?</h2>
+        <p class="section-subtitle">Speak with our logistics engineers to get a custom solution tailored to your enterprise supply chain.</p>
+        <div class="cta-actions">
+          <a href="contact.html" class="btn btn-accent" style="padding:15px 36px;font-size:1rem;">Request Custom Quote &rarr;</a>
+          <a href="signup.html" class="btn btn-outline-white" style="padding:15px 36px;font-size:1rem;">Create Account Free</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo stackly-logo">
+            <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img stackly-logo-footer" />
+          </a>
+          <p>Empowering companies with modern logistics technology and intelligent supply chain solutions.</p>
+          <div class="footer-social">
+            <a href="404.html" aria-label="LinkedIn">in</a>
+            <a href="404.html" aria-label="Twitter">𝕏</a>
+            <a href="404.html" aria-label="Instagram">ig</a>
+            <a href="404.html" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="services.html">Freight Forwarding</a></li>
+            <li><a href="services.html">Last-Mile Delivery</a></li>
+            <li><a href="services.html">Warehouse Automation</a></li>
+            <li><a href="services.html">Customs & Compliance</a></li>
+            <li><a href="dashboard.html">Client Dashboard</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-newsletter">
+          <h4>Stay Updated</h4>
+          <p>Get weekly freight market intelligence and logistics technology updates.</p>
+          <form class="newsletter-form" id="newsletter-form" onsubmit="return false;">
+            <input type="email" id="newsletter-email" placeholder="Enter your business email" aria-label="Email for newsletter" required />
+            <button type="submit" id="newsletter-submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 LogiTech Logistics Technology. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+          <a href="404.html">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

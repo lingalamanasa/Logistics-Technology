@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – LogiTech</title>
+  <meta name="description" content="Your LogiTech logistics dashboard – monitor shipments, performance KPIs, and supply chain health in real time." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #8B0000;
+      --accent-light: rgba(139,0,0,0.08);
+      --dark: #0F172A;
+      --dark-2: #1E293B;
+      --sidebar-bg: #0F172A;
+      --sidebar-width: 260px;
+      --text: #1E293B;
+      --text-light: #64748B;
+      --text-muted: #94A3B8;
+      --border: #E2E8F0;
+      --bg: #F1F5F9;
+      --card: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', sans-serif;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ---- SIDEBAR ---- */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      height: 100vh;
+      z-index: 100;
+      overflow: hidden;
+    }
+    .sidebar-header {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar-logo img {
+      height: 34px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 10px;
+      min-height: 0;
+    }
+    .sidebar-nav::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar-nav::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.15);
+      border-radius: 4px;
+    }
+    .nav-section-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0 8px;
+      margin-bottom: 6px;
+      margin-top: 16px;
+    }
+    .nav-section-label:first-child { margin-top: 0; }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-bottom: 2px;
+    }
+    .sidebar-link:hover {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.9);
+    }
+    .sidebar-link.active {
+      background: var(--accent);
+      color: white;
+    }
+    .sidebar-link .icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .sidebar-badge {
+      margin-left: auto;
+      background: var(--accent);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      line-height: 1.4;
+    }
+    .sidebar-footer {
+      flex-shrink: 0;
+      padding: 14px 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: #060a14;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.35);
+    }
+    .user-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .user-profile-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; color: white;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(139,0,0,0.4);
+    }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.95);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      line-height: 1.2;
+    }
+    .user-email {
+      font-size: 0.72rem;
+      color: #94A3B8;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+    .user-role-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #F87171;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+    .sidebar-logout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #FCA5A5;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .sidebar-logout-btn:hover {
+      background: #EF4444;
+      border-color: #EF4444;
+      color: #FFFFFF;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+    }
+    .sidebar-logout-btn svg {
+      width: 15px; height: 15px;
+      flex-shrink: 0;
+    }
+
+    /* ---- MAIN CONTENT ---- */
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Top Bar */
+    .topbar {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+    .topbar-left h1 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .topbar-left p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .topbar-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 12px 4px 6px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .topbar-user-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .topbar-user-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .topbar-user-name {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .topbar-user-email {
+      font-size: 0.68rem;
+      color: var(--text-light);
+    }
+    .topbar-logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      color: #DC2626;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .topbar-logout-btn:hover {
+      background: #DC2626;
+      color: #FFFFFF;
+      border-color: #DC2626;
+    }
+    .topbar-logout-btn svg {
+      width: 14px; height: 14px;
+    }
+    .topbar-btn {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      position: relative;
+      color: var(--text-light);
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+    .topbar-btn:hover { background: var(--border); color: var(--dark); }
+    .notif-dot {
+      position: absolute;
+      top: 6px; right: 6px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--card);
+    }
+    .date-badge {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 8px;
+    }
+
+    /* Content */
+    .content { padding: 28px; }
+
+    /* KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+    }
+    .kpi-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .kpi-value {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .kpi-change {
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .kpi-change.up { color: #16a34a; }
+    .kpi-change.down { color: #dc2626; }
+    .kpi-icon {
+      position: absolute;
+      top: 18px; right: 18px;
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--accent-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    /* Middle Grid */
+    .mid-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    /* Chart Card */
+    .chart-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .card-subtitle { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+    .card-action {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .card-action:hover { text-decoration: underline; }
+
+    /* Simple bar chart */
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      height: 160px;
+    }
+    .bar-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .bar-wrap {
+      width: 100%;
+      background: var(--bg);
+      border-radius: 6px 6px 0 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .bar {
+      border-radius: 6px 6px 0 0;
+      background: linear-gradient(to top, var(--accent), #c0392b);
+      transition: all 0.4s ease;
+      min-height: 4px;
+    }
+    .bar-wrap.secondary .bar {
+      background: linear-gradient(to top, #64748B, #94A3B8);
+    }
+    .bar-label { font-size: 0.68rem; color: var(--text-muted); }
+
+    /* Donut chart */
+    .donut-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .donut-chart {
+      position: relative;
+      width: 140px; height: 140px;
+    }
+    .donut-chart svg { transform: rotate(-90deg); }
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .donut-num {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .donut-sub { font-size: 0.7rem; color: var(--text-muted); }
+    .donut-legend { width: 100%; }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+    .legend-item:last-child { border-bottom: none; }
+    .legend-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-light);
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-pct { font-weight: 600; color: var(--dark); }
+
+    /* Bottom grid */
+    .bot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Shipments Table */
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.835rem;
+    }
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      color: var(--text-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--bg); }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 600;
+    }
+    .status-badge.delivered { background: #dcfce7; color: #16a34a; }
+    .status-badge.transit { background: #dbeafe; color: #2563eb; }
+    .status-badge.pending { background: #fef9c3; color: #ca8a04; }
+    .status-badge.delayed { background: #fee2e2; color: #dc2626; }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* Alerts list */
+    .alerts-list { display: flex; flex-direction: column; gap: 10px; }
+    .alert-item {
+      display: flex;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      align-items: flex-start;
+      transition: all 0.2s;
+    }
+    .alert-item:hover { box-shadow: var(--shadow-md); transform: translateX(2px); }
+    .alert-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .alert-icon.warn { background: #fef9c3; }
+    .alert-icon.danger { background: #fee2e2; }
+    .alert-icon.info { background: #dbeafe; }
+    .alert-icon.success { background: #dcfce7; }
+    .alert-body { flex: 1; min-width: 0; }
+    .alert-title { font-size: 0.84rem; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
+    .alert-desc { font-size: 0.775rem; color: var(--text-light); line-height: 1.4; }
+    .alert-time { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
+
+    /* Mobile hamburger for sidebar */
+    .mob-toggle {
+      display: none;
+      position: fixed;
+      top: 14px; left: 14px;
+      z-index: 200;
+      background: var(--dark);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 1100px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .mid-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 800px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .mob-toggle { display: flex; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .bot-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+      .content { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="mob-toggle" id="mob-toggle" aria-label="Toggle sidebar">☰</button>
+
+  <!-- ======================== SIDEBAR ======================== -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <img src="images/logo.webp" alt="LogiTech Logo" />
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="dashboard.html" class="sidebar-link active" id="nav-dashboard">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-shipments">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Shipments
+        <span class="sidebar-badge">12</span>
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-tracking">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        Live Tracking
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-routes">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        Routes
+      </a>
+
+      <div class="nav-section-label">Operations</div>
+      <a href="404.html" class="sidebar-link" id="nav-warehouse">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Warehouse
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-inventory">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        Inventory
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-carriers">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        Carriers
+      </a>
+
+      <div class="nav-section-label">Analytics</div>
+      <a href="404.html" class="sidebar-link" id="nav-reports">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Reports
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-analytics">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </a>
+
+      <div class="nav-section-label">Account</div>
+      <a href="404.html" class="sidebar-link" id="nav-settings">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-profile-row">
+          <div class="user-avatar" id="sidebar-avatar">LM</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Lingalamanasa123</div>
+            <div class="user-email" id="sidebar-user-email" style="display:flex;align-items:center;gap:5px;color:#94A3B8;font-size:0.75rem;margin-top:2px;">
+              <svg style="width:13px;height:13px;flex-shrink:0;opacity:0.85;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span id="sidebar-email-text" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">lingalamanasa123@gmail.com</span>
+            </div>
+            <div class="user-role-tag" id="sidebar-user-role">Logistics Manager</div>
+          </div>
+        </div>
+        <a href="login.html" class="sidebar-logout-btn" id="logout-link" onclick="handleLogout(event)" title="Sign out of Dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================== MAIN ======================== -->
+  <div class="main">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 style="font-size:1.35rem; font-weight:700; color:var(--dark); margin-bottom:2px;">Platform Overview</h1>
+        <p id="dashboard-welcome-text" style="font-size:0.875rem; color:#64748B; margin-top:2px;">Welcome back, <strong id="dashboard-welcome-name" style="color:var(--accent,#8B0000); font-weight:700;">Lingalamanasa123</strong>, manage your logistics ecosystem</p>
+      </div>
+      <div class="topbar-right">
+        <span class="date-badge" id="current-date">Loading...</span>
+        <button class="topbar-btn" id="notif-btn" onclick="window.location.href='404.html'" aria-label="Notifications">
+          🔔
+          <span class="notif-dot"></span>
+        </button>
+        <button class="topbar-btn" id="search-btn" onclick="window.location.href='404.html'" aria-label="Search">🔍</button>
+        <div class="topbar-user">
+          <div class="topbar-user-avatar" id="topbar-avatar">LM</div>
+          <div class="topbar-user-info">
+            <span class="topbar-user-name" id="topbar-user-name">Lingalamanasa123</span>
+            <span class="topbar-user-email" id="topbar-user-email">lingalamanasa123@gmail.com</span>
+          </div>
+        </div>
+        <a href="login.html" class="topbar-logout-btn" onclick="handleLogout(event)" title="Sign out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon">🚚</div>
+          <div class="kpi-label">Active Shipments</div>
+          <div class="kpi-value" id="kpi-shipments">0</div>
+          <div class="kpi-change up">↑ +8% vs last week</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">✅</div>
+          <div class="kpi-label">On-Time Delivery Rate</div>
+          <div class="kpi-value" id="kpi-ontime">0%</div>
+          <div class="kpi-change up">↑ +2.3% vs last month</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">💰</div>
+          <div class="kpi-label">Freight Cost Saved</div>
+          <div class="kpi-value" id="kpi-savings">$0</div>
+          <div class="kpi-change up">↑ +12% vs last month</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon">⚠️</div>
+          <div class="kpi-label">Delayed Shipments</div>
+          <div class="kpi-value" id="kpi-delayed">0</div>
+          <div class="kpi-change down">↑ +2 from yesterday</div>
+        </div>
+      </div>
+
+      <!-- Middle Row -->
+      <div class="mid-grid">
+        <!-- Bar Chart -->
+        <div class="chart-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Shipment Volume — Last 7 Days</div>
+              <div class="card-subtitle">Delivered vs. In Transit</div>
+            </div>
+            <a href="404.html" class="card-action">View Report</a>
+          </div>
+          <div class="bar-chart" id="bar-chart" role="img" aria-label="Bar chart of shipment volumes">
+            <!-- Generated by JS -->
+          </div>
+          <div style="display:flex;gap:16px;margin-top:12px;justify-content:center;">
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-light);">
+              <span style="width:12px;height:12px;border-radius:3px;background:var(--accent);display:inline-block;"></span> Delivered
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:0.75rem;color:var(--text-light);">
+              <span style="width:12px;height:12px;border-radius:3px;background:#94A3B8;display:inline-block;"></span> In Transit
+            </div>
+          </div>
+        </div>
+
+        <!-- Donut Chart -->
+        <div class="chart-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Shipment by Mode</div>
+              <div class="card-subtitle">This month</div>
+            </div>
+          </div>
+          <div class="donut-wrap">
+            <div class="donut-chart">
+              <svg width="140" height="140" viewBox="0 0 140 140">
+                <!-- Road: 48% -->
+                <circle cx="70" cy="70" r="52" fill="none" stroke="#E2E8F0" stroke-width="20"/>
+                <circle cx="70" cy="70" r="52" fill="none" stroke="#8B0000" stroke-width="20"
+                  stroke-dasharray="156.8 326.7" stroke-dashoffset="0"/>
+                <!-- Air: 32% -->
+                <circle cx="70" cy="70" r="52" fill="none" stroke="#0F172A" stroke-width="20"
+                  stroke-dasharray="104.4 326.7" stroke-dashoffset="-156.8"/>
+                <!-- Sea: 20% -->
+                <circle cx="70" cy="70" r="52" fill="none" stroke="#94A3B8" stroke-width="20"
+                  stroke-dasharray="65.3 326.7" stroke-dashoffset="-261.2"/>
+              </svg>
+              <div class="donut-center">
+                <div class="donut-num">1.2K</div>
+                <div class="donut-sub">Total</div>
+              </div>
+            </div>
+            <div class="donut-legend" role="list" aria-label="Shipment modes breakdown">
+              <div class="legend-item" role="listitem">
+                <div class="legend-left">
+                  <div class="legend-dot" style="background:#8B0000;"></div>
+                  Road Freight
+                </div>
+                <div class="legend-pct">48%</div>
+              </div>
+              <div class="legend-item" role="listitem">
+                <div class="legend-left">
+                  <div class="legend-dot" style="background:#0F172A;"></div>
+                  Air Freight
+                </div>
+                <div class="legend-pct">32%</div>
+              </div>
+              <div class="legend-item" role="listitem">
+                <div class="legend-left">
+                  <div class="legend-dot" style="background:#94A3B8;"></div>
+                  Ocean Freight
+                </div>
+                <div class="legend-pct">20%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row -->
+      <div class="bot-grid">
+        <!-- Recent Shipments -->
+        <div class="chart-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Recent Shipments</div>
+              <div class="card-subtitle">Latest 5 shipments</div>
+            </div>
+            <a href="404.html" class="card-action">View All</a>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tracking ID</th>
+                  <th>Destination</th>
+                  <th>Mode</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#LT-20849</strong></td>
+                  <td>New York, US</td>
+                  <td>Air</td>
+                  <td><span class="status-badge delivered"><span class="status-dot"></span> Delivered</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#LT-20847</strong></td>
+                  <td>Rotterdam, NL</td>
+                  <td>Sea</td>
+                  <td><span class="status-badge transit"><span class="status-dot"></span> In Transit</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#LT-20845</strong></td>
+                  <td>Mumbai, IN</td>
+                  <td>Road</td>
+                  <td><span class="status-badge pending"><span class="status-dot"></span> Pending</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#LT-20843</strong></td>
+                  <td>Shanghai, CN</td>
+                  <td>Air</td>
+                  <td><span class="status-badge delayed"><span class="status-dot"></span> Delayed</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#LT-20840</strong></td>
+                  <td>London, UK</td>
+                  <td>Road</td>
+                  <td><span class="status-badge delivered"><span class="status-dot"></span> Delivered</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Alerts & Notifications -->
+        <div class="chart-card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Alerts & Notifications</div>
+              <div class="card-subtitle">Requires your attention</div>
+            </div>
+            <a href="404.html" class="card-action">Mark All Read</a>
+          </div>
+          <div class="alerts-list" role="list">
+            <div class="alert-item" role="listitem">
+              <div class="alert-icon danger">🚨</div>
+              <div class="alert-body">
+                <div class="alert-title">Shipment #LT-20843 Delayed</div>
+                <div class="alert-desc">Customs clearance hold at Shanghai — estimated 18h delay. Action required.</div>
+                <div class="alert-time">10 minutes ago</div>
+              </div>
+            </div>
+            <div class="alert-item" role="listitem">
+              <div class="alert-icon warn">⚠️</div>
+              <div class="alert-body">
+                <div class="alert-title">Weather Warning — Rotterdam</div>
+                <div class="alert-desc">Storm forecast may impact ocean shipments scheduled for Aug 25–26.</div>
+                <div class="alert-time">1 hour ago</div>
+              </div>
+            </div>
+            <div class="alert-item" role="listitem">
+              <div class="alert-icon info">📋</div>
+              <div class="alert-body">
+                <div class="alert-title">Contract Renewal Due</div>
+                <div class="alert-desc">Your carrier contract with FastFreight Ltd. expires in 14 days.</div>
+                <div class="alert-time">3 hours ago</div>
+              </div>
+            </div>
+            <div class="alert-item" role="listitem">
+              <div class="alert-icon success">✅</div>
+              <div class="alert-body">
+                <div class="alert-title">Monthly Report Ready</div>
+                <div class="alert-desc">Your August performance report is now available for download.</div>
+                <div class="alert-time">Yesterday</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+
+  <script>
+    // Sidebar mobile toggle
+    const mobToggle = document.getElementById('mob-toggle');
+    const sidebar = document.getElementById('sidebar');
+    mobToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+
+    // Date display
+    const dateEl = document.getElementById('current-date');
+    if (dateEl) {
+      const now = new Date();
+      dateEl.textContent = now.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    // Animated KPI counters
+    function animateVal(el, target, prefix = '', suffix = '', duration = 1800) {
+      let start = 0;
+      const inc = target / (duration / 16);
+      const t = setInterval(() => {
+        start = Math.min(start + inc, target);
+        el.textContent = prefix + Math.floor(start).toLocaleString() + suffix;
+        if (start >= target) clearInterval(t);
+      }, 16);
+    }
+    setTimeout(() => {
+      animateVal(document.getElementById('kpi-shipments'), 248, '', '');
+      animateVal(document.getElementById('kpi-ontime'), 98, '', '%');
+      animateVal(document.getElementById('kpi-savings'), 84, '$', 'K');
+      animateVal(document.getElementById('kpi-delayed'), 7, '', '');
+    }, 300);
+
+    // Bar chart
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const delivered = [42, 58, 37, 65, 72, 48, 55];
+    const transit = [18, 22, 15, 28, 30, 20, 24];
+    const chartEl = document.getElementById('bar-chart');
+    const maxVal = Math.max(...delivered, ...transit);
+
+    days.forEach((day, i) => {
+      const group = document.createElement('div');
+      group.className = 'bar-group';
+      group.innerHTML = `
+        <div style="display:flex;gap:3px;height:100%;align-items:flex-end;width:100%;">
+          <div class="bar-wrap" style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;">
+            <div class="bar" style="height:${(delivered[i] / maxVal * 90)}%;" title="${delivered[i]} delivered"></div>
+          </div>
+          <div class="bar-wrap secondary" style="flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;">
+            <div class="bar" style="height:${(transit[i] / maxVal * 90)}%;" title="${transit[i]} in transit"></div>
+          </div>
+        </div>
+        <div class="bar-label">${day}</div>
+      `;
+      chartEl.appendChild(group);
+    });
+
+    // Sidebar active links
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.id === 'logout-link' || this.getAttribute('href') === '404.html') return;
+        if (this.getAttribute('href') === '#') {
+          e.preventDefault();
+          window.location.href = '404.html';
+          return;
+        }
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Dynamic user loader from signup/login
+    function loadActiveUser() {
+      try {
+        const raw = localStorage.getItem('logitech_user') || sessionStorage.getItem('logitech_user');
+        let user = raw ? JSON.parse(raw) : null;
+        if (!user || !user.email) {
+          user = {
+            name: 'Lingalamanasa123',
+            email: 'lingalamanasa123@gmail.com',
+            role: 'Logistics Manager'
+          };
+        }
+
+        const displayName = user.name || (user.email ? user.email.split('@')[0] : 'Lingalamanasa123');
+        const displayEmail = user.email || 'lingalamanasa123@gmail.com';
+        const displayRole = user.role || 'Logistics Manager';
+
+        let initials = 'LM';
+        if (displayName) {
+          const parts = displayName.trim().split(/\s+/);
+          if (parts.length >= 2) {
+            initials = (parts[0][0] + parts[1][0]).toUpperCase();
+          } else {
+            initials = displayName.substring(0, 2).toUpperCase();
+          }
+        }
+
+        // 1. Update all user names
+        document.querySelectorAll('.user-name, #sidebar-user-name, .topbar-user-name, #topbar-user-name').forEach(el => {
+          el.textContent = displayName;
+        });
+
+        // 2. Update all email addresses
+        const sideEmailText = document.getElementById('sidebar-email-text');
+        if (sideEmailText) sideEmailText.textContent = displayEmail;
+
+        document.querySelectorAll('.user-email:not(#sidebar-user-email), .topbar-user-email, #topbar-user-email').forEach(el => {
+          el.textContent = displayEmail;
+        });
+
+        // 3. Update roles
+        document.querySelectorAll('.user-role-tag, #sidebar-user-role').forEach(el => {
+          el.textContent = displayRole;
+        });
+
+        // 4. Update avatars
+        document.querySelectorAll('.user-avatar, #sidebar-avatar, .topbar-user-avatar, #topbar-avatar').forEach(el => {
+          el.textContent = initials;
+        });
+
+        // 5. Update welcome greeting banner
+        const welcomeName = document.getElementById('dashboard-welcome-name');
+        if (welcomeName) {
+          welcomeName.textContent = displayName;
+        }
+      } catch (err) {
+        console.error('Error loading active user profile:', err);
+      }
+    }
+
+    function handleLogout(e) {
+      if (e) e.preventDefault();
+      window.location.href = 'login.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', loadActiveUser);
+    loadActiveUser();
+  </script>
+</body>
+</html>

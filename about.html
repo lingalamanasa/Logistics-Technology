@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - LogiTech Logistics Technology</title>
+  <meta name="description" content="Learn about LogiTech's mission, story, and the team dedicated to powering the future of logistics technology and supply chain management." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* About Page Specific Styles */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+    .mission-card {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: 36px 28px;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .mission-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+    .mission-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .mission-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-dark);
+      margin-bottom: 12px;
+    }
+    .mission-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      line-height: 1.6;
+    }
+
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+    .team-card {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .team-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--color-bg-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+    .team-body { padding: 20px; }
+    .team-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--color-dark);
+      margin-bottom: 4px;
+    }
+    .team-role {
+      font-size: 0.825rem;
+      color: var(--color-accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .team-bio {
+      font-size: 0.8rem;
+      color: var(--color-text-light);
+      line-height: 1.5;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 760px;
+      margin: 56px auto 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0; bottom: 0;
+      width: 2px;
+      background: var(--color-border);
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 12px;
+      transform: translateX(-50%);
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      border: 3px solid var(--color-white);
+      box-shadow: 0 0 0 2px var(--color-accent);
+      z-index: 1;
+    }
+    .timeline-content {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
+    }
+    .timeline-item:nth-child(odd) .timeline-content { grid-column: 1; }
+    .timeline-item:nth-child(even) .timeline-content { grid-column: 2; }
+    .timeline-year {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .timeline-content h3 {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-dark);
+      margin-bottom: 8px;
+    }
+    .timeline-content p {
+      font-size: 0.875rem;
+      color: var(--color-text-light);
+      line-height: 1.5;
+    }
+    @media (max-width: 768px) {
+      .mission-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .timeline::before { left: 16px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0; padding-left: 44px; }
+      .timeline-item::before { left: 16px; }
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content { grid-column: 1; }
+    }
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo stackly-logo" id="logo-link">
+        <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+        <li><a href="about.html" class="nav-link active" id="nav-about">About</a></li>
+        <li><a href="services.html" class="nav-link" id="nav-services">Services</a></li>
+        <li><a href="blog.html" class="nav-link" id="nav-blog">Blog</a></li>
+        <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-dark" id="btn-login">Login</a>
+        <a href="signup.html" class="btn btn-accent" id="btn-signup">Signup</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul>
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link active">About</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-dark">Login</a>
+      <a href="signup.html" class="btn btn-accent">Signup</a>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" aria-label="About page hero">
+    <div class="container">
+      <span class="section-tag">Our Story</span>
+      <h1>Powering the Future of<br/>Global Logistics</h1>
+      <p>We started with a simple belief: that logistics technology should be as smart, fast, and reliable as the businesses that depend on it.</p>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">›</span>
+        <span>About</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION / VALUES -->
+  <section class="section" id="mission" aria-label="Our mission">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="section-tag">What Drives Us</span>
+        <h2 class="section-title">Our Mission & Core Values</h2>
+        <p class="section-subtitle" style="margin:0 auto;">We are on a mission to eliminate inefficiency from global logistics through technology, intelligence, and an unwavering commitment to our clients.</p>
+      </div>
+      <div class="mission-grid">
+        <div class="mission-card reveal">
+          <div class="mission-icon">🎯</div>
+          <h3>Our Mission</h3>
+          <p>To make global supply chains smarter, faster, and more resilient through technology that empowers people and businesses to deliver on their promises.</p>
+        </div>
+        <div class="mission-card reveal" style="transition-delay:0.1s">
+          <div class="mission-icon">👁️</div>
+          <h3>Our Vision</h3>
+          <p>A world where logistics is seamlessly connected — where every shipment, every carrier, and every customer touchpoint works in perfect harmony.</p>
+        </div>
+        <div class="mission-card reveal" style="transition-delay:0.2s">
+          <div class="mission-icon">💡</div>
+          <h3>Our Values</h3>
+          <p>Innovation, transparency, reliability, and partnership. We build lasting relationships by delivering technology that works when it matters most.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPANY STORY -->
+  <section class="section section-bg" id="story" aria-label="Company history">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="section-tag">Our Journey</span>
+        <h2 class="section-title">From Startup to Global Platform</h2>
+        <p class="section-subtitle" style="margin:0 auto;">A decade of innovation, resilience, and relentless focus on transforming how the world moves goods.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-content">
+            <div class="timeline-year">2015 — Founded</div>
+            <h3>The Beginning</h3>
+            <p>Three logistics veterans founded LogiTech in Bangalore with a vision to bring Silicon Valley-grade technology to global supply chains.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-content">
+            <div class="timeline-year">2017 — Series A</div>
+            <h3>First Major Funding</h3>
+            <p>Raised $12M Series A to expand our engineering team and launch our freight management platform across Southeast Asia.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-content">
+            <div class="timeline-year">2019 — Global Launch</div>
+            <h3>Going International</h3>
+            <p>Expanded operations to Europe and North America. Reached 100 enterprise clients and 1 million shipments tracked on the platform.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-content">
+            <div class="timeline-year">2022 — AI Integration</div>
+            <h3>Intelligence at Scale</h3>
+            <p>Launched our AI-powered route optimization and predictive analytics engine, reducing client logistics costs by an average of 28%.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-content">
+            <div class="timeline-year">2026 — Today</div>
+            <h3>500+ Enterprises Served</h3>
+            <p>Serving 500+ enterprise clients across 60 countries, processing 12,000+ daily shipments with 98% on-time delivery rates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" id="team" aria-label="Our team">
+    <div class="container">
+      <div style="text-align:center;">
+        <span class="section-tag">The People</span>
+        <h2 class="section-title">Meet the Leadership Team</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Our diverse team combines deep logistics expertise with cutting-edge technology talent from around the world.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-avatar">AK</div>
+          <div class="team-body">
+            <div class="team-name">Arjun Kumar</div>
+            <div class="team-role">CEO & Co-Founder</div>
+            <p class="team-bio">15 years in supply chain operations. Former Head of Logistics at a Fortune 500 company.</p>
+          </div>
+        </div>
+        <div class="team-card reveal" style="transition-delay:0.1s">
+          <div class="team-avatar">PR</div>
+          <div class="team-body">
+            <div class="team-name">Priya Rao</div>
+            <div class="team-role">CTO & Co-Founder</div>
+            <p class="team-bio">Ex-Google engineer. PhD in Distributed Systems. Architect of our AI optimization engine.</p>
+          </div>
+        </div>
+        <div class="team-card reveal" style="transition-delay:0.2s">
+          <div class="team-avatar">MN</div>
+          <div class="team-body">
+            <div class="team-name">Marcus Nakamura</div>
+            <div class="team-role">Chief Revenue Officer</div>
+            <p class="team-bio">20 years in B2B SaaS sales. Built enterprise sales teams across 3 continents.</p>
+          </div>
+        </div>
+        <div class="team-card reveal" style="transition-delay:0.3s">
+          <div class="team-avatar">SL</div>
+          <div class="team-body">
+            <div class="team-name">Sofia Lindberg</div>
+            <div class="team-role">VP of Customer Success</div>
+            <p class="team-bio">Former logistics consultant. Passionate about helping clients achieve measurable ROI from day one.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats" aria-label="Company statistics">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-num">12<span>K</span><span style="font-size:1.5rem">+</span></div>
+          <div class="stat-label">Daily Shipments</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:0.1s">
+          <div class="stat-num">500<span>+</span></div>
+          <div class="stat-label">Enterprise Clients</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:0.2s">
+          <div class="stat-num">60<span>+</span></div>
+          <div class="stat-label">Countries Served</div>
+        </div>
+        <div class="stat-item reveal" style="transition-delay:0.3s">
+          <div class="stat-num">98<span>%</span></div>
+          <div class="stat-label">On-Time Delivery</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta" aria-label="Call to action">
+    <div class="cta-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cta-inner reveal">
+        <h2 class="section-title">Join us in shaping the<br/>future of logistics</h2>
+        <p class="section-subtitle">Partner with a team that combines industry expertise with world-class technology to deliver supply chain excellence.</p>
+        <div class="cta-actions">
+          <a href="404.html" class="btn btn-outline-white" id="cta-contact-btn" style="padding:15px 36px;font-size:1rem;">Let's Talk</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo stackly-logo">
+            <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img stackly-logo-footer" />
+          </a>
+          <p>Empowering companies with modern logistics technology and intelligent supply chain solutions.</p>
+          <div class="footer-social">
+            <a href="404.html" aria-label="LinkedIn">in</a>
+            <a href="404.html" aria-label="Twitter">𝕏</a>
+            <a href="404.html" aria-label="Instagram">ig</a>
+            <a href="404.html" aria-label="YouTube">▶</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="404.html">Freight Management</a></li>
+            <li><a href="404.html">Last-Mile Delivery</a></li>
+            <li><a href="404.html">Warehouse Automation</a></li>
+            <li><a href="404.html">Customs & Compliance</a></li>
+            <li><a href="404.html">Supply Chain Analytics</a></li>
+          </ul>
+        </div>
+        <div class="footer-col footer-newsletter">
+          <h4>Stay Updated</h4>
+          <p>Get weekly logistics insights and market intelligence reports.</p>
+          <form class="newsletter-form" id="newsletter-form" onsubmit="return false;">
+            <input type="email" id="newsletter-email" placeholder="Enter your email" aria-label="Email for newsletter" />
+            <button type="submit" id="newsletter-submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 LogiTech Logistics Technology. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="404.html">Privacy Policy</a>
+          <a href="404.html">Terms of Service</a>
+          <a href="404.html">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

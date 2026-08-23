@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel – LogiTech</title>
+  <meta name="description" content="LogiTech Administrator Control Panel — manage users, monitor platform metrics, and oversee operations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #8B0000;
+      --accent-light: rgba(139,0,0,0.08);
+      --dark: #0F172A;
+      --dark-2: #1E293B;
+      --sidebar-bg: #0a0f1e;
+      --sidebar-width: 260px;
+      --text: #1E293B;
+      --text-light: #64748B;
+      --text-muted: #94A3B8;
+      --border: #E2E8F0;
+      --bg: #F1F5F9;
+      --card: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', sans-serif;
+      --radius: 12px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ---- SIDEBAR ---- */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      height: 100vh;
+      z-index: 100;
+      overflow: hidden;
+    }
+    .sidebar-header {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar-logo img {
+      height: 32px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .admin-badge {
+      font-size: 0.62rem;
+      font-weight: 700;
+      background: var(--accent);
+      color: white;
+      padding: 2px 7px;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 10px;
+      min-height: 0;
+    }
+    .sidebar-nav::-webkit-scrollbar {
+      width: 4px;
+    }
+    .sidebar-nav::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.15);
+      border-radius: 4px;
+    }
+    .nav-section-label {
+      font-size: 0.67rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0 8px;
+      margin-bottom: 6px;
+      margin-top: 16px;
+    }
+    .nav-section-label:first-child { margin-top: 0; }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.835rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-bottom: 2px;
+      cursor: pointer;
+    }
+    .sidebar-link:hover {
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.9);
+    }
+    .sidebar-link.active {
+      background: var(--accent);
+      color: white;
+    }
+    .sidebar-link .icon { width: 16px; height: 16px; flex-shrink: 0; }
+    .sidebar-count {
+      margin-left: auto;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+    .sidebar-count.alert { background: var(--accent); color: white; }
+    .sidebar-footer {
+      flex-shrink: 0;
+      padding: 14px 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: #060a14;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.35);
+    }
+    .user-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .user-profile-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; color: white;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(139,0,0,0.4);
+    }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.95);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      line-height: 1.2;
+    }
+    .user-email {
+      font-size: 0.72rem;
+      color: #94A3B8;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+    .user-role-tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #F87171;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+    .sidebar-logout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 8px;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #FCA5A5;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .sidebar-logout-btn:hover {
+      background: #EF4444;
+      border-color: #EF4444;
+      color: #FFFFFF;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+    }
+    .sidebar-logout-btn svg {
+      width: 15px; height: 15px;
+      flex-shrink: 0;
+    }
+
+    /* ---- MAIN ---- */
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Topbar */
+    .topbar {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+    .topbar-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .topbar-title h1 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .admin-pill {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .topbar-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 12px 4px 6px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .topbar-user-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .topbar-user-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .topbar-user-name {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .topbar-user-email {
+      font-size: 0.68rem;
+      color: var(--text-light);
+    }
+    .topbar-logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      color: #DC2626;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .topbar-logout-btn:hover {
+      background: #DC2626;
+      color: #FFFFFF;
+      border-color: #DC2626;
+    }
+    .topbar-logout-btn svg {
+      width: 14px; height: 14px;
+    }
+    .topbar-btn {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; position: relative;
+      color: var(--text-light); font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+    .topbar-btn:hover { background: var(--border); color: var(--dark); }
+    .notif-dot {
+      position: absolute; top: 6px; right: 6px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--card);
+    }
+    .date-badge {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
+      border-radius: 8px;
+    }
+
+    /* Content */
+    .content { padding: 28px; }
+
+    /* Platform stats */
+    .platform-kpis {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .pkpi-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .pkpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .pkpi-card.red::before { background: #8B0000; }
+    .pkpi-card.blue::before { background: #2563eb; }
+    .pkpi-card.green::before { background: #16a34a; }
+    .pkpi-card.orange::before { background: #ea580c; }
+    .pkpi-card.purple::before { background: #7c3aed; }
+    .pkpi-icon {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+    .pkpi-val {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pkpi-label {
+      font-size: 0.76rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    .pkpi-change {
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .pkpi-change.up { color: #16a34a; }
+    .pkpi-change.down { color: #dc2626; }
+
+    /* Middle row */
+    .mid-grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    .card-subtitle { font-size: 0.76rem; color: var(--text-muted); margin-top: 2px; }
+    .card-action {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .card-action:hover { text-decoration: underline; }
+
+    /* User table */
+    table { width: 100%; border-collapse: collapse; font-size: 0.825rem; }
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      color: var(--text-light);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #FAFBFC; }
+    .user-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .table-avatar {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.68rem; font-weight: 700; color: white;
+      flex-shrink: 0;
+    }
+    .table-name { font-weight: 600; color: var(--dark); font-size: 0.825rem; }
+    .table-email { font-size: 0.75rem; color: var(--text-light); }
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .role-badge.admin { background: #fee2e2; color: #991b1b; }
+    .role-badge.user { background: #f0fdf4; color: #166534; }
+    .status-dot-active { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; margin-right: 5px; }
+    .status-dot-inactive { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #94A3B8; margin-right: 5px; }
+    .action-btn {
+      background: none; border: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .action-btn.edit { color: var(--dark); }
+    .action-btn.edit:hover { background: var(--bg); }
+    .action-btn.del { color: #dc2626; }
+    .action-btn.del:hover { background: #fee2e2; }
+
+    /* System health */
+    .health-list { display: flex; flex-direction: column; gap: 14px; }
+    .health-item {}
+    .health-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .health-label { font-size: 0.82rem; color: var(--text); font-weight: 500; }
+    .health-val { font-size: 0.8rem; font-weight: 700; color: var(--dark); }
+    .health-bar-track {
+      height: 6px;
+      border-radius: 999px;
+      background: var(--border);
+      overflow: hidden;
+    }
+    .health-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1.2s ease;
+    }
+    .health-bar-fill.good { background: #22c55e; }
+    .health-bar-fill.warn { background: #eab308; }
+    .health-bar-fill.danger { background: #ef4444; }
+
+    /* Bottom row */
+    .bot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* Activity Feed */
+    .activity-feed { display: flex; flex-direction: column; gap: 0; }
+    .activity-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .activity-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .activity-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .activity-body { flex: 1; }
+    .activity-text { font-size: 0.8rem; color: var(--text); line-height: 1.4; }
+    .activity-text strong { color: var(--dark); }
+    .activity-time { font-size: 0.7rem; color: var(--text-muted); margin-top: 3px; }
+
+    /* Quick Actions */
+    .quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .qa-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 18px 12px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .qa-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      transform: translateY(-2px);
+    }
+    .qa-icon { font-size: 1.4rem; }
+    .qa-label { font-size: 0.75rem; font-weight: 600; color: var(--text); }
+
+    /* Platform notices */
+    .notice-list { display: flex; flex-direction: column; gap: 10px; }
+    .notice-item {
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      border-left-width: 3px;
+    }
+    .notice-item.red { border-left-color: #dc2626; background: #fff5f5; }
+    .notice-item.yellow { border-left-color: #eab308; background: #fefce8; }
+    .notice-item.green { border-left-color: #22c55e; background: #f0fdf4; }
+    .notice-title { font-size: 0.82rem; font-weight: 600; color: var(--dark); margin-bottom: 3px; }
+    .notice-text { font-size: 0.76rem; color: var(--text-light); line-height: 1.4; }
+
+    /* Mobile */
+    .mob-toggle {
+      display: none;
+      position: fixed;
+      top: 14px; left: 14px;
+      z-index: 200;
+      background: var(--dark);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 1300px) {
+      .platform-kpis { grid-template-columns: repeat(3, 1fr); }
+      .bot-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 1024px) {
+      .mid-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 800px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s; }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; }
+      .mob-toggle { display: flex; }
+      .platform-kpis { grid-template-columns: repeat(2, 1fr); }
+      .bot-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="mob-toggle" id="mob-toggle" aria-label="Toggle sidebar">☰</button>
+
+  <!-- ======================== SIDEBAR ======================== -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Admin navigation">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <img src="images/logo.webp" alt="LogiTech Logo" />
+        <span class="admin-badge">Admin</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <a href="admin.html" class="sidebar-link active" id="nav-overview">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Control Panel
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-platform">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Platform Health
+      </a>
+
+      <div class="nav-section-label">User Management</div>
+      <a href="user.html" class="sidebar-link" id="nav-users" title="Switch to User Portal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        All Users
+        <span class="sidebar-count">512</span>
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-roles">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Roles &amp; Permissions
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-pending">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Pending Approvals
+        <span class="sidebar-count alert">7</span>
+      </a>
+
+      <div class="nav-section-label">Data &amp; Content</div>
+      <a href="404.html" class="sidebar-link" id="nav-shipments-admin">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        All Shipments
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-carriers-admin">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        Carriers
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-blog-admin">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Blog &amp; Content
+      </a>
+
+      <div class="nav-section-label">System</div>
+      <a href="404.html" class="sidebar-link" id="nav-logs">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Audit Logs
+      </a>
+      <a href="404.html" class="sidebar-link" id="nav-config">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        System Config
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-profile-row">
+          <div class="user-avatar" id="sidebar-avatar">LM</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Lingalamanasa123</div>
+            <div class="user-email" id="sidebar-user-email" style="display:flex;align-items:center;gap:5px;color:#94A3B8;font-size:0.75rem;margin-top:2px;">
+              <svg style="width:13px;height:13px;flex-shrink:0;opacity:0.85;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <span id="sidebar-email-text" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">lingalamanasa123@gmail.com</span>
+            </div>
+            <div class="user-role-tag" id="sidebar-user-role">Administrator</div>
+          </div>
+        </div>
+        <a href="login.html" class="sidebar-logout-btn" id="logout-link" onclick="handleLogout(event)" title="Sign out of Admin Panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================== MAIN ======================== -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-title">
+        <div>
+          <h1 style="font-size:1.35rem; font-weight:700; color:var(--dark); margin-bottom:2px;">Platform Overview</h1>
+          <p id="admin-welcome-text" style="font-size:0.875rem; color:#64748B; margin-top:2px;">Welcome back, <strong id="admin-welcome-name" style="color:var(--accent,#8B0000); font-weight:700;">Lingalamanasa123</strong>, manage your logistics ecosystem</p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span class="date-badge" id="current-date">Loading...</span>
+        <button class="topbar-btn" id="notif-btn" onclick="window.location.href='404.html'" aria-label="Notifications">
+          🔔
+          <span class="notif-dot"></span>
+        </button>
+        <div class="topbar-user">
+          <div class="topbar-user-avatar" id="topbar-avatar">LM</div>
+          <div class="topbar-user-info">
+            <span class="topbar-user-name" id="topbar-user-name">Lingalamanasa123</span>
+            <span class="topbar-user-email" id="topbar-user-email">lingalamanasa123@gmail.com</span>
+          </div>
+        </div>
+        <a href="login.html" class="topbar-logout-btn" onclick="handleLogout(event)" title="Sign out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- Platform KPIs -->
+      <div class="platform-kpis">
+        <div class="pkpi-card red">
+          <div class="pkpi-icon">👥</div>
+          <div class="pkpi-val" id="kpi-users">0</div>
+          <div class="pkpi-label">Total Users</div>
+          <div class="pkpi-change up">↑ +23 this week</div>
+        </div>
+        <div class="pkpi-card blue">
+          <div class="pkpi-icon">🏢</div>
+          <div class="pkpi-val" id="kpi-clients">0</div>
+          <div class="pkpi-label">Enterprise Clients</div>
+          <div class="pkpi-change up">↑ +5 this month</div>
+        </div>
+        <div class="pkpi-card green">
+          <div class="pkpi-icon">🚚</div>
+          <div class="pkpi-val" id="kpi-shipments">0</div>
+          <div class="pkpi-label">Total Shipments Today</div>
+          <div class="pkpi-change up">↑ +12% vs yesterday</div>
+        </div>
+        <div class="pkpi-card orange">
+          <div class="pkpi-icon">💵</div>
+          <div class="pkpi-val" id="kpi-revenue">$0</div>
+          <div class="pkpi-label">Monthly Revenue</div>
+          <div class="pkpi-change up">↑ +18% vs last month</div>
+        </div>
+        <div class="pkpi-card purple">
+          <div class="pkpi-icon">⚡</div>
+          <div class="pkpi-val">99.97%</div>
+          <div class="pkpi-label">Platform Uptime</div>
+          <div class="pkpi-change up">✓ All systems normal</div>
+        </div>
+      </div>
+
+      <!-- Middle Row -->
+      <div class="mid-grid">
+        <!-- Users Table -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">User Management</div>
+              <div class="card-subtitle">All registered platform users</div>
+            </div>
+            <button class="card-action" id="add-user-btn" onclick="window.location.href='404.html'">+ Add User</button>
+          </div>
+          <div style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Role</th>
+                  <th>Company</th>
+                  <th>Joined</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="user-cell">
+                      <div class="table-avatar" style="background:#8B0000;">SA</div>
+                      <div>
+                        <div class="table-name">Sarah Anderson</div>
+                        <div class="table-email">sarah@globalmart.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="role-badge user">User</span></td>
+                  <td>GlobalMart</td>
+                  <td>Aug 12, 2026</td>
+                  <td><span class="status-dot-active"></span>Active</td>
+                  <td>
+                    <button class="action-btn edit" onclick="alert('Edit user')">Edit</button>
+                    <button class="action-btn del" onclick="alert('Delete user')">Del</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="user-cell">
+                      <div class="table-avatar" style="background:#0F172A;">JK</div>
+                      <div>
+                        <div class="table-name">James Khatri</div>
+                        <div class="table-email">j.khatri@pharma.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="role-badge user">User</span></td>
+                  <td>PharmaDistribute</td>
+                  <td>Jul 28, 2026</td>
+                  <td><span class="status-dot-active"></span>Active</td>
+                  <td>
+                    <button class="action-btn edit" onclick="alert('Edit user')">Edit</button>
+                    <button class="action-btn del" onclick="alert('Delete user')">Del</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="user-cell">
+                      <div class="table-avatar" style="background:#2563eb;">ML</div>
+                      <div>
+                        <div class="table-name">Maria Lindqvist</div>
+                        <div class="table-email">m.lindq@nordic.se</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="role-badge user">User</span></td>
+                  <td>Nordic Imports</td>
+                  <td>Jul 15, 2026</td>
+                  <td><span class="status-dot-active"></span>Active</td>
+                  <td>
+                    <button class="action-btn edit" onclick="alert('Edit user')">Edit</button>
+                    <button class="action-btn del" onclick="alert('Delete user')">Del</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="user-cell">
+                      <div class="table-avatar" style="background:#7c3aed;">TR</div>
+                      <div>
+                        <div class="table-name">Tom Richards</div>
+                        <div class="table-email">tom.r@autoparts.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="role-badge user">User</span></td>
+                  <td>AutoParts Co.</td>
+                  <td>Jun 20, 2026</td>
+                  <td><span class="status-dot-inactive"></span>Inactive</td>
+                  <td>
+                    <button class="action-btn edit" onclick="alert('Edit user')">Edit</button>
+                    <button class="action-btn del" onclick="alert('Delete user')">Del</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="user-cell">
+                      <div class="table-avatar" style="background:#ea580c;">AK</div>
+                      <div>
+                        <div class="table-name">Arjun Kumar</div>
+                        <div class="table-email">arjun@logitech.io</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="role-badge admin">Admin</span></td>
+                  <td>LogiTech (Internal)</td>
+                  <td>Jan 1, 2026</td>
+                  <td><span class="status-dot-active"></span>Active</td>
+                  <td>
+                    <button class="action-btn edit" onclick="alert('Edit user')">Edit</button>
+                    <button class="action-btn del" onclick="alert('Cannot delete admin')">Del</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- System Health -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">System Health</div>
+              <div class="card-subtitle">Real-time infrastructure metrics</div>
+            </div>
+          </div>
+          <div class="health-list">
+            <div class="health-item">
+              <div class="health-header">
+                <span class="health-label">API Response Time</span>
+                <span class="health-val">142ms</span>
+              </div>
+              <div class="health-bar-track">
+                <div class="health-bar-fill good" id="bar-api" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="health-item">
+              <div class="health-header">
+                <span class="health-label">CPU Usage</span>
+                <span class="health-val">34%</span>
+              </div>
+              <div class="health-bar-track">
+                <div class="health-bar-fill good" id="bar-cpu" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="health-item">
+              <div class="health-header">
+                <span class="health-label">Memory Usage</span>
+                <span class="health-val">68%</span>
+              </div>
+              <div class="health-bar-track">
+                <div class="health-bar-fill warn" id="bar-mem" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="health-item">
+              <div class="health-header">
+                <span class="health-label">Database Load</span>
+                <span class="health-val">22%</span>
+              </div>
+              <div class="health-bar-track">
+                <div class="health-bar-fill good" id="bar-db" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="health-item">
+              <div class="health-header">
+                <span class="health-label">Storage Used</span>
+                <span class="health-val">81%</span>
+              </div>
+              <div class="health-bar-track">
+                <div class="health-bar-fill danger" id="bar-storage" style="width:0%"></div>
+              </div>
+            </div>
+            <div class="health-item">
+              <div class="health-header">
+                <span class="health-label">CDN Latency</span>
+                <span class="health-val">18ms</span>
+              </div>
+              <div class="health-bar-track">
+                <div class="health-bar-fill good" id="bar-cdn" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row -->
+      <div class="bot-grid">
+        <!-- Activity Feed -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Recent Activity</div>
+              <div class="card-subtitle">System-wide audit trail</div>
+            </div>
+            <a href="404.html" class="card-action">View Logs</a>
+          </div>
+          <div class="activity-feed" role="list">
+            <div class="activity-item" role="listitem">
+              <div class="activity-dot" style="background:#dcfce7;">👤</div>
+              <div class="activity-body">
+                <div class="activity-text"><strong>New user registered</strong> — Sarah Anderson joined as User</div>
+                <div class="activity-time">2 min ago</div>
+              </div>
+            </div>
+            <div class="activity-item" role="listitem">
+              <div class="activity-dot" style="background:#fee2e2;">🔒</div>
+              <div class="activity-body">
+                <div class="activity-text"><strong>Failed login attempt</strong> — 3x from IP 192.168.1.45</div>
+                <div class="activity-time">18 min ago</div>
+              </div>
+            </div>
+            <div class="activity-item" role="listitem">
+              <div class="activity-dot" style="background:#dbeafe;">📋</div>
+              <div class="activity-body">
+                <div class="activity-text"><strong>Carrier contract updated</strong> — FastFreight Ltd. rate amended</div>
+                <div class="activity-time">1 hour ago</div>
+              </div>
+            </div>
+            <div class="activity-item" role="listitem">
+              <div class="activity-dot" style="background:#fef9c3;">⚙️</div>
+              <div class="activity-body">
+                <div class="activity-text"><strong>System config changed</strong> — Max shipment limit updated to 15K</div>
+                <div class="activity-time">3 hours ago</div>
+              </div>
+            </div>
+            <div class="activity-item" role="listitem">
+              <div class="activity-dot" style="background:#f3e8ff;">💾</div>
+              <div class="activity-body">
+                <div class="activity-text"><strong>Database backup completed</strong> — 2.4GB backed up to S3</div>
+                <div class="activity-time">6 hours ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Quick Actions</div>
+              <div class="card-subtitle">Common administrative tasks</div>
+            </div>
+          </div>
+          <div class="quick-actions">
+            <button class="qa-btn" id="qa-add-user" onclick="window.location.href='404.html'">
+              <div class="qa-icon">👤</div>
+              <div class="qa-label">Add User</div>
+            </button>
+            <button class="qa-btn" id="qa-export" onclick="window.location.href='404.html'">
+              <div class="qa-icon">📊</div>
+              <div class="qa-label">Export Report</div>
+            </button>
+            <button class="qa-btn" id="qa-backup" onclick="window.location.href='404.html'">
+              <div class="qa-icon">💾</div>
+              <div class="qa-label">Run Backup</div>
+            </button>
+            <button class="qa-btn" id="qa-broadcast" onclick="window.location.href='404.html'">
+              <div class="qa-icon">📢</div>
+              <div class="qa-label">Broadcast</div>
+            </button>
+            <button class="qa-btn" id="qa-logs" onclick="window.location.href='404.html'">
+              <div class="qa-icon">📋</div>
+              <div class="qa-label">Audit Logs</div>
+            </button>
+            <button class="qa-btn" id="qa-config" onclick="window.location.href='404.html'">
+              <div class="qa-icon">⚙️</div>
+              <div class="qa-label">Config</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Platform Notices -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Platform Notices</div>
+              <div class="card-subtitle">Action required items</div>
+            </div>
+          </div>
+          <div class="notice-list" role="list">
+            <div class="notice-item red" role="listitem">
+              <div class="notice-title">🚨 Storage Approaching Limit</div>
+              <div class="notice-text">81% of 2TB used. Consider upgrading storage or archiving old shipment records.</div>
+            </div>
+            <div class="notice-item yellow" role="listitem">
+              <div class="notice-title">⚠️ 7 Pending User Approvals</div>
+              <div class="notice-text">New user accounts are awaiting manual verification and approval.</div>
+            </div>
+            <div class="notice-item yellow" role="listitem">
+              <div class="notice-title">⚠️ SSL Certificate Expiry</div>
+              <div class="notice-text">api.logitech.io SSL certificate expires in 22 days. Renew before expiry.</div>
+            </div>
+            <div class="notice-item green" role="listitem">
+              <div class="notice-title">✅ v2.4.1 Deployed Successfully</div>
+              <div class="notice-text">Latest platform update deployed with zero downtime. All services healthy.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+
+  <script>
+    // Mobile sidebar toggle
+    const mobToggle = document.getElementById('mob-toggle');
+    const sidebar = document.getElementById('sidebar');
+    mobToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+
+    // Date display
+    const dateEl = document.getElementById('current-date');
+    if (dateEl) {
+      const now = new Date();
+      dateEl.textContent = now.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    // Animated KPI counters
+    function animateVal(el, target, prefix = '', suffix = '', duration = 1800) {
+      let start = 0;
+      const inc = target / (duration / 16);
+      const t = setInterval(() => {
+        start = Math.min(start + inc, target);
+        el.textContent = prefix + Math.floor(start).toLocaleString() + suffix;
+        if (start >= target) clearInterval(t);
+      }, 16);
+    }
+    setTimeout(() => {
+      animateVal(document.getElementById('kpi-users'), 512);
+      animateVal(document.getElementById('kpi-clients'), 87);
+      animateVal(document.getElementById('kpi-shipments'), 3480);
+      animateVal(document.getElementById('kpi-revenue'), 284, '$', 'K');
+    }, 300);
+
+    // System health bars animate in
+    setTimeout(() => {
+      document.getElementById('bar-api').style.width = '14%';    // 142ms of 1000ms max
+      document.getElementById('bar-cpu').style.width = '34%';
+      document.getElementById('bar-mem').style.width = '68%';
+      document.getElementById('bar-db').style.width = '22%';
+      document.getElementById('bar-storage').style.width = '81%';
+      document.getElementById('bar-cdn').style.width = '4%';
+    }, 400);
+
+    // Sidebar active state
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (this.id === 'logout-link' || this.getAttribute('href') === '404.html') return;
+        if (this.getAttribute('href') === '#') {
+          e.preventDefault();
+          window.location.href = '404.html';
+          return;
+        }
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Dynamic user loader from signup/login
+    function loadActiveUser() {
+      try {
+        const raw = localStorage.getItem('logitech_user') || sessionStorage.getItem('logitech_user');
+        let user = raw ? JSON.parse(raw) : null;
+        if (!user || !user.email) {
+          user = {
+            name: 'Lingalamanasa123',
+            email: 'lingalamanasa123@gmail.com',
+            role: 'Administrator'
+          };
+        }
+
+        const displayName = user.name || (user.email ? user.email.split('@')[0] : 'Lingalamanasa123');
+        const displayEmail = user.email || 'lingalamanasa123@gmail.com';
+        const displayRole = user.role || 'Administrator';
+
+        let initials = 'LM';
+        if (displayName) {
+          const parts = displayName.trim().split(/\s+/);
+          if (parts.length >= 2) {
+            initials = (parts[0][0] + parts[1][0]).toUpperCase();
+          } else {
+            initials = displayName.substring(0, 2).toUpperCase();
+          }
+        }
+
+        // 1. Update all user names
+        document.querySelectorAll('.user-name, #sidebar-user-name, .topbar-user-name, #topbar-user-name').forEach(el => {
+          el.textContent = displayName;
+        });
+
+        // 2. Update all email addresses
+        const sideEmailText = document.getElementById('sidebar-email-text');
+        if (sideEmailText) sideEmailText.textContent = displayEmail;
+
+        document.querySelectorAll('.user-email:not(#sidebar-user-email), .topbar-user-email, #topbar-user-email').forEach(el => {
+          el.textContent = displayEmail;
+        });
+
+        // 3. Update roles
+        document.querySelectorAll('.user-role-tag, #sidebar-user-role').forEach(el => {
+          el.textContent = displayRole;
+        });
+
+        // 4. Update avatars
+        document.querySelectorAll('.user-avatar, #sidebar-avatar, .topbar-user-avatar, #topbar-avatar').forEach(el => {
+          el.textContent = initials;
+        });
+
+        // 5. Update welcome greeting banner
+        const welcomeName = document.getElementById('admin-welcome-name');
+        if (welcomeName) {
+          welcomeName.textContent = displayName;
+        }
+      } catch (err) {
+        console.error('Error loading active user profile:', err);
+      }
+    }
+
+    function handleLogout(e) {
+      if (e) e.preventDefault();
+      window.location.href = 'login.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', loadActiveUser);
+    loadActiveUser();
+  </script>
+</body>
+</html>
