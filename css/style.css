@@ -1120,6 +1120,12 @@ img, svg, video, canvas, audio, iframe, embed, object {
   .section-subtitle {
     font-size: 0.95rem;
   }
+  .slide-left, .slide-right {
+    transform: translateY(20px);
+  }
+  .slide-left.visible, .slide-right.visible {
+    transform: translateY(0);
+  }
   .chain-flow-container {
     grid-template-columns: 1fr;
     gap: 14px;
