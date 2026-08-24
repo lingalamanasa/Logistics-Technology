@@ -774,12 +774,57 @@ p {
   50% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(139, 0, 0, 0); }
 }
 
+/* ==========================================
+   SUPPLY CHAIN NETWORK (SLIDING ANIMATION MODEL)
+   ========================================== */
+.chain-slider-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
+}
+
 .chain-flow-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   position: relative;
-  margin-top: 48px;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Connecting Telemetry Signal Line */
+.chain-flow-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 3px;
+  background: #E2E8F0;
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Animated Laser Beam Pulse Sliding Across Nodes */
+.chain-flow-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 140px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #8B0000, #FF4D4D, transparent);
+  transform: translateY(-50%);
+  z-index: 1;
+  pointer-events: none;
+  animation: laserFlow 5s linear infinite;
+}
+
+@keyframes laserFlow {
+  0% { left: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 88%; opacity: 0; }
 }
 
 .chain-node {
@@ -789,17 +834,33 @@ p {
   padding: 34px 18px 24px;
   text-align: center;
   position: relative;
+  z-index: 2;
   box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
+/* Sliding Entry Micro-animation */
+.chain-node:nth-child(1) { animation: slideInNode 0.8s ease-out backwards 0.1s; }
+.chain-node:nth-child(2) { animation: slideInNode 0.8s ease-out backwards 0.2s; }
+.chain-node:nth-child(3) { animation: slideInNode 0.8s ease-out backwards 0.3s; }
+.chain-node:nth-child(4) { animation: slideInNode 0.8s ease-out backwards 0.4s; }
+.chain-node:nth-child(5) { animation: slideInNode 0.8s ease-out backwards 0.5s; }
+
+@keyframes slideInNode {
+  0% { opacity: 0; transform: translateX(-30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Active Highlight Sliding State */
+.chain-node.active-step,
 .chain-node:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px) scale(1.02);
   border-color: var(--color-primary);
-  box-shadow: 0 16px 32px -4px rgba(139, 0, 0, 0.12), 0 0 0 1px rgba(139, 0, 0, 0.15);
+  box-shadow: 0 20px 36px -6px rgba(139, 0, 0, 0.16), 0 0 0 1.5px rgba(139, 0, 0, 0.2);
 }
 
 .chain-node-icon {
@@ -816,11 +877,12 @@ p {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.chain-node.active-step .chain-node-icon,
 .chain-node:hover .chain-node-icon {
-  transform: scale(1.08);
+  transform: scale(1.1) rotate(-4deg);
   background: var(--color-primary);
   color: #FFFFFF;
-  box-shadow: 0 6px 16px rgba(139, 0, 0, 0.25);
+  box-shadow: 0 6px 16px rgba(139, 0, 0, 0.3);
 }
 
 .chain-node-num {
@@ -841,6 +903,13 @@ p {
   box-shadow: 0 4px 10px rgba(139, 0, 0, 0.3);
   border: 2px solid #FFFFFF;
   z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chain-node.active-step .chain-node-num,
+.chain-node:hover .chain-node-num {
+  transform: translateX(-50%) scale(1.15);
+  box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.2);
 }
 
 .chain-node h4 {
@@ -886,11 +955,76 @@ p {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.25s ease;
   }
+  .chain-node.active-step:not(:last-child)::after,
   .chain-node:hover:not(:last-child)::after {
     color: var(--color-primary);
     border-color: var(--color-primary);
     background: #FFFFFF;
+    transform: translateY(-50%) scale(1.1);
   }
+}
+
+/* Slider Controls & Step Indicator Pills */
+.chain-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 36px;
+}
+
+.chain-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  color: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.chain-nav-btn:hover {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+  transform: scale(1.08);
+}
+
+.chain-step-pill {
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748B;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chain-step-pill.active,
+.chain-step-pill:hover {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.2);
+}
+
+.chain-step-pill .step-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 /* 5. METRICS & COUNTER CARDS */

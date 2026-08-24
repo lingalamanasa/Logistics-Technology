@@ -871,45 +871,58 @@
         <p class="section-subtitle" style="margin: 0 auto;">Every link from manufacturing origin to door-to-door delivery operates on unified real-time telemetry.</p>
       </div>
 
-      <div class="chain-flow-container">
-        <!-- Node 1 -->
-        <div class="chain-node slide-up">
-          <div class="chain-node-num">1</div>
-          <div class="chain-node-icon"><i class="fa-solid fa-industry"></i></div>
-          <h4>Supplier Origin</h4>
-          <p>Factory inventory check & automated e-manifest generation</p>
+      <div class="chain-slider-wrapper">
+        <div class="chain-flow-container" id="chain-flow-container">
+          <!-- Node 1 -->
+          <div class="chain-node active-step" data-index="0">
+            <div class="chain-node-num">1</div>
+            <div class="chain-node-icon"><i class="fa-solid fa-industry"></i></div>
+            <h4>Supplier Origin</h4>
+            <p>Factory inventory check & automated e-manifest generation</p>
+          </div>
+
+          <!-- Node 2 -->
+          <div class="chain-node" data-index="1">
+            <div class="chain-node-num">2</div>
+            <div class="chain-node-icon"><i class="fa-solid fa-passport"></i></div>
+            <h4>Customs Gate</h4>
+            <p>Digital HS tariff classification & pre-cleared bills of lading</p>
+          </div>
+
+          <!-- Node 3 -->
+          <div class="chain-node" data-index="2">
+            <div class="chain-node-num">3</div>
+            <div class="chain-node-icon"><i class="fa-solid fa-ship"></i></div>
+            <h4>Multimodal Transit</h4>
+            <p>Ocean & air carrier GPS tracking with temperature IoT sensors</p>
+          </div>
+
+          <!-- Node 4 -->
+          <div class="chain-node" data-index="3">
+            <div class="chain-node-num">4</div>
+            <div class="chain-node-icon"><i class="fa-solid fa-warehouse"></i></div>
+            <h4>3PL Smart Hub</h4>
+            <p>Robotic sortation, automated staging & dynamic pallet batching</p>
+          </div>
+
+          <!-- Node 5 -->
+          <div class="chain-node" data-index="4">
+            <div class="chain-node-num">5</div>
+            <div class="chain-node-icon"><i class="fa-solid fa-truck-fast"></i></div>
+            <h4>Last-Mile Courier</h4>
+            <p>AI turn-by-turn routing & contactless digital ePOD confirmation</p>
+          </div>
         </div>
 
-        <!-- Node 2 -->
-        <div class="chain-node slide-up" style="transition-delay:0.1s;">
-          <div class="chain-node-num">2</div>
-          <div class="chain-node-icon"><i class="fa-solid fa-passport"></i></div>
-          <h4>Customs Gate</h4>
-          <p>Digital HS tariff classification & pre-cleared bills of lading</p>
-        </div>
-
-        <!-- Node 3 -->
-        <div class="chain-node slide-up" style="transition-delay:0.2s;">
-          <div class="chain-node-num">3</div>
-          <div class="chain-node-icon"><i class="fa-solid fa-ship"></i></div>
-          <h4>Multimodal Transit</h4>
-          <p>Ocean & air carrier GPS tracking with temperature IoT sensors</p>
-        </div>
-
-        <!-- Node 4 -->
-        <div class="chain-node slide-up" style="transition-delay:0.3s;">
-          <div class="chain-node-num">4</div>
-          <div class="chain-node-icon"><i class="fa-solid fa-warehouse"></i></div>
-          <h4>3PL Smart Hub</h4>
-          <p>Robotic sortation, automated staging & dynamic pallet batching</p>
-        </div>
-
-        <!-- Node 5 -->
-        <div class="chain-node slide-up" style="transition-delay:0.4s;">
-          <div class="chain-node-num">5</div>
-          <div class="chain-node-icon"><i class="fa-solid fa-truck-fast"></i></div>
-          <h4>Last-Mile Courier</h4>
-          <p>AI turn-by-turn routing & contactless digital ePOD confirmation</p>
+        <!-- Interactive Sliding Controls & Step Indicator Pills -->
+        <div class="chain-controls">
+          <button class="chain-nav-btn" onclick="prevChainStep()" aria-label="Previous step"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="chain-step-pill active" onclick="setChainStep(0)"><span class="step-dot"></span> 1: Origin</div>
+          <div class="chain-step-pill" onclick="setChainStep(1)"><span class="step-dot"></span> 2: Customs</div>
+          <div class="chain-step-pill" onclick="setChainStep(2)"><span class="step-dot"></span> 3: Transit</div>
+          <div class="chain-step-pill" onclick="setChainStep(3)"><span class="step-dot"></span> 4: 3PL Hub</div>
+          <div class="chain-step-pill" onclick="setChainStep(4)"><span class="step-dot"></span> 5: Last-Mile</div>
+          <button class="chain-nav-btn" onclick="nextChainStep()" aria-label="Next step"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
       </div>
     </div>
@@ -1309,6 +1322,60 @@
         time.textContent = '14.0 Days';
       }
     }
+
+    // Auto-sliding Supply Chain Model Animation
+    let currentChainStep = 0;
+    let chainAutoSlideTimer = null;
+    const chainNodes = document.querySelectorAll('.chain-node');
+    const chainPills = document.querySelectorAll('.chain-step-pill');
+
+    function setChainStep(idx) {
+      if (!chainNodes.length) return;
+      currentChainStep = (idx + chainNodes.length) % chainNodes.length;
+      chainNodes.forEach((node, i) => {
+        node.classList.toggle('active-step', i === currentChainStep);
+      });
+      chainPills.forEach((pill, i) => {
+        pill.classList.toggle('active', i === currentChainStep);
+      });
+    }
+
+    function nextChainStep() {
+      setChainStep(currentChainStep + 1);
+    }
+
+    function prevChainStep() {
+      setChainStep(currentChainStep - 1);
+    }
+
+    function startChainAutoSlide() {
+      if (!chainAutoSlideTimer) {
+        chainAutoSlideTimer = setInterval(() => {
+          nextChainStep();
+        }, 3200);
+      }
+    }
+
+    function stopChainAutoSlide() {
+      if (chainAutoSlideTimer) {
+        clearInterval(chainAutoSlideTimer);
+        chainAutoSlideTimer = null;
+      }
+    }
+
+    const chainSliderWrap = document.querySelector('.chain-slider-wrapper');
+    if (chainSliderWrap) {
+      chainSliderWrap.addEventListener('mouseenter', stopChainAutoSlide);
+      chainSliderWrap.addEventListener('mouseleave', startChainAutoSlide);
+    }
+
+    chainNodes.forEach((node, i) => {
+      node.addEventListener('click', () => {
+        setChainStep(i);
+      });
+    });
+
+    startChainAutoSlide();
   </script>
 </body>
 </html>
