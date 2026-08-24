@@ -56,14 +56,33 @@
       flex-shrink: 0;
     }
     .sidebar-logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .sidebar-logo:hover {
+      opacity: 0.9;
     }
     .sidebar-logo img {
       height: 32px;
       width: auto;
       filter: brightness(0) invert(1);
+    }
+    .mobile-topbar-logo {
+      display: none;
+      align-items: center;
+      margin-right: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .mobile-topbar-logo img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
     }
     .admin-badge {
       font-size: 0.62rem;
@@ -636,10 +655,10 @@
   <!-- ======================== SIDEBAR ======================== -->
   <aside class="sidebar" id="sidebar" role="navigation" aria-label="Admin navigation">
     <div class="sidebar-header">
-      <div class="sidebar-logo">
-        <img src="images/logo.webp" alt="LogiTech Logo" />
+      <a href="admin.html" class="sidebar-logo" title="Stackly Admin Panel">
+        <img src="images/logo.webp" alt="Stackly Logo" />
         <span class="admin-badge">Admin</span>
-      </div>
+      </a>
     </div>
 
     <nav class="sidebar-nav">
@@ -718,7 +737,10 @@
   <!-- ======================== MAIN ======================== -->
   <div class="main">
     <header class="topbar">
-      <div class="topbar-title">
+      <div class="topbar-title" style="display:flex;align-items:center;">
+        <a href="admin.html" class="mobile-topbar-logo" title="Stackly Admin Panel">
+          <img src="images/logo.webp" alt="Stackly Logo" />
+        </a>
         <div>
           <h1 style="font-size:1.35rem; font-weight:700; color:var(--dark); margin-bottom:2px;">Platform Overview</h1>
           <p id="admin-welcome-text" style="font-size:0.875rem; color:#64748B; margin-top:2px;">Welcome back, <strong id="admin-welcome-name" style="color:var(--accent,#8B0000); font-weight:700;">Lingalamanasa123</strong>, manage your logistics ecosystem</p>

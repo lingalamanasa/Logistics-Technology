@@ -57,14 +57,33 @@
       flex-shrink: 0;
     }
     .sidebar-logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .sidebar-logo:hover {
+      opacity: 0.9;
     }
     .sidebar-logo img {
       height: 34px;
       width: auto;
       filter: brightness(0) invert(1);
+    }
+    .mobile-topbar-logo {
+      display: none;
+      align-items: center;
+      margin-right: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .mobile-topbar-logo img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
     }
     .portal-tag {
       font-size: 0.65rem;
@@ -694,10 +713,10 @@
   <!-- ======================== SIDEBAR ======================== -->
   <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
     <div class="sidebar-header">
-      <div class="sidebar-logo">
-        <img src="images/logo.webp" alt="LogiTech Logo" />
+      <a href="user.html" class="sidebar-logo" title="Stackly User Portal">
+        <img src="images/logo.webp" alt="Stackly Logo" />
         <span class="portal-tag">User Portal</span>
-      </div>
+      </a>
     </div>
 
     <nav class="sidebar-nav">
@@ -764,9 +783,14 @@
 
     <!-- Top Bar with Profile & Logout -->
     <header class="topbar">
-      <div class="topbar-left">
-        <h1 style="font-size:1.35rem; font-weight:700; color:var(--dark); margin-bottom:2px;">Platform Overview</h1>
-        <p id="user-welcome-text" style="font-size:0.875rem; color:#64748B; margin-top:2px;">Welcome back, <strong id="user-welcome-name" style="color:var(--accent,#8B0000); font-weight:700;">Lingalamanasa123</strong>, manage your logistics ecosystem</p>
+      <div class="topbar-left" style="display:flex;align-items:center;">
+        <a href="user.html" class="mobile-topbar-logo" title="Stackly User Portal">
+          <img src="images/logo.webp" alt="Stackly Logo" />
+        </a>
+        <div>
+          <h1 style="font-size:1.35rem; font-weight:700; color:var(--dark); margin-bottom:2px;">Platform Overview</h1>
+          <p id="user-welcome-text" style="font-size:0.875rem; color:#64748B; margin-top:2px;">Welcome back, <strong id="user-welcome-name" style="color:var(--accent,#8B0000); font-weight:700;">Lingalamanasa123</strong>, manage your logistics ecosystem</p>
+        </div>
       </div>
       <div class="topbar-right">
         <span class="date-badge" id="current-date">Loading...</span>
