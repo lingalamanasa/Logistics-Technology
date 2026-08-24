@@ -400,6 +400,8 @@ p {
   display: flex !important;
   flex-direction: column;
   gap: 10px;
+}
+
 .mobile-menu .nav-actions .btn,
 .mobile-menu .mobile-actions .btn {
   width: 100%;
