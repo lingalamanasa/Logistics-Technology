@@ -14,7 +14,7 @@ A modern, responsive Logistics & Supply Chain Management web platform featuring 
 - **Services (`services.html`)**: Multimodal freight forwarding, smart warehousing & 3PL, and last-mile logistics solutions.
 - **Industry Blog (`blog.html`)**: Supply chain trends, market intelligence, and technology reports.
 - **Contact (`contact.html`)**: Enterprise quote request form, interactive inquiry submission, and contact details.
-- **User Authentication (`login.html`, `signup.html`)**: Multi-step registration, role-based login (Admin / Operations / User), and local state persistence.
+- **User Authentication (`login.html`, `signup.html`)**: Clean registration, role-based login (Admin / User), and local session state persistence.
 - **User Portal (`user.html`)**: Personal dashboard for booking shipments, tracking live freight telemetry, and invoice downloads.
 - **Analytics Dashboard (`dashboard.html`)**: Freight metrics, delivery performance KPIs, and operational overview.
 - **Admin Control Panel (`admin.html`)**: Fleet management, user administration, consignment dispatching, and system monitoring.
