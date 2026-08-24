@@ -2,13 +2,14 @@
 
 A modern, responsive Logistics & Supply Chain Management web platform featuring real-time tracking, multimodal freight management, warehouse automation, client dashboard, user portal, and admin control center.
 
-🌐 **Live Demo Website:** [https://lingalamanasa.github.io/Logistics-Technology/](https://lingalamanasa.github.io/Logistics-Technology/)
+🌐 **Live Demo Website:** [https://lingalamanasa.github.io/Logistics-Technology/](https://lingalamanasa.github.io/Logistics-Technology/)  
+📁 **GitHub Repository:** [https://github.com/lingalamanasa/Logistics-Technology](https://github.com/lingalamanasa/Logistics-Technology)
 
 ---
 
 ## 🚀 Key Pages & Features
 
-- **Home (`index.html`)**: Landing page with live consignment/B/L tracker, feature showcase, stats, and client testimonials.
+- **Home (`index.html`)**: Landing page with real-time global network intelligence and telemetry showcase, feature breakdown, operational metrics, and client testimonials.
 - **About (`about.html`)**: Company vision, core milestones, leadership, and global presence.
 - **Services (`services.html`)**: Multimodal freight forwarding, smart warehousing & 3PL, and last-mile logistics solutions.
 - **Industry Blog (`blog.html`)**: Supply chain trends, market intelligence, and technology reports.
