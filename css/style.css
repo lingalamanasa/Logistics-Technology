@@ -693,11 +693,35 @@ p {
   animation: floating-slow 5s ease-in-out infinite;
 }
 
-/* 2. HANGING PENDULUM ANIMATION */
+/* 2. HANGING PENDULUM & SUSPENDED CARDS ANIMATION */
 @keyframes hangingSway {
   0% { transform: rotate(4deg); }
   50% { transform: rotate(-4deg); }
   100% { transform: rotate(4deg); }
+}
+
+@keyframes hangingCardSway1 {
+  0% { transform: rotate(2.2deg); }
+  50% { transform: rotate(-2.2deg); }
+  100% { transform: rotate(2.2deg); }
+}
+
+@keyframes hangingCardSway2 {
+  0% { transform: rotate(-2.6deg); }
+  50% { transform: rotate(2.6deg); }
+  100% { transform: rotate(-2.6deg); }
+}
+
+@keyframes hangingCardSway3 {
+  0% { transform: rotate(1.8deg); }
+  50% { transform: rotate(-2.4deg); }
+  100% { transform: rotate(1.8deg); }
+}
+
+@keyframes hangingCardSway4 {
+  0% { transform: rotate(-2deg); }
+  50% { transform: rotate(2.2deg); }
+  100% { transform: rotate(-2deg); }
 }
 
 .hanging-card-wrap {
@@ -705,6 +729,63 @@ p {
   display: inline-block;
   transform-origin: top center;
   animation: hangingSway 4s ease-in-out infinite;
+}
+
+.hanging-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+  position: relative;
+  width: 100%;
+}
+
+.hanging-card-wrapper:nth-child(1) { animation: hangingCardSway1 5.5s ease-in-out infinite; }
+.hanging-card-wrapper:nth-child(2) { animation: hangingCardSway2 6.2s ease-in-out infinite 0.4s; }
+.hanging-card-wrapper:nth-child(3) { animation: hangingCardSway3 5.8s ease-in-out infinite 0.8s; }
+.hanging-card-wrapper:nth-child(4) { animation: hangingCardSway4 6.5s ease-in-out infinite 1.2s; }
+
+.hanging-card-anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: -1px;
+  z-index: 5;
+}
+
+.hanging-card-pin {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B0000, #B22222);
+  border: 2.5px solid #FFFFFF;
+  box-shadow: 0 3px 8px rgba(139, 0, 0, 0.35);
+  position: relative;
+  z-index: 6;
+}
+
+.hanging-card-line {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(180deg, #8B0000, rgba(139, 0, 0, 0.4));
+  margin: -2px auto 0;
+}
+
+.hanging-card-wrapper:hover {
+  animation-play-state: paused;
+}
+
+.hanging-card-wrapper:hover .feature-card,
+.hanging-card-wrapper:hover .mission-card {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--color-primary);
+  box-shadow: 0 20px 40px -8px rgba(139, 0, 0, 0.16), 0 0 0 1px rgba(139, 0, 0, 0.15);
+}
+
+.hanging-card-wrapper:hover .feature-icon-wrap,
+.hanging-card-wrapper:hover .mission-card-icon {
+  transform: scale(1.12) rotate(6deg);
+  color: var(--color-primary);
 }
 
 .hanging-pin {
