@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -617,7 +618,7 @@
 </head>
 <body>
 
-  <button class="mob-toggle" id="mob-toggle" aria-label="Toggle sidebar">☰</button>
+  <button class="mob-toggle" id="mob-toggle" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
 
   <!-- ======================== SIDEBAR ======================== -->
   <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
@@ -711,10 +712,10 @@
       <div class="topbar-right">
         <span class="date-badge" id="current-date">Loading...</span>
         <button class="topbar-btn" id="notif-btn" onclick="window.location.href='404.html'" aria-label="Notifications">
-          🔔
+          <i class="fa-solid fa-bell"></i>
           <span class="notif-dot"></span>
         </button>
-        <button class="topbar-btn" id="search-btn" onclick="window.location.href='404.html'" aria-label="Search">🔍</button>
+        <button class="topbar-btn" id="search-btn" onclick="window.location.href='404.html'" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
         <div class="topbar-user">
           <div class="topbar-user-avatar" id="topbar-avatar">LM</div>
           <div class="topbar-user-info">
@@ -734,28 +735,28 @@
       <!-- KPI Cards -->
       <div class="kpi-grid">
         <div class="kpi-card">
-          <div class="kpi-icon">🚚</div>
+          <div class="kpi-icon"><i class="fa-solid fa-truck"></i></div>
           <div class="kpi-label">Active Shipments</div>
           <div class="kpi-value" id="kpi-shipments">0</div>
-          <div class="kpi-change up">↑ +8% vs last week</div>
+          <div class="kpi-change up"><i class="fa-solid fa-arrow-up"></i> +8% vs last week</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-icon">✅</div>
+          <div class="kpi-icon"><i class="fa-solid fa-circle-check"></i></div>
           <div class="kpi-label">On-Time Delivery Rate</div>
           <div class="kpi-value" id="kpi-ontime">0%</div>
-          <div class="kpi-change up">↑ +2.3% vs last month</div>
+          <div class="kpi-change up"><i class="fa-solid fa-arrow-up"></i> +2.3% vs last month</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-icon">💰</div>
+          <div class="kpi-icon"><i class="fa-solid fa-sack-dollar"></i></div>
           <div class="kpi-label">Freight Cost Saved</div>
           <div class="kpi-value" id="kpi-savings">$0</div>
-          <div class="kpi-change up">↑ +12% vs last month</div>
+          <div class="kpi-change up"><i class="fa-solid fa-arrow-up"></i> +12% vs last month</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-icon">⚠️</div>
+          <div class="kpi-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
           <div class="kpi-label">Delayed Shipments</div>
           <div class="kpi-value" id="kpi-delayed">0</div>
-          <div class="kpi-change down">↑ +2 from yesterday</div>
+          <div class="kpi-change down"><i class="fa-solid fa-arrow-up"></i> +2 from yesterday</div>
         </div>
       </div>
 
@@ -905,7 +906,7 @@
           </div>
           <div class="alerts-list" role="list">
             <div class="alert-item" role="listitem">
-              <div class="alert-icon danger">🚨</div>
+              <div class="alert-icon danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
               <div class="alert-body">
                 <div class="alert-title">Shipment #LT-20843 Delayed</div>
                 <div class="alert-desc">Customs clearance hold at Shanghai — estimated 18h delay. Action required.</div>
@@ -913,7 +914,7 @@
               </div>
             </div>
             <div class="alert-item" role="listitem">
-              <div class="alert-icon warn">⚠️</div>
+              <div class="alert-icon warn"><i class="fa-solid fa-cloud-bolt"></i></div>
               <div class="alert-body">
                 <div class="alert-title">Weather Warning — Rotterdam</div>
                 <div class="alert-desc">Storm forecast may impact ocean shipments scheduled for Aug 25–26.</div>
@@ -921,7 +922,7 @@
               </div>
             </div>
             <div class="alert-item" role="listitem">
-              <div class="alert-icon info">📋</div>
+              <div class="alert-icon info"><i class="fa-solid fa-clipboard-list"></i></div>
               <div class="alert-body">
                 <div class="alert-title">Contract Renewal Due</div>
                 <div class="alert-desc">Your carrier contract with FastFreight Ltd. expires in 14 days.</div>
@@ -929,7 +930,7 @@
               </div>
             </div>
             <div class="alert-item" role="listitem">
-              <div class="alert-icon success">✅</div>
+              <div class="alert-icon success"><i class="fa-solid fa-circle-check"></i></div>
               <div class="alert-body">
                 <div class="alert-title">Monthly Report Ready</div>
                 <div class="alert-desc">Your August performance report is now available for download.</div>

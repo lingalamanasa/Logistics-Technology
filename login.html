@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -448,16 +449,16 @@
 
       <div class="auth-card-header">
         <h1>Sign in to LogiTech</h1>
-        <p>New to the platform? <a href="signup.html">Create a free account &rarr;</a></p>
+        <p>New to the platform? <a href="signup.html">Create a free account <i class="fa-solid fa-arrow-right"></i></a></p>
       </div>
 
       <!-- ROLE SELECTOR: USER VS ADMIN -->
       <div class="role-selector-wrap" id="role-selector">
         <button type="button" class="role-btn active" id="role-user" onclick="selectRole('user')">
-          <span>👤 User / Shipper</span>
+          <span><i class="fa-solid fa-user"></i> User / Shipper</span>
         </button>
         <button type="button" class="role-btn" id="role-admin" onclick="selectRole('admin')">
-          <span>⚙️ Administrator</span>
+          <span><i class="fa-solid fa-gear"></i> Administrator</span>
         </button>
       </div>
 
@@ -467,7 +468,7 @@
         <div class="form-group">
           <label for="login-email">Business Email</label>
           <div class="input-wrap">
-            <span class="input-icon">✉</span>
+            <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
             <input type="email" id="login-email" placeholder="you@company.com" required autocomplete="email" />
           </div>
         </div>
@@ -475,7 +476,7 @@
         <div class="form-group">
           <label for="login-password">Password</label>
           <div class="input-wrap">
-            <span class="input-icon">🔒</span>
+            <span class="input-icon"><i class="fa-solid fa-lock"></i></span>
             <input type="password" id="login-password" placeholder="Enter your password" required autocomplete="current-password" />
             <button type="button" class="input-toggle" onclick="togglePw('login-password', this)">Show</button>
           </div>
@@ -489,7 +490,7 @@
         </div>
 
         <button type="submit" class="btn-auth" id="btn-login-submit">
-          Sign In &rarr;
+          Sign In <i class="fa-solid fa-arrow-right"></i>
         </button>
       </form>
 
@@ -566,7 +567,7 @@
           }
         } else {
           err.classList.add('show');
-          btn.textContent = 'Sign In →';
+          btn.innerHTML = 'Sign In <i class="fa-solid fa-arrow-right"></i>';
           btn.disabled = false;
         }
       }, 600);
