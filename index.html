@@ -512,7 +512,7 @@
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo stackly-logo" id="logo-link">
-        <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img" />
+        <img src="https://raw.githubusercontent.com/lingalamanasa/Logistics-Technology/main/images/logo.webp" alt="Stackly Logo" class="stackly-logo-img" onerror="this.onerror=null; this.src='images/logo.webp';" />
       </a>
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link active" id="nav-home">Home</a></li>
@@ -547,13 +547,22 @@
   </div>
 
   <!-- ==========================================
-       SECTION 1: HERO & REAL-TIME TRACKING ENGINE
+       SECTION 1: HERO & REAL-TIME TRACKING ENGINE (WITH BACKGROUND ANIMATIONS & SLIDING SHOWCASE)
        ========================================== -->
   <header class="hero" id="home">
-    <div class="container">
+    <!-- Interactive Background Particle Canvas -->
+    <canvas id="hero-particles" class="hero-particles-canvas"></canvas>
+    
+    <!-- Ambient Glowing Gradient Orbs -->
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+
+    <div class="container" style="position:relative;z-index:2;">
       <div class="hero-grid">
         <div class="hero-content slide-left">
-          <span class="section-tag" style="background: rgba(139,0,0,0.3); color:#FFA5A5;">Next-Gen Logistics</span>
+          <span class="section-tag" style="background: rgba(139,0,0,0.35); color:#FFA5A5; border:1px solid rgba(255,165,165,0.25);">
+            <i class="fa-solid fa-satellite-dish" style="margin-right:6px;"></i> Next-Gen Logistics Cloud
+          </span>
           <h1>Intelligent Supply Chain & <span>Logistics</span> Cloud</h1>
           <p class="hero-desc">
             Transform global freight and last-mile operations with AI-driven route optimization, real-time IoT cargo telemetry, and automated compliance.
@@ -563,8 +572,8 @@
             <a href="404.html" class="btn btn-outline-white" id="hero-explore" style="padding:14px 28px;font-size:1rem;">Explore Services</a>
           </div>
 
-          <!-- LIVE FREIGHT TRACKING BOX -->
-          <div class="hero-tracker-box">
+          <!-- LIVE FREIGHT TRACKING BOX (WITH 3D TILT) -->
+          <div class="hero-tracker-box tilt-card">
             <div class="tracker-title">
               <span class="tracker-pulse"></span>
               Live Freight & Consignment Tracker
@@ -583,19 +592,197 @@
           </div>
         </div>
 
+        <!-- HERO MULTI-STYLE SLIDING IMAGE SHOWCASE -->
         <div class="hero-media-wrap slide-right" style="transition-delay: 0.15s;">
-          <img src="images/hero_img.webp" alt="LogiTech Operations Platform" class="hero-img-main" />
-          <div class="hero-float-card anim-floating">
-            <div class="hero-float-icon"><i class="fa-solid fa-circle-check"></i></div>
-            <div>
-              <div class="hero-float-title" style="font-weight:700;">99.4% On-Time SLA</div>
-              <div class="hero-float-sub" style="font-size:0.8rem;color:#64748B;">Across 60+ global corridors</div>
+          <div class="hero-slider-wrap tilt-card">
+            <div class="hero-slider-track">
+              <!-- Slide 1: Multimodal Cargo Aviation -->
+              <div class="hero-slide active">
+                <img src="images/hero_img.webp" alt="Global Multimodal Freight" class="hero-slide-img" />
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-badge">
+                  <span class="tracker-pulse"></span>
+                  <span>Aviation & Multimodal Express</span>
+                </div>
+                <div class="hero-slide-caption">
+                  <div>
+                    <div class="slide-caption-title">Global Air Freight & Hub Routing</div>
+                    <div class="slide-caption-desc">Sub-second ETA updates with direct airline API integration.</div>
+                  </div>
+                  <div style="text-align:right;flex-shrink:0;">
+                    <strong style="color:#FFA5A5;font-size:1.1rem;display:block;">99.4% SLA</strong>
+                    <span style="font-size:0.72rem;color:#CBD5E1;">60+ Global Hubs</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2: Smart Robotics Warehousing -->
+              <div class="hero-slide">
+                <img src="images/service_2.webp" alt="Smart Robotics Warehousing" class="hero-slide-img" />
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-badge">
+                  <span class="tracker-pulse" style="background:#38BDF8;box-shadow:0 0 8px #38BDF8;"></span>
+                  <span>Autonomous Robotics Hub</span>
+                </div>
+                <div class="hero-slide-caption">
+                  <div>
+                    <div class="slide-caption-title">AI Autonomous Warehouse Robotics</div>
+                    <div class="slide-caption-desc">High-density 3D sorting grid with zero pick errors.</div>
+                  </div>
+                  <div style="text-align:right;flex-shrink:0;">
+                    <strong style="color:#38BDF8;font-size:1.1rem;display:block;">+40% Faster</strong>
+                    <span style="font-size:0.72rem;color:#CBD5E1;">Automated Matrix</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Maritime Ocean Corridors -->
+              <div class="hero-slide">
+                <img src="images/about_img.webp" alt="Maritime Container Shipping" class="hero-slide-img" />
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-badge">
+                  <span class="tracker-pulse" style="background:#F59E0B;box-shadow:0 0 8px #F59E0B;"></span>
+                  <span>Ocean Freight & Port Operations</span>
+                </div>
+                <div class="hero-slide-caption">
+                  <div>
+                    <div class="slide-caption-title">Global Maritime Corridor Matrix</div>
+                    <div class="slide-caption-desc">Dynamic berth scheduling and port customs automation.</div>
+                  </div>
+                  <div style="text-align:right;flex-shrink:0;">
+                    <strong style="color:#FCD34D;font-size:1.1rem;display:block;">140+ Ports</strong>
+                    <span style="font-size:0.72rem;color:#CBD5E1;">Worldwide</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 4: Real-time IoT Cold Chain -->
+              <div class="hero-slide">
+                <img src="images/service_3.webp" alt="IoT Telemetry & Last Mile" class="hero-slide-img" />
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-badge">
+                  <span class="tracker-pulse" style="background:#A855F7;box-shadow:0 0 8px #A855F7;"></span>
+                  <span>Satellite IoT Cargo Telemetry</span>
+                </div>
+                <div class="hero-slide-caption">
+                  <div>
+                    <div class="slide-caption-title">Real-Time Sensor Telemetry Hub</div>
+                    <div class="slide-caption-desc">Live vibration, humidity, and temperature monitoring.</div>
+                  </div>
+                  <div style="text-align:right;flex-shrink:0;">
+                    <strong style="color:#D8B4FE;font-size:1.1rem;display:block;">±0.1°C</strong>
+                    <span style="font-size:0.72rem;color:#CBD5E1;">Strict Precision</span>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <!-- Navigation Controls -->
+            <button class="slider-nav-btn prev" aria-label="Previous slide"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-nav-btn next" aria-label="Next slide"><i class="fa-solid fa-chevron-right"></i></button>
+
+            <!-- Indicators -->
+            <div class="slider-pagination">
+              <div class="slider-dot active" data-index="0"></div>
+              <div class="slider-dot" data-index="1"></div>
+              <div class="slider-dot" data-index="2"></div>
+              <div class="slider-dot" data-index="3"></div>
+            </div>
+
+            <!-- Animated Progress Bar -->
+            <div class="slider-progress-bar"></div>
           </div>
         </div>
       </div>
     </div>
   </header>
+
+  <!-- ==========================================
+       LIVE LOGISTICS CORRIDOR STREAM (INFINITE MARQUEE TICKER)
+       ========================================== -->
+  <div class="logistics-marquee-strip" aria-label="Live Freight Corridors Stream">
+    <div class="marquee-badge-label">
+      <i class="fa-solid fa-satellite-dish"></i> Live Corridors
+    </div>
+    <div class="marquee-wrapper">
+      <div class="marquee-content">
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">SGSIN &rarr; NLRTM</span>
+          <span>CMA CGM Magellan</span>
+          <span style="color:#94A3B8;">18.4 kts • In-Transit</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">FRA &rarr; LHR</span>
+          <span>Flight B777-F</span>
+          <span style="color:#94A3B8;">Alt 34,000ft • On-Time</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">ORD &rarr; DFW</span>
+          <span>Autonomous EV Fleet #108</span>
+          <span style="color:#94A3B8;">ETA 2h 15m</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">HKG &rarr; LAX</span>
+          <span>Pacific Express Hub</span>
+          <span style="color:#94A3B8;">Customs Cleared</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">DXB &rarr; JFK</span>
+          <span>Pharma Cold-Chain</span>
+          <span style="color:#94A3B8;">Temp 3.8°C (Optimal)</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">SHG &rarr; SIN</span>
+          <span>Cosco Shipping 2,400 TEU</span>
+          <span style="color:#94A3B8;">Docked Berth 4</span>
+        </div>
+        <!-- Duplicate for continuous infinite loop -->
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">SGSIN &rarr; NLRTM</span>
+          <span>CMA CGM Magellan</span>
+          <span style="color:#94A3B8;">18.4 kts • In-Transit</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">FRA &rarr; LHR</span>
+          <span>Flight B777-F</span>
+          <span style="color:#94A3B8;">Alt 34,000ft • On-Time</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">ORD &rarr; DFW</span>
+          <span>Autonomous EV Fleet #108</span>
+          <span style="color:#94A3B8;">ETA 2h 15m</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">HKG &rarr; LAX</span>
+          <span>Pacific Express Hub</span>
+          <span style="color:#94A3B8;">Customs Cleared</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">DXB &rarr; JFK</span>
+          <span>Pharma Cold-Chain</span>
+          <span style="color:#94A3B8;">Temp 3.8°C (Optimal)</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-dot"></span>
+          <span class="marquee-corridor">SHG &rarr; SIN</span>
+          <span>Cosco Shipping 2,400 TEU</span>
+          <span style="color:#94A3B8;">Docked Berth 4</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- ==========================================
        SECTION 2: LIVE METRIC COUNTERS (METRIC ANIMATION)
@@ -832,6 +1019,162 @@
   </section>
 
   <!-- ==========================================
+       SECTION 6.5: INTERACTIVE MULTIMODAL FLEET & SOLUTIONS SWITCHER
+       ========================================== -->
+  <section class="section fleet-interactive-section" id="fleet-modes" aria-label="Multimodal Fleet Operations">
+    <div class="container">
+      <div style="text-align: center; max-width: 760px; margin: 0 auto 36px;">
+        <span class="section-tag"><i class="fa-solid fa-layer-group" style="margin-right:6px;"></i> Interactive Fleet Showcase</span>
+        <h2 class="section-title">End-to-End Multimodal Transport Capabilities</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">Explore how our specialized logistics divisions coordinate seamlessly to move cargo rapidly and securely across all modes.</p>
+      </div>
+
+      <!-- Fleet Nav Tabs -->
+      <div class="fleet-tabs-nav">
+        <button class="fleet-tab-btn active" data-target="fleet-air">
+          <i class="fa-solid fa-plane-departure"></i> Global Air Express
+        </button>
+        <button class="fleet-tab-btn" data-target="fleet-ocean">
+          <i class="fa-solid fa-ship"></i> Ocean & Maritime Fleet
+        </button>
+        <button class="fleet-tab-btn" data-target="fleet-land">
+          <i class="fa-solid fa-truck-moving"></i> Smart Ground Transport
+        </button>
+        <button class="fleet-tab-btn" data-target="fleet-warehouse">
+          <i class="fa-solid fa-robot"></i> AI Warehousing Robotics
+        </button>
+      </div>
+
+      <!-- Tab Content Panes -->
+      <div class="fleet-content-container">
+        <!-- 1. Air Express Pane -->
+        <div class="fleet-tab-pane active" id="fleet-air">
+          <div class="fleet-info-side">
+            <span class="service-card-tag" style="color:var(--color-primary);font-weight:700;"><i class="fa-solid fa-bolt"></i> High Velocity Freight</span>
+            <h3 style="font-size: clamp(1.4rem, 2.5vw, 1.85rem); margin: 8px 0 14px;">Next-Flight-Out Global Cargo Priority</h3>
+            <p style="color:var(--color-text-light); line-height: 1.65; margin-bottom: 20px;">
+              Direct access to chartered freighters and scheduled commercial capacity across 180+ global airports. Guaranteed temperature control and automated airport customs clearance within 45 minutes.
+            </p>
+            <div class="fleet-metrics-row">
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">24-48h</div>
+                <div class="fleet-metric-lbl">Intercontinental Transit</div>
+              </div>
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">180+</div>
+                <div class="fleet-metric-lbl">Airport Hubs</div>
+              </div>
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">99.8%</div>
+                <div class="fleet-metric-lbl">On-Time Flight SLA</div>
+              </div>
+            </div>
+            <div style="margin-top: 24px;">
+              <a href="404.html" class="btn btn-accent"><i class="fa-solid fa-plane-up"></i> Book Air Cargo Slot</a>
+            </div>
+          </div>
+          <div class="fleet-visual-card tilt-card">
+            <img src="images/hero_img.webp" alt="Global Air Express Cargo" class="fleet-visual-img" />
+          </div>
+        </div>
+
+        <!-- 2. Ocean Maritime Pane -->
+        <div class="fleet-tab-pane" id="fleet-ocean">
+          <div class="fleet-info-side">
+            <span class="service-card-tag" style="color:#0284C7;font-weight:700;"><i class="fa-solid fa-anchor"></i> High Capacity Maritime</span>
+            <h3 style="font-size: clamp(1.4rem, 2.5vw, 1.85rem); margin: 8px 0 14px;">Full Container (FCL) & Consolidated (LCL) Corridors</h3>
+            <p style="color:var(--color-text-light); line-height: 1.65; margin-bottom: 20px;">
+              Connected to major global ocean shipping alliances with predictive AIS satellite tracking, smart container door-sensor monitoring, and automated demurrage prevention alerts.
+            </p>
+            <div class="fleet-metrics-row">
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">140+</div>
+                <div class="fleet-metric-lbl">Direct Sea Ports</div>
+              </div>
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">-28%</div>
+                <div class="fleet-metric-lbl">Dwell Time Reduction</div>
+              </div>
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">2.4M</div>
+                <div class="fleet-metric-lbl">TEU Managed Annually</div>
+              </div>
+            </div>
+            <div style="margin-top: 24px;">
+              <a href="404.html" class="btn btn-accent"><i class="fa-solid fa-ship"></i> View Ocean Schedules</a>
+            </div>
+          </div>
+          <div class="fleet-visual-card tilt-card">
+            <img src="images/about_img.webp" alt="Ocean Container Carrier" class="fleet-visual-img" />
+          </div>
+        </div>
+
+        <!-- 3. Smart Ground Transport Pane -->
+        <div class="fleet-tab-pane" id="fleet-land">
+          <div class="fleet-info-side">
+            <span class="service-card-tag" style="color:#10B981;font-weight:700;"><i class="fa-solid fa-leaf"></i> Eco & Autonomous Road</span>
+            <h3 style="font-size: clamp(1.4rem, 2.5vw, 1.85rem); margin: 8px 0 14px;">AI-Dispatched Regional Fleet & Cross-Border Trucking</h3>
+            <p style="color:var(--color-text-light); line-height: 1.65; margin-bottom: 20px;">
+              Dynamic load-matching algorithms match trailers with available cargo instantly, cutting empty miles by 34%. Electric and telematics-equipped heavy vehicles for low-emission transport.
+            </p>
+            <div class="fleet-metrics-row">
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">15,000+</div>
+                <div class="fleet-metric-lbl">Certified Drivers</div>
+              </div>
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">-34%</div>
+                <div class="fleet-metric-lbl">Empty Miles Cut</div>
+              </div>
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">Real-Time</div>
+                <div class="fleet-metric-lbl">GPS Geofencing</div>
+              </div>
+            </div>
+            <div style="margin-top: 24px;">
+              <a href="404.html" class="btn btn-accent"><i class="fa-solid fa-truck-fast"></i> Schedule Linehaul</a>
+            </div>
+          </div>
+          <div class="fleet-visual-card tilt-card">
+            <img src="images/service_3.webp" alt="Smart Ground Fleet" class="fleet-visual-img" />
+          </div>
+        </div>
+
+        <!-- 4. AI Warehousing Robotics Pane -->
+        <div class="fleet-tab-pane" id="fleet-warehouse">
+          <div class="fleet-info-side">
+            <span class="service-card-tag" style="color:#8B5CF6;font-weight:700;"><i class="fa-solid fa-microchip"></i> Next-Gen Fulfillment</span>
+            <h3 style="font-size: clamp(1.4rem, 2.5vw, 1.85rem); margin: 8px 0 14px;">Robotics-Assisted Sortation & High-Density Micro-Hubs</h3>
+            <p style="color:var(--color-text-light); line-height: 1.65; margin-bottom: 20px;">
+              Autonomous mobile robots (AMRs) and automated storage & retrieval systems (ASRS) reduce fulfillment cycle times from hours to minutes with 99.99% picking accuracy.
+            </p>
+            <div class="fleet-metrics-row">
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">99.99%</div>
+                <div class="fleet-metric-lbl">Picking Accuracy</div>
+              </div>
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">4x</div>
+                <div class="fleet-metric-lbl">Sortation Velocity</div>
+              </div>
+              <div class="fleet-metric-box">
+                <div class="fleet-metric-val">24/7</div>
+                <div class="fleet-metric-lbl">Robotics Uptime</div>
+              </div>
+            </div>
+            <div style="margin-top: 24px;">
+              <a href="404.html" class="btn btn-accent"><i class="fa-solid fa-warehouse"></i> Tour Robotic Hub</a>
+            </div>
+          </div>
+          <div class="fleet-visual-card tilt-card">
+            <img src="images/service_2.webp" alt="Automated Robotics Warehouse" class="fleet-visual-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
        SECTION 7: GLOBAL CORRIDOR & TELEMETRY SIMULATOR
        ========================================== -->
   <section class="section" id="corridor-simulator" style="background: var(--color-bg-2);" aria-label="Global Route Simulator">
@@ -955,7 +1298,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="nav-logo stackly-logo">
-            <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img stackly-logo-footer" />
+            <img src="https://raw.githubusercontent.com/lingalamanasa/Logistics-Technology/main/images/logo.webp" alt="Stackly Logo" class="stackly-logo-img stackly-logo-footer" onerror="this.onerror=null; this.src='images/logo.webp';" />
           </a>
           <p>Empowering companies with modern logistics technology, intelligent routing, and resilient supply chain infrastructure.</p>
           <div class="footer-social">
@@ -963,7 +1306,7 @@
             <a href="404.html" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="404.html" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="404.html" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+            <a href="https://github.com/lingalamanasa/Logistics-Technology" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
           </div>
         </div>
         <div class="footer-col">

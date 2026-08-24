@@ -178,7 +178,7 @@
   <nav id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo stackly-logo" id="logo-link">
-        <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img" />
+        <img src="https://raw.githubusercontent.com/lingalamanasa/Logistics-Technology/main/images/logo.webp" alt="Stackly Logo" class="stackly-logo-img" onerror="this.onerror=null; this.src='images/logo.webp';" />
       </a>
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
@@ -215,8 +215,11 @@
   <!-- ==========================================
        SECTION 1: HERO & SUPPORT BANNER
        ========================================== -->
-  <section class="page-hero" aria-label="Contact Hero">
-    <div class="container">
+  <section class="page-hero" aria-label="Contact Hero" style="position:relative; overflow:hidden;">
+    <canvas id="hero-particles" class="hero-particles-canvas"></canvas>
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="container" style="position:relative; z-index:2;">
       <div class="hanging-card-wrap" style="margin-bottom: 12px;">
         <div class="hanging-pin"></div>
         <div class="hanging-line"></div>
@@ -500,7 +503,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="index.html" class="nav-logo stackly-logo">
-            <img src="images/logo.webp" alt="Stackly Logo" class="stackly-logo-img stackly-logo-footer" />
+            <img src="https://raw.githubusercontent.com/lingalamanasa/Logistics-Technology/main/images/logo.webp" alt="Stackly Logo" class="stackly-logo-img stackly-logo-footer" onerror="this.onerror=null; this.src='images/logo.webp';" />
           </a>
           <p>Empowering companies with modern logistics technology and intelligent supply chain solutions.</p>
           <div class="footer-social">
@@ -508,7 +511,7 @@
             <a href="404.html" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="404.html" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="404.html" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="404.html" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+            <a href="https://github.com/lingalamanasa/Logistics-Technology" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
           </div>
         </div>
         <div class="footer-col">
