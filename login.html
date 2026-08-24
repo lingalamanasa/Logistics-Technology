@@ -3,253 +3,292 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login – LogiTech Logistics Technology</title>
-  <meta name="description" content="Sign in to your LogiTech account to manage shipments, track freight, and access your supply chain dashboard." />
+  <title>Login – Stackly Logistics</title>
+  <meta name="description" content="Sign in to your Stackly account to manage shipments, track freight, and access your supply chain dashboard." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
     :root {
       --accent: #8B0000;
       --accent-hover: #700000;
       --dark: #0F172A;
-      --dark-2: #1E293B;
+      --dark-btn: #111827;
       --text: #1E293B;
       --text-light: #64748B;
       --border: #E2E8F0;
       --bg: #F8FAFC;
       --white: #FFFFFF;
       --font-serif: 'Playfair Display', Georgia, serif;
-      --font-sans: 'Inter', sans-serif;
-      --radius: 14px;
-      --radius-sm: 8px;
-      --shadow-lg: 0 20px 48px -6px rgba(15,23,42,0.16);
-      --transition: 0.25s cubic-bezier(0.16,1,0.3,1);
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --radius-card: 28px;
+      --radius-sm: 10px;
+      --radius-full: 9999px;
+      --transition: 0.25s ease;
+    }
+    html, body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      background: #F1F5F9;
+      color: var(--text);
     }
     body {
-      font-family: var(--font-sans);
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-    }
-
-    /* LEFT PANEL */
-    .auth-left {
-      width: 48%;
-      background: linear-gradient(145deg, #0F172A 0%, #1a0505 50%, #0F172A 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 48px;
-      position: relative;
-      overflow: hidden;
-    }
-    .auth-left::before {
-      content: '';
-      position: absolute;
-      top: -200px; right: -200px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(139,0,0,0.35) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .auth-left::after {
-      content: '';
-      position: absolute;
-      bottom: -150px; left: -150px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(139,0,0,0.2) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .auth-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      position: relative; z-index: 1;
-    }
-    .auth-logo img {
-      height: 40px; width: auto;
-      filter: brightness(0) invert(1);
-    }
-    .auth-panel-content {
-      position: relative; z-index: 1;
-    }
-    .auth-panel-content h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.9rem, 3vw, 2.6rem);
-      color: #FFFFFF;
-      line-height: 1.25;
-      margin-bottom: 18px;
-    }
-    .auth-panel-content p {
-      color: #94A3B8;
-      font-size: 1rem;
-      line-height: 1.65;
-      margin-bottom: 36px;
-      max-width: 380px;
-    }
-    .auth-stats {
-      display: flex;
-      gap: 32px;
-    }
-    .auth-stat-num {
-      font-family: var(--font-serif);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1;
-    }
-    .auth-stat-num span { color: #EF4444; }
-    .auth-stat-label {
-      font-size: 0.8rem;
-      color: #64748B;
-      margin-top: 4px;
-    }
-    .auth-testimonial {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius);
-      padding: 24px;
-      position: relative; z-index: 1;
-    }
-    .auth-testimonial p {
-      color: #CBD5E1;
-      font-size: 0.9rem;
-      font-style: italic;
-      margin-bottom: 14px;
-    }
-    .auth-testimonial-author {
-      display: flex; align-items: center; gap: 12px;
-    }
-    .auth-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: var(--white);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 0.85rem;
-    }
-    .auth-author-name { font-weight: 600; color: var(--white); font-size: 0.875rem; }
-    .auth-author-role { color: #64748B; font-size: 0.775rem; }
-
-    /* RIGHT PANEL */
-    .auth-right {
-      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 48px 32px;
+      padding: clamp(16px, 3vw, 40px);
     }
-    .auth-card {
+
+    /* Outer Container Card */
+    .auth-page-container {
+      width: 100%;
+      max-width: 1120px;
+      min-height: 720px;
+      background: var(--white);
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 20px 60px -15px rgba(15, 23, 42, 0.12);
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Left Hero Panel */
+    .auth-left-panel {
+      position: relative;
+      background-image: url('images/login_hero.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: clamp(32px, 5vw, 48px);
+      overflow: hidden;
+    }
+    .auth-left-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.45) 45%, rgba(15, 23, 42, 0.15) 100%);
+      pointer-events: none;
+    }
+    .auth-left-content {
+      position: relative;
+      z-index: 2;
+      color: var(--white);
+    }
+    .auth-left-content h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 2.5vw, 2.3rem);
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 14px;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+    }
+    .auth-left-content p {
+      font-size: 0.95rem;
+      color: #CBD5E1;
+      line-height: 1.55;
+      max-width: 380px;
+    }
+
+    /* Right Form Panel */
+    .auth-right-panel {
+      padding: clamp(28px, 4vw, 48px) clamp(24px, 5vw, 56px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      background: var(--white);
+    }
+
+    /* Top Left Back Button */
+    .btn-back-home {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #475569;
+      text-decoration: none;
+      transition: all var(--transition);
+      margin-bottom: 24px;
+    }
+    .btn-back-home:hover {
+      background: #F8FAFC;
+      color: var(--dark);
+      border-color: #CBD5E1;
+      transform: translateX(-2px);
+    }
+
+    /* Form Header */
+    .auth-header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+    .auth-header-logo {
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .auth-header-logo img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+    .auth-header h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw, 2.15rem);
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .auth-header p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* Form Elements */
+    .auth-form {
       width: 100%;
       max-width: 440px;
+      margin: 0 auto;
     }
-    .auth-card-header { margin-bottom: 36px; }
-    .auth-card-header h1 {
-      font-family: var(--font-serif);
-      font-size: 2rem;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-    .auth-card-header p {
-      color: var(--text-light);
-      font-size: 0.95rem;
-    }
-    .auth-card-header a {
-      color: var(--accent);
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .auth-card-header a:hover { text-decoration: underline; }
-
-    /* Form */
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
-    .form-group label {
+    .form-label {
       display: block;
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--dark);
-      margin-bottom: 8px;
+      color: #1E293B;
+      margin-bottom: 6px;
     }
-    .input-wrap {
-      position: relative;
+    .req {
+      color: var(--accent);
     }
-    .input-wrap input {
+    .form-input, .form-select {
       width: 100%;
-      padding: 13px 16px 13px 44px;
-      border: 1.5px solid var(--border);
+      padding: 12px 16px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
       border-radius: var(--radius-sm);
       font-size: 0.925rem;
-      color: var(--text);
-      background: var(--white);
+      color: #0F172A;
+      font-family: var(--font-sans);
       outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition);
-      font-family: var(--font-sans);
+      transition: all var(--transition);
+      box-sizing: border-box;
     }
-    .input-wrap input:focus {
+    .form-input::placeholder {
+      color: #94A3B8;
+    }
+    .form-input:focus, .form-select:focus {
+      background: #FFFFFF;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(139,0,0,0.1);
+      box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
     }
-    .input-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #94A3B8;
-      font-size: 1rem;
-      pointer-events: none;
-    }
-    .input-toggle {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #94A3B8;
-      font-size: 0.85rem;
-      font-weight: 600;
-      font-family: var(--font-sans);
-      padding: 4px;
-    }
-    .input-toggle:hover { color: var(--dark); }
-
-    .form-row-flex {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-    .remember-me {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.875rem; color: var(--text-light);
-      cursor: pointer;
-    }
-    .remember-me input { cursor: pointer; accent-color: var(--accent); }
-    .forgot-link {
-      font-size: 0.875rem;
-      color: var(--accent);
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .forgot-link:hover { text-decoration: underline; }
-
-    .btn-auth {
+    .input-password-wrap {
+      position: relative;
       width: 100%;
-      padding: 14px;
-      background: var(--accent);
-      color: var(--white);
+    }
+    .input-password-wrap .form-input {
+      padding-right: 44px;
+    }
+    .pw-toggle-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #94A3B8;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--transition);
+    }
+    .pw-toggle-btn:hover {
+      color: var(--dark);
+    }
+
+    .select-wrap {
+      position: relative;
+    }
+    .form-select {
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    /* Checkbox & Forgot Password Row */
+    .form-options-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 18px 0 22px;
+      font-size: 0.85rem;
+    }
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      color: #475569;
+      user-select: none;
+    }
+    .checkbox-label input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .forgot-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: color var(--transition);
+    }
+    .forgot-link:hover {
+      text-decoration: underline;
+      color: var(--accent-hover);
+    }
+
+    /* Submit Button */
+    .btn-dark-submit {
+      width: 100%;
+      padding: 13px 20px;
+      background: var(--dark-btn);
+      color: #FFFFFF;
       border: none;
       border-radius: var(--radius-sm);
-      font-family: var(--font-sans);
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
+      font-family: var(--font-sans);
       cursor: pointer;
       transition: all var(--transition);
       display: flex;
@@ -257,56 +296,83 @@
       justify-content: center;
       gap: 8px;
     }
-    .btn-auth:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(139,0,0,0.3);
+    .btn-dark-submit:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(139, 0, 0, 0.25);
     }
-    .btn-auth:active { transform: translateY(0); }
+    .btn-dark-submit:active {
+      transform: translateY(0);
+    }
 
-    .auth-divider {
+    /* Divider */
+    .auth-or-divider {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin: 24px 0;
+      gap: 14px;
+      margin: 20px 0;
+      color: #94A3B8;
+      font-size: 0.8rem;
     }
-    .auth-divider::before,
-    .auth-divider::after {
+    .auth-or-divider::before,
+    .auth-or-divider::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: var(--border);
+      background: #E2E8F0;
     }
-    .auth-divider span { font-size: 0.8rem; color: #94A3B8; }
 
-    .social-btns {
+    /* Social Auth Buttons */
+    .social-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      margin-bottom: 22px;
     }
-    .btn-social {
-      display: flex;
+    .btn-social-outline {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 11px;
-      border: 1.5px solid var(--border);
+      padding: 11px 16px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
       border-radius: var(--radius-sm);
-      background: var(--white);
-      color: var(--text);
       font-size: 0.875rem;
       font-weight: 500;
+      color: #1E293B;
       cursor: pointer;
       transition: all var(--transition);
       font-family: var(--font-sans);
       text-decoration: none;
     }
-    .btn-social:hover {
-      border-color: var(--dark);
-      background: var(--bg);
+    .btn-social-outline:hover {
+      border-color: #CBD5E1;
+      background: #F8FAFC;
+    }
+    .btn-social-outline i {
+      font-size: 1.1rem;
     }
 
-    .error-msg {
+    /* Bottom Text */
+    .auth-switch-text {
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-light);
+    }
+    .accent-link {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .accent-link:hover {
+      text-decoration: underline;
+      color: var(--accent-hover);
+    }
+
+    /* Error Alert */
+    .error-alert {
       background: #FEF2F2;
       border: 1px solid #FECACA;
       color: #DC2626;
@@ -316,219 +382,159 @@
       margin-bottom: 16px;
       display: none;
     }
-    .error-msg.show { display: block; }
+    .error-alert.show { display: block; }
 
-    .auth-top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      width: 100%;
-    }
-    .auth-right-logo img {
-      height: 34px;
-      width: auto;
-      object-fit: contain;
-    }
-    .btn-back-home {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.825rem;
-      font-weight: 600;
-      color: var(--dark);
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .btn-back-home:hover {
-      background: var(--dark);
-      color: #FFFFFF;
-      border-color: var(--dark);
-    }
-    .role-selector-wrap {
-      display: flex;
-      background: var(--bg);
-      padding: 4px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      margin: 18px 0;
-      gap: 4px;
-    }
-    .role-btn {
-      flex: 1;
-      padding: 9px 12px;
-      border: none;
-      background: transparent;
-      border-radius: var(--radius-xs);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-light);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .role-btn.active {
-      background: #FFFFFF;
-      color: var(--accent);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      font-weight: 700;
-    }
-
+    /* Responsive */
     @media (max-width: 900px) {
-      .auth-left { display: none; }
-      .auth-right { padding: 32px 20px; width: 100%; }
+      .auth-page-container {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+        min-height: auto;
+      }
+      .auth-left-panel {
+        display: none;
+      }
+      .auth-right-panel {
+        padding: 36px 24px;
+      }
     }
     @media (max-width: 480px) {
-      .auth-right { padding: 20px 14px; }
-      .auth-card { padding: 24px 18px; width: 100%; }
-      .auth-card-header h1 { font-size: 1.5rem; }
-      .auth-top-bar { flex-direction: row; gap: 8px; }
+      body {
+        padding: 12px;
+      }
+      .auth-page-container {
+        border-radius: 20px;
+      }
+      .auth-right-panel {
+        padding: 28px 18px;
+      }
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- LEFT BRANDING PANEL -->
-  <div class="auth-left">
-    <a href="index.html" class="auth-logo">
-      <img src="images/logo.webp" alt="LogiTech Logo" />
-    </a>
-
-    <div class="auth-panel-content">
-      <h2>Welcome back to your command center</h2>
-      <p>Manage global freight, monitor live shipments, and optimize your supply chain — all from one intelligent platform.</p>
-      <div class="auth-stats">
-        <div>
-          <div class="auth-stat-num">12K<span>+</span></div>
-          <div class="auth-stat-label">Daily Shipments</div>
-        </div>
-        <div>
-          <div class="auth-stat-num">98<span>%</span></div>
-          <div class="auth-stat-label">On-Time Delivery</div>
-        </div>
-        <div>
-          <div class="auth-stat-num">60<span>+</span></div>
-          <div class="auth-stat-label">Countries</div>
-        </div>
+  <div class="auth-page-container">
+    
+    <!-- LEFT PANEL: PHOTO & BRANDING -->
+    <div class="auth-left-panel">
+      <div class="auth-left-content">
+        <h2>Find your next career move with confidence.</h2>
+        <p>Join thousands of professionals and companies already growing with Stackly.</p>
       </div>
     </div>
 
-    <div class="auth-testimonial">
-      <p>"LogiTech reduced our freight delays by 34% in the first quarter. The dashboard gives real-time visibility we never had before."</p>
-      <div class="auth-testimonial-author">
-        <div class="auth-avatar">AK</div>
-        <div>
-          <div class="auth-author-name">Arjun Kumar</div>
-          <div class="auth-author-role">VP Supply Chain, GlobalEdge Corp</div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <!-- RIGHT PANEL: AUTH FORM -->
+    <div class="auth-right-panel">
+      <a href="index.html" class="btn-back-home" id="btn-back-home">
+        <i class="fa-solid fa-arrow-left"></i> Back to Home
+      </a>
 
-  <!-- RIGHT FORM PANEL -->
-  <div class="auth-right">
-    <div class="auth-card">
-      
-      <!-- TOP BAR: STACKLY LOGO & BACK TO HOME -->
-      <div class="auth-top-bar">
-        <a href="index.html" class="auth-right-logo" title="Stackly Logistics">
+      <div class="auth-header">
+        <a href="index.html" class="auth-header-logo" title="Stackly Logo">
           <img src="images/logo.webp" alt="Stackly Logo" />
         </a>
-        <a href="index.html" class="btn-back-home" id="btn-back-home">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-          Back to Home
-        </a>
+        <h1>Welcome back</h1>
+        <p>Enter your credentials to access your dashboard.</p>
       </div>
 
-      <div class="auth-card-header">
-        <h1>Sign in to LogiTech</h1>
-        <p>New to the platform? <a href="signup.html">Create a free account <i class="fa-solid fa-arrow-right"></i></a></p>
-      </div>
+      <div class="error-alert" id="login-error">Invalid email or password. Please try again.</div>
 
-      <!-- ROLE SELECTOR: USER VS ADMIN -->
-      <div class="role-selector-wrap" id="role-selector">
-        <button type="button" class="role-btn active" id="role-user" onclick="selectRole('user')">
-          <span><i class="fa-solid fa-user"></i> User / Shipper</span>
-        </button>
-        <button type="button" class="role-btn" id="role-admin" onclick="selectRole('admin')">
-          <span><i class="fa-solid fa-gear"></i> Administrator</span>
-        </button>
-      </div>
-
-      <div class="error-msg" id="login-error">Invalid email or password. Please try again.</div>
-
-      <form id="login-form" onsubmit="handleLogin(event)">
+      <form class="auth-form" id="login-form" onsubmit="handleLogin(event)">
+        
+        <!-- EMAIL -->
         <div class="form-group">
-          <label for="login-email">Business Email</label>
-          <div class="input-wrap">
-            <span class="input-icon"><i class="fa-solid fa-envelope"></i></span>
-            <input type="email" id="login-email" placeholder="you@company.com" required autocomplete="email" />
+          <label class="form-label" for="login-email">Email <span class="req">*</span></label>
+          <input type="email" id="login-email" class="form-input" placeholder="lingalamanasa123@gmail.com" required autocomplete="email" />
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password <span class="req">*</span></label>
+          <div class="input-password-wrap">
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password" />
+            <button type="button" class="pw-toggle-btn" onclick="togglePassword('login-password', this)" aria-label="Toggle password visibility">
+              <i class="fa-regular fa-eye"></i>
+            </button>
           </div>
         </div>
 
+        <!-- ROLE -->
         <div class="form-group">
-          <label for="login-password">Password</label>
-          <div class="input-wrap">
-            <span class="input-icon"><i class="fa-solid fa-lock"></i></span>
-            <input type="password" id="login-password" placeholder="Enter your password" required autocomplete="current-password" />
-            <button type="button" class="input-toggle" onclick="togglePw('login-password', this)">Show</button>
+          <label class="form-label" for="login-role">Role <span class="req">*</span></label>
+          <div class="select-wrap">
+            <select id="login-role" class="form-select" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="user">User / Shipper</option>
+              <option value="operations">Operations Lead</option>
+              <option value="dispatcher">Fleet Dispatcher</option>
+              <option value="admin">Administrator</option>
+            </select>
           </div>
         </div>
 
-        <div class="form-row-flex">
-          <label class="remember-me">
-            <input type="checkbox" id="remember-me" /> Remember me
+        <!-- REMEMBER ME & FORGOT PASSWORD -->
+        <div class="form-options-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="remember-me" checked />
+            <span>Remember me</span>
           </label>
           <a href="404.html" class="forgot-link">Forgot password?</a>
         </div>
 
-        <button type="submit" class="btn-auth" id="btn-login-submit">
-          Sign In <i class="fa-solid fa-arrow-right"></i>
+        <!-- SIGN IN BUTTON -->
+        <button type="submit" class="btn-dark-submit" id="btn-login-submit">
+          Sign in
         </button>
+
+        <!-- DIVIDER -->
+        <div class="auth-or-divider">
+          <span>Or continue with</span>
+        </div>
+
+        <!-- SOCIAL LOGIN BUTTONS -->
+        <div class="social-grid">
+          <button type="button" class="btn-social-outline" onclick="socialLogin('Apple')">
+            <i class="fa-brands fa-apple"></i> Apple
+          </button>
+          <button type="button" class="btn-social-outline" onclick="socialLogin('Google')">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google
+          </button>
+        </div>
+
+        <!-- SWITCH TO SIGNUP -->
+        <div class="auth-switch-text">
+          Don't have an account? <a href="signup.html" class="accent-link">Create account</a>
+        </div>
       </form>
-
-      <div class="auth-divider"><span>or continue with</span></div>
-
-      <div class="social-btns">
-        <a href="404.html" class="btn-social">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Google
-        </a>
-        <a href="404.html" class="btn-social">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2" fill="#0A66C2"/></svg>
-          LinkedIn
-        </a>
-      </div>
     </div>
+
   </div>
 
   <script>
-    let activeRole = 'user';
-
-    function selectRole(role) {
-      activeRole = role;
-      document.getElementById('role-user').classList.toggle('active', role === 'user');
-      document.getElementById('role-admin').classList.toggle('active', role === 'admin');
+    function togglePassword(inputId, btn) {
+      const input = document.getElementById(inputId);
+      const icon = btn.querySelector('i');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'fa-regular fa-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'fa-regular fa-eye';
+      }
     }
 
-    function togglePw(id, btn) {
-      const el = document.getElementById(id);
-      const isPass = el.type === 'password';
-      el.type = isPass ? 'text' : 'password';
-      btn.textContent = isPass ? 'Hide' : 'Show';
+    function socialLogin(provider) {
+      alert('Connecting to ' + provider + ' authentication...');
     }
 
     function handleLogin(e) {
       e.preventDefault();
       const email = document.getElementById('login-email').value.trim();
       const pass = document.getElementById('login-password').value;
+      const role = document.getElementById('login-role').value;
       const btn = document.getElementById('btn-login-submit');
       const err = document.getElementById('login-error');
 
@@ -537,7 +543,7 @@
       err.classList.remove('show');
 
       setTimeout(() => {
-        if (email && pass.length >= 6) {
+        if (email && pass.length >= 4) {
           let existing = {};
           try {
             existing = JSON.parse(localStorage.getItem('logitech_user') || '{}');
@@ -549,28 +555,27 @@
             name = prefix.charAt(0).toUpperCase() + prefix.slice(1);
           }
 
-          const chosenRole = activeRole === 'admin' ? 'Administrator' : 'Logistics Manager';
           const userData = {
             name: name,
             email: email,
-            role: chosenRole,
-            company: existing.company || 'LogiTech Logistics'
+            role: role || 'user',
+            company: existing.company || 'Stackly Logistics'
           };
 
           localStorage.setItem('logitech_user', JSON.stringify(userData));
           sessionStorage.setItem('logitech_user', JSON.stringify(userData));
 
-          if (activeRole === 'admin' || email.toLowerCase().includes('admin')) {
+          if (role === 'admin' || email.toLowerCase().includes('admin')) {
             window.location.href = 'admin.html';
           } else {
             window.location.href = 'dashboard.html';
           }
         } else {
           err.classList.add('show');
-          btn.innerHTML = 'Sign In <i class="fa-solid fa-arrow-right"></i>';
+          btn.textContent = 'Sign in';
           btn.disabled = false;
         }
-      }, 600);
+      }, 500);
     }
   </script>
 </body>
