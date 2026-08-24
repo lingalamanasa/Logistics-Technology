@@ -23,27 +23,50 @@ if (navbar) {
   });
 }
 
-// ---- Mobile menu toggle ----
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobile-menu');
+// ---- Global Mobile Navigation Handler ----
+function initMobileNavigation() {
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', () => {
-    const isOpen = hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', isOpen);
-    mobileMenu.setAttribute('aria-hidden', !isOpen);
-  });
+  if (hamburger && mobileMenu) {
+    const newHamburger = hamburger.cloneNode(true);
+    hamburger.parentNode.replaceChild(newHamburger, hamburger);
 
-  // Close mobile menu when a link is clicked
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      mobileMenu.setAttribute('aria-hidden', 'true');
+    newHamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = newHamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open', isOpen);
+      newHamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      mobileMenu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-  });
+
+    document.addEventListener('click', (e) => {
+      if (mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !newHamburger.contains(e.target)) {
+        newHamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        newHamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        newHamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        newHamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMobileNavigation);
+} else {
+  initMobileNavigation();
 }
 
 // ---- Scroll Reveal Animation ----

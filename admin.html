@@ -651,6 +651,7 @@
 <body>
 
   <button class="mob-toggle" id="mob-toggle" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
   <!-- ======================== SIDEBAR ======================== -->
   <aside class="sidebar" id="sidebar" role="navigation" aria-label="Admin navigation">
@@ -667,7 +668,7 @@
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         Control Panel
       </a>
-      <a href="404.html" class="sidebar-link" id="nav-platform">
+      <a href="analytics.html" class="sidebar-link" id="nav-platform">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         Platform Health
       </a>
@@ -678,36 +679,36 @@
         All Users
         <span class="sidebar-count">512</span>
       </a>
-      <a href="404.html" class="sidebar-link" id="nav-roles">
+      <a href="settings.html" class="sidebar-link" id="nav-roles">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Roles &amp; Permissions
       </a>
-      <a href="404.html" class="sidebar-link" id="nav-pending">
+      <a href="shipments.html" class="sidebar-link" id="nav-pending">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         Pending Approvals
         <span class="sidebar-count alert">7</span>
       </a>
 
       <div class="nav-section-label">Data &amp; Content</div>
-      <a href="404.html" class="sidebar-link" id="nav-shipments-admin">
+      <a href="shipments.html" class="sidebar-link" id="nav-shipments-admin">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         All Shipments
       </a>
-      <a href="404.html" class="sidebar-link" id="nav-carriers-admin">
+      <a href="carriers.html" class="sidebar-link" id="nav-carriers-admin">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
         Carriers
       </a>
-      <a href="404.html" class="sidebar-link" id="nav-blog-admin">
+      <a href="blog.html" class="sidebar-link" id="nav-blog-admin">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         Blog &amp; Content
       </a>
 
       <div class="nav-section-label">System</div>
-      <a href="404.html" class="sidebar-link" id="nav-logs">
+      <a href="reports.html" class="sidebar-link" id="nav-logs">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Audit Logs
       </a>
-      <a href="404.html" class="sidebar-link" id="nav-config">
+      <a href="settings.html" class="sidebar-link" id="nav-config">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
         System Config
       </a>
@@ -791,10 +792,10 @@
           <div class="pkpi-change up"><i class="fa-solid fa-arrow-up"></i> +18% MoM</div>
         </div>
         <div class="pkpi-card purple">
-          <div class="pkpi-icon">⚡</div>
+          <div class="pkpi-icon"><i class="fa-solid fa-bolt"></i></div>
           <div class="pkpi-val">99.97%</div>
           <div class="pkpi-label">Platform Uptime</div>
-          <div class="pkpi-change up">✓ All systems normal</div>
+          <div class="pkpi-change up"><i class="fa-solid fa-check"></i> All systems normal</div>
         </div>
       </div>
 
@@ -1049,27 +1050,27 @@
           </div>
           <div class="quick-actions">
             <button class="qa-btn" id="qa-add-user" onclick="window.location.href='404.html'">
-              <div class="qa-icon">👤</div>
+              <div class="qa-icon" style="color:var(--accent);"><i class="fa-solid fa-user-plus"></i></div>
               <div class="qa-label">Add User</div>
             </button>
             <button class="qa-btn" id="qa-export" onclick="window.location.href='404.html'">
-              <div class="qa-icon">📊</div>
+              <div class="qa-icon" style="color:#0284C7;"><i class="fa-solid fa-file-export"></i></div>
               <div class="qa-label">Export Report</div>
             </button>
             <button class="qa-btn" id="qa-backup" onclick="window.location.href='404.html'">
-              <div class="qa-icon">💾</div>
+              <div class="qa-icon" style="color:#10B981;"><i class="fa-solid fa-hard-drive"></i></div>
               <div class="qa-label">Run Backup</div>
             </button>
             <button class="qa-btn" id="qa-broadcast" onclick="window.location.href='404.html'">
-              <div class="qa-icon">📢</div>
+              <div class="qa-icon" style="color:#F59E0B;"><i class="fa-solid fa-bullhorn"></i></div>
               <div class="qa-label">Broadcast</div>
             </button>
-            <button class="qa-btn" id="qa-logs" onclick="window.location.href='404.html'">
-              <div class="qa-icon">📋</div>
+            <button class="qa-btn" id="qa-logs" onclick="window.location.href='reports.html'">
+              <div class="qa-icon" style="color:#8B5CF6;"><i class="fa-solid fa-clipboard-list"></i></div>
               <div class="qa-label">Audit Logs</div>
             </button>
-            <button class="qa-btn" id="qa-config" onclick="window.location.href='404.html'">
-              <div class="qa-icon">⚙️</div>
+            <button class="qa-btn" id="qa-config" onclick="window.location.href='settings.html'">
+              <div class="qa-icon" style="color:#64748B;"><i class="fa-solid fa-gear"></i></div>
               <div class="qa-label">Config</div>
             </button>
           </div>
@@ -1085,19 +1086,19 @@
           </div>
           <div class="notice-list" role="list">
             <div class="notice-item red" role="listitem">
-              <div class="notice-title">🚨 Storage Approaching Limit</div>
+              <div class="notice-title"><i class="fa-solid fa-triangle-exclamation" style="color:#EF4444; margin-right:6px;"></i> Storage Approaching Limit</div>
               <div class="notice-text">81% of 2TB used. Consider upgrading storage or archiving old shipment records.</div>
             </div>
             <div class="notice-item yellow" role="listitem">
-              <div class="notice-title">⚠️ 7 Pending User Approvals</div>
+              <div class="notice-title"><i class="fa-solid fa-clock" style="color:#F59E0B; margin-right:6px;"></i> 7 Pending User Approvals</div>
               <div class="notice-text">New user accounts are awaiting manual verification and approval.</div>
             </div>
             <div class="notice-item yellow" role="listitem">
-              <div class="notice-title">⚠️ SSL Certificate Expiry</div>
+              <div class="notice-title"><i class="fa-solid fa-shield-halved" style="color:#F59E0B; margin-right:6px;"></i> SSL Certificate Expiry</div>
               <div class="notice-text">api.logitech.io SSL certificate expires in 22 days. Renew before expiry.</div>
             </div>
             <div class="notice-item green" role="listitem">
-              <div class="notice-title">✅ v2.4.1 Deployed Successfully</div>
+              <div class="notice-title"><i class="fa-solid fa-circle-check" style="color:#10B981; margin-right:6px;"></i> v2.4.1 Deployed Successfully</div>
               <div class="notice-text">Latest platform update deployed with zero downtime. All services healthy.</div>
             </div>
           </div>
@@ -1108,10 +1109,45 @@
   </div><!-- /main -->
 
   <script>
-    // Mobile sidebar toggle
+    // Mobile sidebar toggle & backdrop handling
     const mobToggle = document.getElementById('mob-toggle');
     const sidebar = document.getElementById('sidebar');
-    mobToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+    const backdrop = document.getElementById('sidebar-backdrop');
+
+    function openSidebar() {
+      if (sidebar) sidebar.classList.add('open');
+      if (backdrop) backdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      if (sidebar) sidebar.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    if (mobToggle && sidebar) {
+      mobToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (sidebar.classList.contains('open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+    }
+
+    if (backdrop) {
+      backdrop.addEventListener('click', closeSidebar);
+    }
+
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 800) {
+          closeSidebar();
+        }
+      });
+    });
 
     // Date display
     const dateEl = document.getElementById('current-date');

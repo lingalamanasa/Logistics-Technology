@@ -305,6 +305,7 @@ p {
   padding: 8px;
   flex-direction: column;
   gap: 5px;
+  z-index: 1001;
 }
 
 .hamburger span {
@@ -328,9 +329,9 @@ p {
 }
 
 .mobile-menu {
-  display: none;
+  display: flex;
   position: fixed;
-  top: 72px;
+  top: 64px;
   left: 0;
   right: 0;
   background: var(--color-white);
@@ -340,14 +341,18 @@ p {
   flex-direction: column;
   gap: 16px;
   z-index: 999;
-  transform: translateY(-100%);
+  transform: translateY(-150%);
   opacity: 0;
-  transition: transform var(--transition), opacity var(--transition);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
 }
 
 .mobile-menu.open {
   transform: translateY(0);
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-menu ul {
@@ -363,6 +368,12 @@ p {
   color: var(--color-dark);
   display: block;
   padding: 6px 0;
+  transition: color var(--transition);
+}
+
+.mobile-menu ul li a:hover,
+.mobile-menu ul li a.active {
+  color: var(--color-primary);
 }
 
 .mobile-menu .nav-actions,
@@ -370,12 +381,6 @@ p {
   display: flex !important;
   flex-direction: column;
   gap: 10px;
-  width: 100%;
-  margin-top: 12px;
-  padding-top: 16px;
-  border-top: 1px solid var(--color-border);
-}
-
 .mobile-menu .nav-actions .btn,
 .mobile-menu .mobile-actions .btn {
   width: 100%;

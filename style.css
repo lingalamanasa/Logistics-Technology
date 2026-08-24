@@ -305,6 +305,7 @@ p {
   padding: 8px;
   flex-direction: column;
   gap: 5px;
+  z-index: 1001;
 }
 
 .hamburger span {
@@ -328,33 +329,81 @@ p {
 }
 
 .mobile-menu {
-  display: none;
+  display: flex;
   position: fixed;
-  top: 72px;
+  top: 64px;
   left: 0;
   right: 0;
   background: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 2px solid var(--color-primary);
   padding: 24px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.18);
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   z-index: 999;
-  transform: translateY(-100%);
+  transform: translateY(-150%);
   opacity: 0;
-  transition: transform var(--transition), opacity var(--transition);
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
 }
 
 .mobile-menu.open {
   transform: translateY(0);
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-menu ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
+}
+
+.mobile-menu ul li a {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  display: block;
+  padding: 6px 0;
+  transition: color var(--transition);
+}
+
+.mobile-menu ul li a:hover,
+.mobile-menu ul li a.active {
+  color: var(--color-primary);
+}
+
+.mobile-menu .nav-actions,
+.mobile-menu .mobile-actions {
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.mobile-menu .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Sidebar Backdrop Overlay */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-backdrop.active {
+  display: block;
+  opacity: 1;
 }
 
 /* Page Hero */

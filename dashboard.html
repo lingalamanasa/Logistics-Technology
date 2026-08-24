@@ -650,6 +650,7 @@
 <body>
 
   <button class="mob-toggle" id="mob-toggle" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
   <!-- ======================== SIDEBAR ======================== -->
   <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
@@ -978,11 +979,44 @@
   </div><!-- /main -->
 
   <script>
-    // Sidebar mobile toggle
+    // Sidebar mobile toggle & backdrop handling
     const mobToggle = document.getElementById('mob-toggle');
     const sidebar = document.getElementById('sidebar');
-    mobToggle.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
+    const backdrop = document.getElementById('sidebar-backdrop');
+
+    function openSidebar() {
+      if (sidebar) sidebar.classList.add('open');
+      if (backdrop) backdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+      if (sidebar) sidebar.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    if (mobToggle && sidebar) {
+      mobToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (sidebar.classList.contains('open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+    }
+
+    if (backdrop) {
+      backdrop.addEventListener('click', closeSidebar);
+    }
+
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 800) {
+          closeSidebar();
+        }
+      });
     });
 
     // Date display
