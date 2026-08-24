@@ -68,6 +68,18 @@
       width: auto;
       filter: brightness(0) invert(1);
     }
+    .admin-badge, .role-badge {
+      font-size: 0.62rem;
+      font-weight: 700;
+      background: var(--accent);
+      color: #FFF;
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 4px;
+      flex-shrink: 0;
+    }
     .mobile-topbar-logo {
       display: none;
       align-items: center;
@@ -391,6 +403,7 @@
     <div class="sidebar-header">
       <a href="dashboard.html" class="sidebar-logo" title="Stackly Dashboard">
         <img src="images/logo.webp" alt="Stackly Logo" />
+        <span class="role-badge" id="logo-role-badge">User</span>
       </a>
     </div>
 
@@ -553,6 +566,8 @@
         }
         if (u.role) {
           document.querySelectorAll('#sidebar-user-role').forEach(el => el.textContent = u.role);
+          const lb = document.getElementById('logo-role-badge');
+          if (lb) lb.textContent = u.role.toUpperCase();
         }
       }
     } catch(e) {}

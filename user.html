@@ -85,15 +85,17 @@
       width: auto;
       object-fit: contain;
     }
-    .portal-tag {
-      font-size: 0.65rem;
+    .admin-badge, .portal-tag, .role-badge {
+      font-size: 0.62rem;
       font-weight: 700;
-      background: rgba(255,255,255,0.12);
-      color: #94A3B8;
+      background: var(--accent);
+      color: #FFF;
       padding: 2px 7px;
-      border-radius: 999px;
+      border-radius: 4px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+      margin-left: 4px;
+      flex-shrink: 0;
     }
     .sidebar-nav {
       flex: 1;
@@ -715,7 +717,7 @@
     <div class="sidebar-header">
       <a href="user.html" class="sidebar-logo" title="Stackly User Portal">
         <img src="images/logo.webp" alt="Stackly Logo" />
-        <span class="portal-tag">User Portal</span>
+        <span class="admin-badge" id="logo-role-badge">User</span>
       </a>
     </div>
 
@@ -1090,6 +1092,10 @@
         document.querySelectorAll('.user-role-tag, #sidebar-user-role').forEach(el => {
           el.textContent = displayRole;
         });
+        const logoBadge = document.getElementById('logo-role-badge');
+        if (logoBadge) {
+          logoBadge.textContent = (displayRole || 'User').toUpperCase();
+        }
 
         // 4. Update avatars
         document.querySelectorAll('.user-avatar, #sidebar-avatar, .topbar-user-avatar, #topbar-avatar').forEach(el => {

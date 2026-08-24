@@ -655,9 +655,9 @@
   <!-- ======================== SIDEBAR ======================== -->
   <aside class="sidebar" id="sidebar" role="navigation" aria-label="Admin navigation">
     <div class="sidebar-header">
-      <a href="admin.html" class="sidebar-logo" title="Stackly Admin Panel">
+      <a href="admin.html" class="sidebar-logo" title="Stackly Panel">
         <img src="images/logo.webp" alt="Stackly Logo" />
-        <span class="admin-badge">Admin</span>
+        <span class="admin-badge" id="logo-role-badge">Admin</span>
       </a>
     </div>
 
@@ -1205,6 +1205,10 @@
         document.querySelectorAll('.user-role-tag, #sidebar-user-role').forEach(el => {
           el.textContent = displayRole;
         });
+        const logoBadge = document.getElementById('logo-role-badge');
+        if (logoBadge) {
+          logoBadge.textContent = (displayRole || 'Admin').toUpperCase();
+        }
 
         // 4. Update avatars
         document.querySelectorAll('.user-avatar, #sidebar-avatar, .topbar-user-avatar, #topbar-avatar').forEach(el => {
