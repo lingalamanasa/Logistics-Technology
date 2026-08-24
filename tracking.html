@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Tracking & Telemetry – Stackly Logistics</title>
+  <meta name="description" content="Sub-second global cargo telemetry, satellite GPS container tracking, temperature IoT monitoring, and route status." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #8B0000;
+      --accent-light: rgba(139,0,0,0.08);
+      --dark: #0F172A;
+      --dark-2: #1E293B;
+      --sidebar-bg: #0F172A;
+      --sidebar-width: 260px;
+      --text: #1E293B;
+      --text-light: #64748B;
+      --text-muted: #94A3B8;
+      --border: #E2E8F0;
+      --bg: #F8FAFC;
+      --card: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', sans-serif;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      height: 100vh;
+      z-index: 100;
+      overflow: hidden;
+    }
+    .sidebar-header {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .sidebar-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .sidebar-logo:hover { opacity: 0.9; }
+    .sidebar-logo img {
+      height: 34px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .mobile-topbar-logo {
+      display: none;
+      align-items: center;
+      margin-right: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .mobile-topbar-logo img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+    }
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 10px;
+      min-height: 0;
+    }
+    .nav-section-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #475569;
+      padding: 10px 10px 4px;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      margin-bottom: 2px;
+    }
+    .sidebar-link:hover {
+      background: rgba(255,255,255,0.06);
+      color: #FFFFFF;
+    }
+    .sidebar-link.active {
+      background: var(--accent);
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .sidebar-link .icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .sidebar-badge {
+      margin-left: auto;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 99px;
+    }
+    .sidebar-link.active .sidebar-badge {
+      background: rgba(255,255,255,0.25);
+    }
+    .sidebar-footer {
+      padding: 14px 12px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.2);
+    }
+    .user-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .user-profile-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .user-info { min-width: 0; flex: 1; }
+    .user-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .user-role-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.1);
+      color: #94A3B8;
+      padding: 1px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+    .sidebar-logout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 7px 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: #CBD5E1;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .sidebar-logout-btn:hover {
+      background: #8B0000;
+      border-color: #8B0000;
+      color: #FFF;
+    }
+    .sidebar-logout-btn svg { width: 14px; height: 14px; }
+
+    /* ---- MAIN WRAPPER ---- */
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .topbar {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .topbar-left { min-width: 0; }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .date-badge {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-light);
+      background: #F1F5F9;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .topbar-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .topbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .topbar-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 8px;
+      border-left: 1px solid var(--border);
+    }
+    .topbar-user-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .topbar-user-info { display: flex; flex-direction: column; }
+    .topbar-user-name { font-size: 0.82rem; font-weight: 700; color: var(--dark); }
+    .topbar-user-email { font-size: 0.72rem; color: var(--text-muted); }
+    .topbar-logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid rgba(139,0,0,0.15);
+      border-radius: var(--radius-sm);
+      padding: 5px 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .topbar-logout-btn:hover { background: var(--accent); color: #FFF; }
+    .topbar-logout-btn svg { width: 13px; height: 13px; }
+
+    .content {
+      padding: 24px 28px;
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+    }
+
+    /* ---- TRACKER LAYOUT ---- */
+    .tracker-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .radar-card {
+      background: #0F172A;
+      color: #FFF;
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .radar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .radar-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ADE80;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 99px;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22C55E;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    .corridor-map-canvas {
+      height: 280px;
+      background: radial-gradient(circle at 50% 50%, #1E293B 0%, #0F172A 100%);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .corridor-route-line {
+      position: absolute;
+      width: 75%;
+      height: 3px;
+      background: linear-gradient(90deg, #22C55E, #38BDF8, #8B0000);
+      top: 50%;
+      left: 12%;
+    }
+    .route-node-point {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid #FFF;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .point-origin { left: 12%; background: #22C55E; }
+    .point-current { left: 56%; background: #38BDF8; box-shadow: 0 0 12px #38BDF8; }
+    .point-dest { left: 87%; background: #8B0000; }
+
+    .telemetry-sensors {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+    .sensor-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      text-align: center;
+    }
+    .sensor-label { font-size: 0.72rem; color: #94A3B8; margin-bottom: 4px; }
+    .sensor-val { font-size: 1.15rem; font-weight: 700; color: #FFF; }
+
+    /* Telemetry Timeline */
+    .timeline-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .timeline-title { font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 18px; }
+    .timeline-item {
+      display: flex;
+      gap: 14px;
+      position: relative;
+      padding-bottom: 22px;
+    }
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 26px;
+      bottom: 0;
+      width: 2px;
+      background: #E2E8F0;
+    }
+    .timeline-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      border: 2px solid #94A3B8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+    .timeline-item.done .timeline-dot {
+      background: #22C55E;
+      border-color: #22C55E;
+      color: #FFF;
+    }
+    .timeline-item.active .timeline-dot {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #FFF;
+      box-shadow: 0 0 0 4px rgba(139,0,0,0.15);
+    }
+    .timeline-content h5 { font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+    .timeline-content p { font-size: 0.78rem; color: var(--text-light); }
+    .timeline-time { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
+
+    .mob-toggle {
+      display: none;
+      position: fixed;
+      top: 14px; left: 14px;
+      z-index: 200;
+      background: var(--dark);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 1024px) {
+      .tracker-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 800px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s; box-shadow: var(--shadow-md); }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; width: 100%; min-width: 0; }
+      .mob-toggle { display: flex; align-items: center; justify-content: center; }
+      .topbar { padding-left: 60px; }
+      .mobile-topbar-logo { display: inline-flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="mob-toggle" id="mob-toggle" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+
+  <!-- ======================== SIDEBAR ======================== -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+    <div class="sidebar-header">
+      <a href="dashboard.html" class="sidebar-logo" title="Stackly Dashboard">
+        <img src="images/logo.webp" alt="Stackly Logo" />
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="dashboard.html" class="sidebar-link" id="nav-dashboard">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="shipments.html" class="sidebar-link" id="nav-shipments">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Shipments
+        <span class="sidebar-badge">12</span>
+      </a>
+      <a href="tracking.html" class="sidebar-link active" id="nav-tracking">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        Live Tracking
+      </a>
+      <a href="routes.html" class="sidebar-link" id="nav-routes">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        Routes
+      </a>
+
+      <div class="nav-section-label">Operations</div>
+      <a href="warehouse.html" class="sidebar-link" id="nav-warehouse">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Warehouse
+      </a>
+      <a href="inventory.html" class="sidebar-link" id="nav-inventory">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        Inventory
+      </a>
+      <a href="carriers.html" class="sidebar-link" id="nav-carriers">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        Carriers
+      </a>
+
+      <div class="nav-section-label">Analytics</div>
+      <a href="reports.html" class="sidebar-link" id="nav-reports">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Reports
+      </a>
+      <a href="analytics.html" class="sidebar-link" id="nav-analytics">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </a>
+
+      <div class="nav-section-label">Account</div>
+      <a href="settings.html" class="sidebar-link" id="nav-settings">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-profile-row">
+          <div class="user-avatar" id="sidebar-avatar">LM</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Lingalamanasa123</div>
+            <div class="user-role-tag" id="sidebar-user-role">Logistics Manager</div>
+          </div>
+        </div>
+        <a href="login.html" class="sidebar-logout-btn" id="logout-link" onclick="handleLogout(event)" title="Sign out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================== MAIN ======================== -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left" style="display:flex;align-items:center;">
+        <a href="dashboard.html" class="mobile-topbar-logo" title="Stackly Dashboard">
+          <img src="images/logo.webp" alt="Stackly Logo" />
+        </a>
+        <div>
+          <h1 style="font-size:1.35rem; font-weight:700; color:var(--dark); margin-bottom:2px;">Live Telemetry & GPS Tracking</h1>
+          <p style="font-size:0.875rem; color:#64748B; margin-top:2px;">Inspecting active freight corridor consignment #LT-20849</p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span class="date-badge" id="current-date">Mon, Aug 24, 2026</span>
+        <div class="topbar-user">
+          <div class="topbar-user-avatar" id="topbar-avatar">LM</div>
+          <div class="topbar-user-info">
+            <span class="topbar-user-name" id="topbar-user-name">Lingalamanasa123</span>
+            <span class="topbar-user-email" id="topbar-user-email">lingalamanasa123@gmail.com</span>
+          </div>
+        </div>
+        <a href="login.html" class="topbar-logout-btn" onclick="handleLogout(event)" title="Sign out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="tracker-grid">
+        <!-- Live Radar & Corridor Canvas -->
+        <div class="radar-card">
+          <div class="radar-header">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:700; margin-bottom:4px;">Transpacific Maritime Route #04</h3>
+              <p style="font-size:0.82rem; color:#94A3B8;">Shanghai Yangshan &rarr; Long Beach Port (Vessel: Maersk Mc-Kinney)</p>
+            </div>
+            <div class="radar-live-badge">
+              <span class="pulse-dot"></span>
+              Sub-second Telemetry Active
+            </div>
+          </div>
+
+          <div class="corridor-map-canvas">
+            <div class="corridor-route-line"></div>
+            <div class="route-node-point point-origin" title="Shanghai Origin"></div>
+            <div class="route-node-point point-current" title="Mid-Pacific (31.2° N, 168.4° W)"></div>
+            <div class="route-node-point point-dest" title="Long Beach Destination"></div>
+            <div style="position:absolute; bottom:16px; left:20px; font-size:0.75rem; color:#94A3B8;">
+              <i class="fa-solid fa-location-arrow" style="color:#38BDF8;"></i> Coordinates: <strong>31.2244° N, 168.4112° W</strong> &bull; Speed: <strong>19.4 kts</strong>
+            </div>
+          </div>
+
+          <div class="telemetry-sensors">
+            <div class="sensor-box">
+              <div class="sensor-label"><i class="fa-solid fa-temperature-half" style="color:#38BDF8;"></i> Temperature</div>
+              <div class="sensor-val">+3.8 °C</div>
+            </div>
+            <div class="sensor-box">
+              <div class="sensor-label"><i class="fa-solid fa-droplet" style="color:#60A5FA;"></i> Humidity</div>
+              <div class="sensor-val">46 %</div>
+            </div>
+            <div class="sensor-box">
+              <div class="sensor-label"><i class="fa-solid fa-wave-square" style="color:#34D399;"></i> Shock (G-Force)</div>
+              <div class="sensor-val">0.02 G</div>
+            </div>
+            <div class="sensor-box">
+              <div class="sensor-label"><i class="fa-solid fa-battery-full" style="color:#22C55E;"></i> IoT Battery</div>
+              <div class="sensor-val">98 %</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-Time Checkpoint Timeline -->
+        <div class="timeline-card">
+          <h3 class="timeline-title"><i class="fa-solid fa-clock-rotate-left" style="color:var(--accent);"></i> Manifest Milestones</h3>
+          
+          <div class="timeline-item done">
+            <div class="timeline-dot"><i class="fa-solid fa-check"></i></div>
+            <div class="timeline-content">
+              <h5>Customs Clearance Approved</h5>
+              <p>Electronic B/L verified & pre-cleared by US CBP</p>
+              <div class="timeline-time">Aug 22, 2026 &bull; 08:30 AM</div>
+            </div>
+          </div>
+
+          <div class="timeline-item done">
+            <div class="timeline-dot"><i class="fa-solid fa-check"></i></div>
+            <div class="timeline-content">
+              <h5>Vessel Departure</h5>
+              <p>Vessel departed Yangshan Deepwater Port, Berth 4</p>
+              <div class="timeline-time">Aug 23, 2026 &bull; 02:15 PM</div>
+            </div>
+          </div>
+
+          <div class="timeline-item active">
+            <div class="timeline-dot"><i class="fa-solid fa-ship"></i></div>
+            <div class="timeline-content">
+              <h5>Mid-Pacific Ocean Transit</h5>
+              <p>En route to Long Beach corridor with zero deviations</p>
+              <div class="timeline-time">Today &bull; Live Telemetry Ping</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">4</div>
+            <div class="timeline-content">
+              <h5>Port Berth & Unloading</h5>
+              <p>Estimated Long Beach Container Terminal Arrival</p>
+              <div class="timeline-time">Est. Aug 28, 2026 &bull; 11:00 AM</div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot">5</div>
+            <div class="timeline-content">
+              <h5>Last-Mile Intermodal Transfer</h5>
+              <p>Dedicated freight dispatch to Los Angeles Distribution Hub</p>
+              <div class="timeline-time">Est. Aug 29, 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    try {
+      const stored = localStorage.getItem('logitech_user') || sessionStorage.getItem('logitech_user');
+      if (stored) {
+        const u = JSON.parse(stored);
+        if (u.name) {
+          document.querySelectorAll('#sidebar-user-name, #topbar-user-name').forEach(el => el.textContent = u.name);
+          const initials = u.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
+          document.querySelectorAll('#sidebar-avatar, #topbar-avatar').forEach(el => el.textContent = initials);
+        }
+        if (u.email) {
+          document.querySelectorAll('#sidebar-email-text, #topbar-user-email').forEach(el => el.textContent = u.email);
+        }
+        if (u.role) {
+          document.querySelectorAll('#sidebar-user-role').forEach(el => el.textContent = u.role);
+        }
+      }
+    } catch(e) {}
+
+    function handleLogout(e) {
+      e.preventDefault();
+      localStorage.removeItem('logitech_user');
+      sessionStorage.removeItem('logitech_user');
+      window.location.href = 'login.html';
+    }
+
+    const mobBtn = document.getElementById('mob-toggle');
+    const sidebar = document.getElementById('sidebar');
+    if (mobBtn && sidebar) {
+      mobBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
+    }
+
+    const now = new Date();
+    const opts = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+    const dateEl = document.getElementById('current-date');
+    if (dateEl) dateEl.textContent = now.toLocaleDateString('en-US', opts);
+  </script>
+</body>
+</html>

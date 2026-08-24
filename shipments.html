@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shipments Management – Stackly Logistics</title>
+  <meta name="description" content="Manage global shipments, view live manifests, track transit stages, and inspect consignee delivery statuses." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #8B0000;
+      --accent-light: rgba(139,0,0,0.08);
+      --dark: #0F172A;
+      --dark-2: #1E293B;
+      --sidebar-bg: #0F172A;
+      --sidebar-width: 260px;
+      --text: #1E293B;
+      --text-light: #64748B;
+      --text-muted: #94A3B8;
+      --border: #E2E8F0;
+      --bg: #F8FAFC;
+      --card: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', sans-serif;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      height: 100vh;
+      z-index: 100;
+      overflow: hidden;
+    }
+    .sidebar-header {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .sidebar-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .sidebar-logo:hover { opacity: 0.9; }
+    .sidebar-logo img {
+      height: 34px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .mobile-topbar-logo {
+      display: none;
+      align-items: center;
+      margin-right: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .mobile-topbar-logo img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+    }
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 10px;
+      min-height: 0;
+    }
+    .nav-section-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #475569;
+      padding: 10px 10px 4px;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      margin-bottom: 2px;
+    }
+    .sidebar-link:hover {
+      background: rgba(255,255,255,0.06);
+      color: #FFFFFF;
+    }
+    .sidebar-link.active {
+      background: var(--accent);
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .sidebar-link .icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .sidebar-badge {
+      margin-left: auto;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 99px;
+    }
+    .sidebar-link.active .sidebar-badge {
+      background: rgba(255,255,255,0.25);
+    }
+    .sidebar-footer {
+      padding: 14px 12px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.2);
+    }
+    .user-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .user-profile-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .user-info { min-width: 0; flex: 1; }
+    .user-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .user-role-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      background: rgba(255,255,255,0.1);
+      color: #94A3B8;
+      padding: 1px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 2px;
+      text-transform: uppercase;
+    }
+    .sidebar-logout-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 7px 10px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm);
+      color: #CBD5E1;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .sidebar-logout-btn:hover {
+      background: #8B0000;
+      border-color: #8B0000;
+      color: #FFF;
+    }
+    .sidebar-logout-btn svg { width: 14px; height: 14px; }
+
+    /* ---- MAIN WRAPPER ---- */
+    .main {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .topbar {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .topbar-left { min-width: 0; }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .date-badge {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-light);
+      background: #F1F5F9;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+    .topbar-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .topbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .topbar-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 8px;
+      border-left: 1px solid var(--border);
+    }
+    .topbar-user-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .topbar-user-info { display: flex; flex-direction: column; }
+    .topbar-user-name { font-size: 0.82rem; font-weight: 700; color: var(--dark); }
+    .topbar-user-email { font-size: 0.72rem; color: var(--text-muted); }
+    .topbar-logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-light);
+      border: 1px solid rgba(139,0,0,0.15);
+      border-radius: var(--radius-sm);
+      padding: 5px 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .topbar-logout-btn:hover { background: var(--accent); color: #FFF; }
+    .topbar-logout-btn svg { width: 13px; height: 13px; }
+
+    .content {
+      padding: 24px 28px;
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+    }
+
+    /* ---- KPI GRID ---- */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      border-radius: var(--radius) var(--radius) 0 0;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .kpi-card:hover::before { opacity: 1; }
+    .kpi-label { font-size: 0.8rem; font-weight: 600; color: var(--text-light); }
+    .kpi-value { font-size: 1.85rem; font-weight: 700; color: var(--dark); margin: 6px 0 4px; font-family: var(--font-serif); }
+    .kpi-change { font-size: 0.76rem; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .kpi-change.up { color: #16A34A; }
+    .kpi-change.down { color: #DC2626; }
+
+    /* ---- DATA TABLE & CONTROLS ---- */
+    .table-container {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .table-toolbar {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #F8FAFC;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      width: 320px;
+      max-width: 100%;
+    }
+    .search-box input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 0.85rem;
+      width: 100%;
+      color: var(--text);
+    }
+    .table-filters {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .filter-pill {
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: #FFF;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-pill.active, .filter-pill:hover {
+      background: var(--accent);
+      color: #FFF;
+      border-color: var(--accent);
+    }
+    .btn-create {
+      padding: 9px 18px;
+      background: var(--accent);
+      color: #FFF;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-create:hover { background: #700000; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th {
+      background: #F8FAFC;
+      padding: 12px 18px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-light);
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 14px 18px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #F1F5F9;
+      vertical-align: middle;
+    }
+    tr:hover td { background: #FAFAFC; }
+    .tracking-code {
+      font-weight: 700;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .status-badge.in-transit { background: #E0F2FE; color: #0284C7; }
+    .status-badge.delivered { background: #DCFCE7; color: #16A34A; }
+    .status-badge.delayed { background: #FEE2E2; color: #DC2626; }
+    .status-badge.pending { background: #FEF3C7; color: #D97706; }
+
+    .mob-toggle {
+      display: none;
+      position: fixed;
+      top: 14px; left: 14px;
+      z-index: 200;
+      background: var(--dark);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 1100px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 800px) {
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s; box-shadow: var(--shadow-md); }
+      .sidebar.open { transform: translateX(0); }
+      .main { margin-left: 0; width: 100%; min-width: 0; }
+      .mob-toggle { display: flex; align-items: center; justify-content: center; }
+      .topbar { padding-left: 60px; }
+      .mobile-topbar-logo { display: inline-flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="mob-toggle" id="mob-toggle" aria-label="Toggle sidebar"><i class="fa-solid fa-bars"></i></button>
+
+  <!-- ======================== SIDEBAR ======================== -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
+    <div class="sidebar-header">
+      <a href="dashboard.html" class="sidebar-logo" title="Stackly Dashboard">
+        <img src="images/logo.webp" alt="Stackly Logo" />
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="dashboard.html" class="sidebar-link" id="nav-dashboard">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="shipments.html" class="sidebar-link active" id="nav-shipments">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Shipments
+        <span class="sidebar-badge">12</span>
+      </a>
+      <a href="tracking.html" class="sidebar-link" id="nav-tracking">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        Live Tracking
+      </a>
+      <a href="routes.html" class="sidebar-link" id="nav-routes">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        Routes
+      </a>
+
+      <div class="nav-section-label">Operations</div>
+      <a href="warehouse.html" class="sidebar-link" id="nav-warehouse">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Warehouse
+      </a>
+      <a href="inventory.html" class="sidebar-link" id="nav-inventory">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        Inventory
+      </a>
+      <a href="carriers.html" class="sidebar-link" id="nav-carriers">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        Carriers
+      </a>
+
+      <div class="nav-section-label">Analytics</div>
+      <a href="reports.html" class="sidebar-link" id="nav-reports">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Reports
+      </a>
+      <a href="analytics.html" class="sidebar-link" id="nav-analytics">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Analytics
+      </a>
+
+      <div class="nav-section-label">Account</div>
+      <a href="settings.html" class="sidebar-link" id="nav-settings">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-profile-row">
+          <div class="user-avatar" id="sidebar-avatar">LM</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Lingalamanasa123</div>
+            <div class="user-role-tag" id="sidebar-user-role">Logistics Manager</div>
+          </div>
+        </div>
+        <a href="login.html" class="sidebar-logout-btn" id="logout-link" onclick="handleLogout(event)" title="Sign out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================== MAIN ======================== -->
+  <div class="main">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left" style="display:flex;align-items:center;">
+        <a href="dashboard.html" class="mobile-topbar-logo" title="Stackly Dashboard">
+          <img src="images/logo.webp" alt="Stackly Logo" />
+        </a>
+        <div>
+          <h1 style="font-size:1.35rem; font-weight:700; color:var(--dark); margin-bottom:2px;">Shipments Management</h1>
+          <p style="font-size:0.875rem; color:#64748B; margin-top:2px;">Track live consignments, inspect manifests, and review customs clearances</p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <span class="date-badge" id="current-date">Mon, Aug 24, 2026</span>
+        <button class="topbar-btn" onclick="window.location.href='404.html'" aria-label="Notifications"><i class="fa-solid fa-bell"></i></button>
+        <div class="topbar-user">
+          <div class="topbar-user-avatar" id="topbar-avatar">LM</div>
+          <div class="topbar-user-info">
+            <span class="topbar-user-name" id="topbar-user-name">Lingalamanasa123</span>
+            <span class="topbar-user-email" id="topbar-user-email">lingalamanasa123@gmail.com</span>
+          </div>
+        </div>
+        <a href="login.html" class="topbar-logout-btn" onclick="handleLogout(event)" title="Sign out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Logout</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- KPI Stats -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Active Consignments</div>
+          <div class="kpi-value">248</div>
+          <div class="kpi-change up"><i class="fa-solid fa-arrow-up"></i> +8% this week</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">In Transit Telemetry</div>
+          <div class="kpi-value">186</div>
+          <div class="kpi-change up"><i class="fa-solid fa-circle-dot"></i> Live GPS synced</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Delivered Today</div>
+          <div class="kpi-value">54</div>
+          <div class="kpi-change up"><i class="fa-solid fa-check"></i> 100% ePOD verified</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Customs & Exceptions</div>
+          <div class="kpi-value">7</div>
+          <div class="kpi-change down"><i class="fa-solid fa-triangle-exclamation"></i> Action required</div>
+        </div>
+      </div>
+
+      <!-- Main Data Table -->
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass" style="color:#94A3B8;"></i>
+            <input type="text" id="shipment-search" placeholder="Search by Tracking ID, route, client..." onkeyup="filterTable()" />
+          </div>
+          <div class="table-filters">
+            <button class="filter-pill active" onclick="setFilter('all', this)">All (248)</button>
+            <button class="filter-pill" onclick="setFilter('In Transit', this)">In Transit (186)</button>
+            <button class="filter-pill" onclick="setFilter('Delivered', this)">Delivered (54)</button>
+            <button class="filter-pill" onclick="setFilter('Delayed', this)">Delayed (7)</button>
+            <button class="filter-pill" onclick="setFilter('Pending', this)">Pending (1)</button>
+          </div>
+          <button class="btn-create" onclick="window.location.href='tracking.html'"><i class="fa-solid fa-location-crosshairs"></i> Live Map</button>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table id="shipments-table">
+            <thead>
+              <tr>
+                <th>Tracking ID</th>
+                <th>Client / Consignee</th>
+                <th>Origin &rarr; Destination</th>
+                <th>Carrier</th>
+                <th>Mode</th>
+                <th>Status</th>
+                <th>ETA</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tracking-code">#LT-20849</span></td>
+                <td><strong>Global Apex Corp</strong></td>
+                <td>Shanghai (CN) &rarr; Long Beach (US)</td>
+                <td>Maersk Line</td>
+                <td><i class="fa-solid fa-ship" style="color:#0284C7;"></i> Ocean</td>
+                <td><span class="status-badge in-transit"><i class="fa-solid fa-circle-dot"></i> In Transit</span></td>
+                <td>Aug 28, 2026</td>
+                <td><a href="tracking.html" style="color:var(--accent); font-weight:600; text-decoration:none;">Track</a></td>
+              </tr>
+              <tr>
+                <td><span class="tracking-code">#LT-20848</span></td>
+                <td><strong>Nordic Pharma Ltd</strong></td>
+                <td>Frankfurt (DE) &rarr; Chicago (US)</td>
+                <td>Lufthansa Cargo</td>
+                <td><i class="fa-solid fa-plane" style="color:#8B0000;"></i> Air</td>
+                <td><span class="status-badge delivered"><i class="fa-solid fa-check"></i> Delivered</span></td>
+                <td>Aug 24, 2026</td>
+                <td><a href="tracking.html" style="color:var(--accent); font-weight:600; text-decoration:none;">ePOD</a></td>
+              </tr>
+              <tr>
+                <td><span class="tracking-code">#LT-20847</span></td>
+                <td><strong>Zenith Electronics</strong></td>
+                <td>Shenzhen (CN) &rarr; Rotterdam (NL)</td>
+                <td>MSC Mediterranean</td>
+                <td><i class="fa-solid fa-ship" style="color:#0284C7;"></i> Ocean</td>
+                <td><span class="status-badge in-transit"><i class="fa-solid fa-circle-dot"></i> In Transit</span></td>
+                <td>Sep 02, 2026</td>
+                <td><a href="tracking.html" style="color:var(--accent); font-weight:600; text-decoration:none;">Track</a></td>
+              </tr>
+              <tr>
+                <td><span class="tracking-code">#LT-20845</span></td>
+                <td><strong>Solaris Energy Inc</strong></td>
+                <td>Hamburg (DE) &rarr; Mumbai (IN)</td>
+                <td>CMA CGM Group</td>
+                <td><i class="fa-solid fa-ship" style="color:#0284C7;"></i> Ocean</td>
+                <td><span class="status-badge delayed"><i class="fa-solid fa-triangle-exclamation"></i> Delayed (Port)</span></td>
+                <td>Aug 30, 2026</td>
+                <td><a href="tracking.html" style="color:var(--accent); font-weight:600; text-decoration:none;">Inspect</a></td>
+              </tr>
+              <tr>
+                <td><span class="tracking-code">#LT-20844</span></td>
+                <td><strong>BioTech Solutions</strong></td>
+                <td>Tokyo (JP) &rarr; San Francisco (US)</td>
+                <td>Singapore Airlines Cargo</td>
+                <td><i class="fa-solid fa-plane" style="color:#8B0000;"></i> Air</td>
+                <td><span class="status-badge in-transit"><i class="fa-solid fa-circle-dot"></i> In Transit</span></td>
+                <td>Aug 26, 2026</td>
+                <td><a href="tracking.html" style="color:var(--accent); font-weight:600; text-decoration:none;">Track</a></td>
+              </tr>
+              <tr>
+                <td><span class="tracking-code">#LT-20842</span></td>
+                <td><strong>Metro Distribution</strong></td>
+                <td>Dallas (US) &rarr; Atlanta (US)</td>
+                <td>Swift Freight</td>
+                <td><i class="fa-solid fa-truck-fast" style="color:#D97706;"></i> Road</td>
+                <td><span class="status-badge delivered"><i class="fa-solid fa-check"></i> Delivered</span></td>
+                <td>Aug 23, 2026</td>
+                <td><a href="tracking.html" style="color:var(--accent); font-weight:600; text-decoration:none;">ePOD</a></td>
+              </tr>
+              <tr>
+                <td><span class="tracking-code">#LT-20840</span></td>
+                <td><strong>AeroSpace Dynamics</strong></td>
+                <td>London (UK) &rarr; Dubai (AE)</td>
+                <td>Emirates SkyCargo</td>
+                <td><i class="fa-solid fa-plane" style="color:#8B0000;"></i> Air</td>
+                <td><span class="status-badge pending"><i class="fa-solid fa-clock"></i> Customs Pre-Check</span></td>
+                <td>Aug 29, 2026</td>
+                <td><a href="tracking.html" style="color:var(--accent); font-weight:600; text-decoration:none;">Review</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load authenticated user info
+    try {
+      const stored = localStorage.getItem('logitech_user') || sessionStorage.getItem('logitech_user');
+      if (stored) {
+        const u = JSON.parse(stored);
+        if (u.name) {
+          document.querySelectorAll('#sidebar-user-name, #topbar-user-name').forEach(el => el.textContent = u.name);
+          const initials = u.name.split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
+          document.querySelectorAll('#sidebar-avatar, #topbar-avatar').forEach(el => el.textContent = initials);
+        }
+        if (u.email) {
+          document.querySelectorAll('#sidebar-email-text, #topbar-user-email').forEach(el => el.textContent = u.email);
+        }
+        if (u.role) {
+          document.querySelectorAll('#sidebar-user-role').forEach(el => el.textContent = u.role);
+        }
+      }
+    } catch(e) {}
+
+    function handleLogout(e) {
+      e.preventDefault();
+      localStorage.removeItem('logitech_user');
+      sessionStorage.removeItem('logitech_user');
+      window.location.href = 'login.html';
+    }
+
+    // Mobile sidebar toggle
+    const mobBtn = document.getElementById('mob-toggle');
+    const sidebar = document.getElementById('sidebar');
+    if (mobBtn && sidebar) {
+      mobBtn.addEventListener('click', () => sidebar.classList.toggle('open'));
+    }
+
+    // Table Search & Filter
+    function filterTable() {
+      const query = document.getElementById('shipment-search').value.toLowerCase();
+      const rows = document.querySelectorAll('#shipments-table tbody tr');
+      rows.forEach(r => {
+        const text = r.textContent.toLowerCase();
+        r.style.display = text.includes(query) ? '' : 'none';
+      });
+    }
+
+    function setFilter(status, btn) {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const rows = document.querySelectorAll('#shipments-table tbody tr');
+      rows.forEach(r => {
+        if (status === 'all') {
+          r.style.display = '';
+        } else {
+          r.style.display = r.textContent.includes(status) ? '' : 'none';
+        }
+      });
+    }
+
+    // Live Date
+    const now = new Date();
+    const opts = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+    const dateEl = document.getElementById('current-date');
+    if (dateEl) dateEl.textContent = now.toLocaleDateString('en-US', opts);
+  </script>
+</body>
+</html>
