@@ -861,7 +861,7 @@ p {
 .chain-slider-wrapper {
   position: relative;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 54px;
 }
 
 .chain-flow-container {
@@ -869,6 +869,7 @@ p {
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   position: relative;
+  margin-top: 54px;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -968,28 +969,32 @@ p {
 
 .chain-node-num {
   position: absolute;
-  top: -14px;
+  top: -15px;
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #8B0000, #B22222);
   color: #FFFFFF;
   font-size: 0.8rem;
   font-weight: 700;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+  min-width: 30px;
+  width: auto;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
   box-shadow: 0 4px 10px rgba(139, 0, 0, 0.3);
   border: 2px solid #FFFFFF;
   z-index: 2;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  letter-spacing: 0.02em;
 }
 
 .chain-node.active-step .chain-node-num,
 .chain-node:hover .chain-node-num {
-  transform: translateX(-50%) scale(1.15);
+  transform: translateX(-50%) scale(1.12);
   box-shadow: 0 0 0 4px rgba(139, 0, 0, 0.2);
 }
 
