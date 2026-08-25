@@ -2182,6 +2182,28 @@ img, svg, video, canvas, audio, iframe, embed, object {
   .fleet-visual-card {
     height: 300px;
   }
+  .hero-slide-caption {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+  .hero-slide-caption .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .fleet-tabs-nav {
+    gap: 8px;
+  }
+  .fleet-tab-btn {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+  .hero-slider-track {
+    height: clamp(260px, 50vw, 360px);
+  }
 }
 
 @media (max-width: 575px) {
@@ -2193,9 +2215,89 @@ img, svg, video, canvas, audio, iframe, embed, object {
     display: none;
   }
   .marquee-content {
-    padding-left: 20px;
+    padding-left: 16px;
+    gap: 16px;
+  }
+  .hero-slide-badge {
+    top: 12px;
+    left: 12px;
+    padding: 5px 12px;
+    font-size: 0.72rem;
+  }
+  .slider-nav-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .slider-nav-btn.prev { left: 8px; }
+  .slider-nav-btn.next { right: 8px; }
+  .hero-slide-caption {
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 12px 14px;
+  }
+  .slide-caption-title {
+    font-size: 1rem;
+  }
+  .slide-caption-desc {
+    font-size: 0.78rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 
+/* =====================================================
+   GLOBAL RESPONSIVE SAFEGUARDS (320px - 1920px+)
+   ===================================================== */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
+img, canvas, svg, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fluid Typography and Card Word Breaks */
+h1, h2, h3, h4, h5, h6, p, span, a, button {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Table Responsive Global Class */
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 20px;
+}
+
+/* Narrow Screen Refinements (< 380px) */
+@media (max-width: 380px) {
+  .container {
+    padding: 0 12px !important;
+  }
+  .hero-actions .btn, .cta-actions .btn {
+    font-size: 0.85rem;
+    padding: 11px 16px;
+  }
+  .hero-content h1 {
+    font-size: 1.6rem !important;
+  }
+  .stat-num {
+    font-size: 2rem !important;
+  }
+  .section-title {
+    font-size: 1.5rem !important;
+  }
+}
