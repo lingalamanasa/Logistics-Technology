@@ -639,12 +639,34 @@
       .platform-kpis { grid-template-columns: repeat(2, 1fr); }
       .bot-grid { grid-template-columns: 1fr; }
     }
-    @media (max-width: 560px) {
-      .topbar { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 16px 14px 60px; }
-      .topbar-actions { width: 100%; justify-content: space-between; }
+    @media (max-width: 768px) {
+      .content { padding: 20px 16px; }
+      .platform-kpis { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    }
+    @media (max-width: 575px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 14px 12px 60px;
+        height: auto;
+        min-height: 58px;
+      }
+      .topbar-left { width: 100%; }
+      .topbar-right {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .date-badge { display: none; }
       .platform-kpis { grid-template-columns: 1fr; gap: 12px; }
-      .content { padding: 16px 12px; }
+      .content { padding: 14px 10px; }
       .admin-table-search { width: 100%; }
+      .table-card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .admin-table { min-width: 600px; }
     }
   </style>
 </head>

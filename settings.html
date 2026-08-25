@@ -363,6 +363,35 @@
       .topbar { padding-left: 64px; }
       .mobile-topbar-logo { display: inline-flex; }
     }
+    @media (max-width: 768px) {
+      .content { padding: 20px 16px; }
+      .settings-card { padding: 20px; }
+      .settings-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 575px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 14px 12px 60px;
+        height: auto;
+        min-height: 58px;
+      }
+      .topbar-left { width: 100%; }
+      .topbar-right {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .date-badge { display: none; }
+      .content { padding: 14px 10px; }
+      .settings-card { padding: 16px 14px; }
+      .form-group-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .btn-save { width: 100%; justify-content: center; }
+    }
   </style>
 </head>
 <body>

@@ -100,6 +100,7 @@ function animateCounter(el, target, suffix = '', duration = 2000) {
     start += increment;
     if (start >= target) {
       start = target;
+      clearInterval(timer);
     }
     el.textContent = Math.floor(start).toLocaleString() + suffix;
   }, 16);
@@ -517,4 +518,5 @@ if (document.readyState === 'loading') {
 } else {
   initAllEnhancements();
 }
+
 

@@ -361,7 +361,7 @@
     }
 
     @media (max-width: 1024px) {
-      .corridors-grid { grid-template-columns: 1fr; }
+      .corridors-grid { grid-template-columns: 1fr; gap: 20px; }
     }
     @media (max-width: 992px) {
       .sidebar { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: var(--shadow-md); }
@@ -370,6 +370,34 @@
       .mob-toggle { display: flex !important; align-items: center; justify-content: center; width: 42px; height: 38px; }
       .topbar { padding-left: 64px; }
       .mobile-topbar-logo { display: inline-flex; }
+    }
+    @media (max-width: 768px) {
+      .content { padding: 20px 16px; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    }
+    @media (max-width: 575px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 14px 12px 60px;
+        height: auto;
+        min-height: 58px;
+      }
+      .topbar-left { width: 100%; }
+      .topbar-right {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .date-badge { display: none; }
+      .kpi-grid { grid-template-columns: 1fr; gap: 12px; }
+      .content { padding: 14px 10px; }
+      .corridor-card { padding: 18px 14px; }
+      .corridor-stats { grid-template-columns: 1fr; gap: 8px; }
     }
   </style>
 </head>

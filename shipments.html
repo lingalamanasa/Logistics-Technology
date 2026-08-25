@@ -492,6 +492,36 @@
       .topbar { padding-left: 64px; }
       .mobile-topbar-logo { display: inline-flex; }
     }
+    @media (max-width: 768px) {
+      .content { padding: 20px 16px; }
+      .table-card { padding: 18px; }
+      .table-card-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .table-filters { width: 100%; flex-wrap: wrap; }
+    }
+    @media (max-width: 575px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 14px 12px 60px;
+        height: auto;
+        min-height: 58px;
+      }
+      .topbar-left { width: 100%; }
+      .topbar-right {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .date-badge { display: none; }
+      .kpi-grid { grid-template-columns: 1fr; gap: 12px; }
+      .content { padding: 14px 10px; }
+      .table-card { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 16px 12px; }
+      .shipment-table { min-width: 600px; }
+    }
   </style>
 </head>
 <body>
