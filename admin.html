@@ -51,9 +51,51 @@
       overflow: hidden;
     }
     .sidebar-header {
-      padding: 18px 18px 14px;
+      padding: 16px 18px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .sidebar-close-btn {
+      display: none;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94A3B8;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .sidebar-close-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #FFF;
+    }
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 140;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .sidebar-backdrop.active {
+      display: block;
+      opacity: 1;
+    }
+    body.sidebar-open {
+      overflow: hidden !important;
+      touch-action: none;
     }
     .sidebar-logo {
       display: inline-flex;
@@ -640,8 +682,23 @@
       .mid-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 992px) {
-      .sidebar { transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: var(--shadow-md); }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 280px;
+        max-width: 85vw;
+        height: 100vh;
+        height: 100dvh;
+        z-index: 150;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+      }
       .sidebar.open { transform: translateX(0); }
+      .sidebar-close-btn { display: inline-flex; }
+      body.sidebar-open .mob-toggle { opacity: 0; pointer-events: none; }
       .main { margin-left: 0; width: 100%; min-width: 0; }
       .mob-toggle { display: flex !important; align-items: center; justify-content: center; width: 42px; height: 38px; }
       .topbar { padding-left: 64px; }
@@ -691,6 +748,7 @@
         <img src="https://raw.githubusercontent.com/lingalamanasa/Logistics-Technology/main/images/logo.webp" alt="Stackly Logo" onerror="this.onerror=null; this.src='images/logo.webp';" />
         <span class="admin-badge" id="logo-role-badge">Admin</span>
       </a>
+      <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close sidebar"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
     <nav class="sidebar-nav">
@@ -1148,17 +1206,18 @@
     const mobToggle = document.getElementById('mob-toggle');
     const sidebar = document.getElementById('sidebar');
     const backdrop = document.getElementById('sidebar-backdrop');
+    const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
 
     function openSidebar() {
       if (sidebar) sidebar.classList.add('open');
       if (backdrop) backdrop.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('sidebar-open');
     }
 
     function closeSidebar() {
       if (sidebar) sidebar.classList.remove('open');
       if (backdrop) backdrop.classList.remove('active');
-      document.body.style.overflow = '';
+      document.body.classList.remove('sidebar-open');
     }
 
     if (mobToggle && sidebar) {
@@ -1169,6 +1228,13 @@
         } else {
           openSidebar();
         }
+      });
+    }
+
+    if (sidebarCloseBtn) {
+      sidebarCloseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeSidebar();
       });
     }
 
