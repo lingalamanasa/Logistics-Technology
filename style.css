@@ -2302,6 +2302,7 @@ img, svg, video, canvas, audio, iframe, embed, object {
 @media (max-width: 575px) {
   *, *::before, *::after {
     max-width: 100%;
+    box-sizing: border-box;
   }
   html, body {
     overflow-x: hidden;
@@ -2329,9 +2330,27 @@ img, svg, video, canvas, audio, iframe, embed, object {
   .hero {
     padding: 80px 0 36px;
   }
+  .hero-grid,
+  .about-teaser,
+  .contact-layout,
+  .fleet-tab-pane.active {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
   .hero-content h1 {
     font-size: clamp(1.65rem, 7vw, 2.2rem);
     line-height: 1.22;
+  }
+  .hero-actions,
+  .cta-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+  }
+  .hero-actions .btn,
+  .cta-actions .btn {
+    width: 100% !important;
+    justify-content: center !important;
   }
   .hero-slider-wrap {
     border-radius: var(--radius-md);
@@ -2424,6 +2443,21 @@ img, svg, video, canvas, audio, iframe, embed, object {
   .fleet-metrics-row {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+  .features-grid,
+  .services-showcase,
+  .services-grid,
+  .testimonials-grid,
+  .blog-grid,
+  .mission-grid,
+  .hubs-grid,
+  .team-grid,
+  .chain-flow-container,
+  .stats-grid,
+  .metric-grid,
+  .sim-display {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
   .newsletter-form {
     flex-direction: column;

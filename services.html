@@ -97,7 +97,12 @@
       font-weight: 700;
     }
     @media (max-width: 992px) {
-      .services-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .chain-flow-container { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+    @media (max-width: 768px) {
+      .services-grid { grid-template-columns: 1fr; gap: 18px; }
+      .chain-flow-container { grid-template-columns: 1fr; gap: 16px; }
     }
   </style>
 </head>
@@ -192,7 +197,7 @@
               <li><i class="fa-solid fa-check" style="color:var(--color-primary);"></i> Instant digital bills of lading (e-BL)</li>
               <li><i class="fa-solid fa-check" style="color:var(--color-primary);"></i> Guaranteed space allocations</li>
             </ul>
-            <a href="404.html" class="btn btn-dark">Book Freight <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="tracking.html" class="btn btn-dark">Book Freight <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -210,7 +215,7 @@
               <li><i class="fa-solid fa-check" style="color:var(--color-primary);"></i> Same-day pick, pack & dispatch</li>
               <li><i class="fa-solid fa-check" style="color:var(--color-primary);"></i> Climate-controlled storage zones</li>
             </ul>
-            <a href="404.html" class="btn btn-dark">Explore Hubs <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="warehouse.html" class="btn btn-dark">Explore Hubs <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -228,7 +233,7 @@
               <li><i class="fa-solid fa-check" style="color:var(--color-primary);"></i> Contactless digital proof of delivery</li>
               <li><i class="fa-solid fa-check" style="color:var(--color-primary);"></i> Real-time driver turn-by-turn routing</li>
             </ul>
-            <a href="404.html" class="btn btn-dark">Request Dispatch <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="routes.html" class="btn btn-dark">Request Dispatch <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -246,7 +251,7 @@
         <p class="section-subtitle" style="margin:0 auto;">Four seamless steps to streamline your supply chain from procurement to final destination.</p>
       </div>
 
-      <div class="chain-flow-container" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="chain-flow-container">
         <div class="chain-node slide-up">
           <div class="chain-node-num">1</div>
           <div class="chain-node-icon"><i class="fa-solid fa-bolt"></i></div>
@@ -389,8 +394,8 @@
         <h2 class="section-title">Ready to Automate Your Freight Operations?</h2>
         <p class="section-subtitle">Speak with our logistics engineers to get a custom solution tailored to your enterprise supply chain.</p>
         <div class="cta-actions">
-          <a href="404.html" class="btn btn-accent" style="padding:15px 36px;font-size:1rem;">Request Custom Quote <i class="fa-solid fa-arrow-right"></i></a>
-          <a href="404.html" class="btn btn-outline-white" style="padding:15px 36px;font-size:1rem;">Create Account Free</a>
+          <a href="contact.html" class="btn btn-accent" style="padding:15px 36px;font-size:1rem;">Request Custom Quote <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="signup.html" class="btn btn-outline-white" style="padding:15px 36px;font-size:1rem;">Create Account Free</a>
         </div>
       </div>
     </div>
