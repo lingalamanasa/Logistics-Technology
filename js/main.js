@@ -124,26 +124,41 @@ if (statsSection) {
   statsObserver.observe(statsSection);
 }
 
-// ---- Newsletter form ----
-const newsletterForm = document.getElementById('newsletter-form');
-if (newsletterForm) {
-  newsletterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = document.getElementById('newsletter-email');
-    if (input && input.value) {
-      const btn = document.getElementById('newsletter-submit');
-      if (btn) {
-        const original = btn.textContent;
-        btn.textContent = 'Subscribed!';
-        btn.style.background = '#16a34a';
-        setTimeout(() => {
-          btn.textContent = original;
-          btn.style.background = '';
-          input.value = '';
-        }, 3000);
-      }
+// ---- Newsletter form validation & 404 redirect ----
+function initNewsletterForms() {
+  document.querySelectorAll('.newsletter-form, #newsletter-form').forEach(form => {
+    const input = form.querySelector('input[type="email"], #newsletter-email');
+    if (input) {
+      input.addEventListener('input', () => {
+        input.setCustomValidity('');
+      });
     }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!input) return false;
+      const email = input.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        input.setCustomValidity('Please enter a valid email address.');
+        if (input.reportValidity) {
+          input.reportValidity();
+        } else {
+          input.focus();
+        }
+        return false;
+      }
+      input.setCustomValidity('');
+      window.location.href = get404Url();
+      return false;
+    });
   });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initNewsletterForms);
+} else {
+  initNewsletterForms();
 }
 
 // ---- Smooth anchor scrolling for valid in-page targets ----

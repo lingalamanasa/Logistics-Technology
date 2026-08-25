@@ -605,7 +605,7 @@
             </div>
             <form class="tracker-form" id="hero-tracker-form" onsubmit="event.preventDefault(); trackShipment(event); return false;">
               <input type="text" id="tracking-number" class="tracker-input" placeholder="Enter Consignment or B/L No (e.g. LT-8921)" required />
-              <button type="button" class="tracker-btn" id="btn-track" onclick="trackShipment(event)"><i class="fa-solid fa-location-crosshairs"></i> Track</button>
+              <button type="submit" class="tracker-btn" id="btn-track"><i class="fa-solid fa-location-crosshairs"></i> Track</button>
             </form>
             <div class="tracker-quick">
               <span>Try: </span>
@@ -1379,8 +1379,11 @@
     // Live Freight Tracking Handler
     function setTrack(id) {
       const input = document.getElementById('tracking-number');
-      if (input) input.value = id;
-      trackShipment();
+      if (input) {
+        input.value = id;
+        input.setCustomValidity('');
+        input.focus();
+      }
     }
 
     function trackShipment(e) {
@@ -1388,58 +1391,25 @@
       const input = document.getElementById('tracking-number');
       if (!input) return false;
       const val = input.value.trim();
-      const res = document.getElementById('track-result');
       if (!val) {
-        input.focus();
+        input.setCustomValidity('Please enter a consignment or B/L number.');
+        if (input.reportValidity) {
+          input.reportValidity();
+        } else {
+          input.focus();
+        }
         return false;
       }
-
-      if (res) {
-        res.className = 'track-result active';
-        res.style.display = 'block';
-
-        if (val.toUpperCase().includes('8921')) {
-          res.innerHTML = `
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px;">
-              <strong style="color:#4ADE80;"><i class="fa-solid fa-truck-fast"></i> IN TRANSIT — On Schedule</strong>
-              <span style="font-size:0.75rem;color:#94A3B8;">ETA: Today, 18:30 GMT</span>
-            </div>
-            <div>Origin: <strong>Singapore Port (SGSIN)</strong> <i class="fa-solid fa-arrow-right" style="font-size:0.8rem;margin:0 4px;"></i> Destination: <strong>Rotterdam Hub (NLRTM)</strong></div>
-            <div style="font-size:0.78rem;color:#94A3B8;margin-top:4px;">Current Loc: Bay of Bengal | Vessel: CMA CGM Magellan | Temp: 4.2°C (Optimal)</div>
-            <div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-              <span style="font-size:0.75rem;color:#A7F3D0;"><i class="fa-solid fa-circle-check"></i> Telemetry Sensor Sync: Active</span>
-              <a href="tracking.html" style="color:#FFA5A5;font-weight:600;font-size:0.78rem;text-decoration:none;display:inline-flex;align-items:center;gap:4px;"><i class="fa-solid fa-satellite-dish"></i> Open Full GPS Radar <i class="fa-solid fa-arrow-right" style="font-size:0.72rem; margin:0 3px;"></i></a>
-            </div>
-          `;
-        } else if (val.toUpperCase().includes('5402')) {
-          res.innerHTML = `
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px;">
-              <strong style="color:#60A5FA;"><i class="fa-solid fa-passport"></i> CUSTOMS CLEARED</strong>
-              <span style="font-size:0.75rem;color:#94A3B8;">Dispatched to Regional Hub</span>
-            </div>
-            <div>Origin: <strong>Frankfurt Air Cargo</strong> <i class="fa-solid fa-arrow-right" style="font-size:0.8rem;margin:0 4px;"></i> Destination: <strong>London Heathrow</strong></div>
-            <div style="font-size:0.78rem;color:#94A3B8;margin-top:4px;">Cleared Import Duties | Handed over to Last-Mile Express Unit #84</div>
-            <div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-              <span style="font-size:0.75rem;color:#BAE6FD;"><i class="fa-solid fa-file-circle-check"></i> Digital B/L Verified</span>
-              <a href="tracking.html" style="color:#FFA5A5;font-weight:600;font-size:0.78rem;text-decoration:none;display:inline-flex;align-items:center;gap:4px;"><i class="fa-solid fa-satellite-dish"></i> Open Full GPS Radar <i class="fa-solid fa-arrow-right" style="font-size:0.72rem; margin:0 3px;"></i></a>
-            </div>
-          `;
-        } else {
-          res.innerHTML = `
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:4px;">
-              <strong style="color:#22C55E;"><i class="fa-solid fa-circle-check"></i> DELIVERED</strong>
-              <span style="font-size:0.75rem;color:#94A3B8;">Signed by J. Martinez</span>
-            </div>
-            <div>Tracking ID: <strong>${val.toUpperCase()}</strong> | Consignment Batch #9921</div>
-            <div style="font-size:0.78rem;color:#94A3B8;margin-top:4px;">Delivered at Dock 4A, Chicago Fulfillment Center. All 140 crates verified.</div>
-            <div style="margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-              <span style="font-size:0.75rem;color:#86EFAC;"><i class="fa-solid fa-clipboard-check"></i> Proof of Delivery ePOD Logged</span>
-              <a href="tracking.html" style="color:#FFA5A5;font-weight:600;font-size:0.78rem;text-decoration:none;display:inline-flex;align-items:center;gap:4px;"><i class="fa-solid fa-satellite-dish"></i> Open Full GPS Radar <i class="fa-solid fa-arrow-right" style="font-size:0.72rem; margin:0 3px;"></i></a>
-            </div>
-          `;
-        }
-      }
+      input.setCustomValidity('');
+      window.location.href = '404.html';
       return false;
+    }
+
+    const trackInput = document.getElementById('tracking-number');
+    if (trackInput) {
+      trackInput.addEventListener('input', () => {
+        trackInput.setCustomValidity('');
+      });
     }
 
     // Corridor Telemetry Switcher
