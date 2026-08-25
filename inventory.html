@@ -440,7 +440,7 @@
         pointer-events: none !important;
       }
       .main { margin-left: 0; width: 100%; min-width: 0; }
-      .topbar { padding-left: 64px; }
+      .topbar { padding-left: 70px !important; }
       .topbar-stackly-logo, .mobile-topbar-logo { display: inline-flex !important; }
     }
     @media (max-width: 768px) {
@@ -453,7 +453,7 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
-        padding: 12px 14px 12px 60px;
+        padding: 12px 14px 12px 70px !important;
         height: auto;
         min-height: 58px;
       }
@@ -728,13 +728,20 @@
       backdrop.addEventListener('click', closeSidebar);
     }
 
-    document.querySelectorAll('.sidebar-link').forEach(link => {
+    document.querySelectorAll('.sidebar-link, .sidebar-logout-btn').forEach(link => {
       link.addEventListener('click', () => {
-        if (window.innerWidth <= 800) {
-          closeSidebar();
-        }
+        closeSidebar();
       });
     });
+
+    window.addEventListener('pageshow', closeSidebar);
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 992) {
+        closeSidebar();
+      }
+    });
+    // Ensure clean state on load
+    closeSidebar();
 
     function filterInventory() {
       const q = document.getElementById('inventory-search').value.toLowerCase();

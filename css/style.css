@@ -2626,6 +2626,9 @@ body.sidebar-open {
     visibility: hidden !important;
     pointer-events: none !important;
   }
+  .topbar {
+    padding-left: 70px !important;
+  }
   .topbar-stackly-logo,
   .mobile-topbar-logo {
     display: inline-flex !important;
@@ -2669,7 +2672,33 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
+@media (max-width: 768px) {
+  .tracker-banner { padding: 20px 16px !important; }
+  .tracker-form { flex-direction: column !important; width: 100% !important; max-width: 100% !important; gap: 8px !important; }
+  .tracker-input { width: 100% !important; box-sizing: border-box !important; }
+  .tracker-btn { width: 100% !important; text-align: center !important; }
+  .live-tracking-card { padding: 16px 12px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; width: 100% !important; box-sizing: border-box !important; }
+  .timeline { min-width: 440px !important; }
+}
+
 @media (max-width: 575px) {
+  .topbar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding: 12px 14px 12px 70px !important;
+    height: auto !important;
+    min-height: 58px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .tracker-banner { padding: 16px 12px !important; }
+  .tracker-title { font-size: 1.15rem !important; }
+  .tracker-form { flex-direction: column !important; width: 100% !important; max-width: 100% !important; gap: 8px !important; }
+  .tracker-input { width: 100% !important; box-sizing: border-box !important; font-size: 0.85rem !important; padding: 10px 12px !important; }
+  .tracker-btn { width: 100% !important; padding: 10px 16px !important; }
+  .live-tracking-card { padding: 14px 10px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; }
+  .timeline { min-width: 420px !important; }
   .content {
     padding: 14px 10px !important;
     width: 100% !important;
@@ -2677,9 +2706,13 @@ html, body {
     overflow-x: hidden !important;
     box-sizing: border-box !important;
   }
-  .card, .table-card, .chart-card, .table-container {
-    padding: 16px 12px !important;
-    border-radius: 12px !important;
+  .card, .table-card, .chart-card {
+    padding: 14px 10px !important;
+    border-radius: 10px !important;
+    margin-bottom: 12px !important;
+  }
+  .user-table, .data-table, table {
+    min-width: 540px !important;
   }
   .table-wrap table, .table-responsive table, .table-card table, .table-container table, table {
     min-width: 540px !important;
