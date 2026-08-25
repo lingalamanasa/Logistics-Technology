@@ -80,18 +80,27 @@
       margin-left: 4px;
       flex-shrink: 0;
     }
-    .mobile-topbar-logo {
-      display: none;
+    .mobile-topbar-logo,
+    .topbar-stackly-logo {
+      display: inline-flex;
       align-items: center;
-      margin-right: 12px;
+      margin-bottom: 6px;
       text-decoration: none;
       cursor: pointer;
       flex-shrink: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .mobile-topbar-logo img {
+    .mobile-topbar-logo:hover,
+    .topbar-stackly-logo:hover {
+      opacity: 0.85;
+      transform: scale(1.02);
+    }
+    .mobile-topbar-logo img,
+    .topbar-stackly-logo img {
       height: 28px;
       width: auto;
       object-fit: contain;
+      display: block;
     }
     .sidebar-nav {
       flex: 1;
@@ -456,6 +465,10 @@
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
         Settings
       </a>
+      <a href="https://github.com/lingalamanasa/Logistics-Technology" target="_blank" rel="noopener noreferrer" class="sidebar-link" id="nav-github" title="GitHub Repository">
+        <i class="fa-brands fa-github icon" style="font-size:18px;"></i>
+        GitHub Repository
+      </a>
     </nav>
 
     <div class="sidebar-footer">
@@ -477,11 +490,11 @@
 
   <div class="main">
     <header class="topbar">
-      <div class="topbar-left" style="display:flex;align-items:center;">
-        <a href="dashboard.html" class="mobile-topbar-logo" title="Stackly Dashboard">
+      <div class="topbar-left">
+        <a href="dashboard.html" class="topbar-stackly-logo" title="Go to Stackly Dashboard">
           <img src="https://raw.githubusercontent.com/lingalamanasa/Logistics-Technology/main/images/logo.webp" alt="Stackly Logo" onerror="this.onerror=null; this.src='images/logo.webp';" />
         </a>
-        <div>
+        <div class="topbar-heading">
           <h1 style="font-size:1.35rem; font-weight:700; color:var(--dark); margin-bottom:2px;">Platform & Telemetry Settings</h1>
           <p style="font-size:0.875rem; color:#64748B; margin-top:2px;">Configure profile, automated trigger thresholds, and webhook integrations</p>
         </div>

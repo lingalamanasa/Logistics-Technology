@@ -2497,5 +2497,30 @@ img, svg, video, canvas, audio, iframe, embed, object {
   }
 }
 
+/* ==========================================================================
+   Dashboard Topbar Stackly Logo
+   ========================================================================== */
+.topbar-stackly-logo,
+.mobile-topbar-logo {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
 
+.topbar-stackly-logo:hover,
+.mobile-topbar-logo:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
 
+.topbar-stackly-logo img,
+.mobile-topbar-logo img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
