@@ -2560,10 +2560,10 @@ img, svg, video, canvas, audio, iframe, embed, object {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.75);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 140;
+  z-index: 999 !important;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -2578,6 +2578,18 @@ body.sidebar-open {
   touch-action: none;
 }
 
+.mob-toggle {
+  z-index: 90 !important;
+}
+
+body.sidebar-open .mob-toggle,
+.sidebar.open ~ .mob-toggle {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 @media (max-width: 992px) {
   .sidebar {
     position: fixed !important;
@@ -2588,7 +2600,7 @@ body.sidebar-open {
     max-width: 85vw !important;
     height: 100vh !important;
     height: 100dvh !important;
-    z-index: 150 !important;
+    z-index: 1000 !important;
     transform: translateX(-100%) !important;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4) !important;
@@ -2599,8 +2611,11 @@ body.sidebar-open {
   .sidebar-close-btn {
     display: inline-flex !important;
   }
-  body.sidebar-open .mob-toggle {
+  body.sidebar-open .mob-toggle,
+  .sidebar.open ~ .mob-toggle {
+    display: none !important;
     opacity: 0 !important;
+    visibility: hidden !important;
     pointer-events: none !important;
   }
 }
