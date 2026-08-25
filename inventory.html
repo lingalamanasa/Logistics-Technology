@@ -356,26 +356,44 @@
     td { padding: 14px 18px; font-size: 0.85rem; border-bottom: 1px solid #F1F5F9; }
     tr:hover td { background: #FAFAFC; }
 
-    .mob-toggle {
+    .sidebar-close-btn {
+      display: none !important;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #94A3B8;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .sidebar-close-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #FFF;
+    }
+    .sidebar-backdrop {
       display: none;
       position: fixed;
-      top: 14px; left: 14px;
-      z-index: 90 !important;
-      background: var(--dark);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 10px;
-      cursor: pointer;
-      font-size: 1.1rem;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 990 !important;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    body.sidebar-open .mob-toggle,
-    .sidebar.open ~ .mob-toggle {
+    body.sidebar-open {
+      overflow: hidden !important;
+      touch-action: none;
+    }
+
+    .mob-toggle {
       display: none !important;
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
     }
 
     @media (max-width: 1100px) {
@@ -398,16 +416,30 @@
       }
       .sidebar.open { transform: translateX(0); }
       .sidebar-close-btn { display: inline-flex !important; }
+      .mob-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        position: fixed !important;
+        top: 14px !important;
+        left: 14px !important;
+        z-index: 120 !important;
+        width: 42px !important;
+        height: 38px !important;
+        background: #0b1120 !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+      }
       body.sidebar-open .mob-toggle,
-      .sidebar.open ~ .mob-toggle {
+      body.sidebar-open #mob-toggle {
         display: none !important;
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
       }
       .main { margin-left: 0; width: 100%; min-width: 0; }
-      .mob-toggle { display: flex !important; align-items: center; justify-content: center; width: 42px; height: 38px; }
-      body.sidebar-open .mob-toggle { display: none !important; }
       .topbar { padding-left: 64px; }
       .topbar-stackly-logo, .mobile-topbar-logo { display: inline-flex !important; }
     }
