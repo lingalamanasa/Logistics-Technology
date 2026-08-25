@@ -115,7 +115,7 @@
     }
     .mobile-topbar-logo,
     .topbar-stackly-logo {
-      display: inline-flex;
+      display: none;
       align-items: center;
       margin-bottom: 6px;
       text-decoration: none;
@@ -741,6 +741,7 @@
       .mob-toggle { display: flex !important; align-items: center; justify-content: center; width: 42px; height: 38px; }
       body.sidebar-open .mob-toggle { display: none !important; }
       .topbar { padding-left: 64px; }
+      .topbar-stackly-logo, .mobile-topbar-logo { display: inline-flex !important; }
       .platform-kpis { grid-template-columns: repeat(2, 1fr); }
       .bot-grid { grid-template-columns: 1fr; }
     }

@@ -74,7 +74,7 @@
     }
     .mobile-topbar-logo,
     .topbar-stackly-logo {
-      display: inline-flex;
+      display: none;
       align-items: center;
       margin-bottom: 6px;
       text-decoration: none;
@@ -753,6 +753,7 @@
       .mob-toggle { display: flex !important; align-items: center; justify-content: center; width: 42px; height: 38px; }
       body.sidebar-open .mob-toggle { display: none !important; }
       .topbar { padding-left: 64px; }
+      .topbar-stackly-logo, .mobile-topbar-logo { display: inline-flex !important; }
       .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
     }
     @media (max-width: 768px) {

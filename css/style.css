@@ -2498,11 +2498,11 @@ img, svg, video, canvas, audio, iframe, embed, object {
 }
 
 /* ==========================================================================
-   Dashboard Topbar Stackly Logo
+   Dashboard Topbar Stackly Logo (Hidden on laptop/desktop, shown on mobile only)
    ========================================================================== */
 .topbar-stackly-logo,
 .mobile-topbar-logo {
-  display: inline-flex;
+  display: none;
   align-items: center;
   margin-bottom: 6px;
   text-decoration: none;
@@ -2611,12 +2611,9 @@ body.sidebar-open .mob-toggle,
   .sidebar-close-btn {
     display: inline-flex !important;
   }
-  body.sidebar-open .mob-toggle,
-  .sidebar.open ~ .mob-toggle {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+  .topbar-stackly-logo,
+  .mobile-topbar-logo {
+    display: inline-flex !important;
   }
 }
 
