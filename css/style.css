@@ -2678,7 +2678,206 @@ html, body {
   .tracker-input { width: 100% !important; box-sizing: border-box !important; }
   .tracker-btn { width: 100% !important; text-align: center !important; }
   .live-tracking-card { padding: 16px 12px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; width: 100% !important; box-sizing: border-box !important; }
+  }
+  .faq-question {
+    padding: 14px 16px;
+    font-size: 0.92rem;
+  }
+  .faq-answer {
+    padding: 0 16px;
+    font-size: 0.85rem;
+  }
+  .faq-item.active .faq-answer {
+    padding: 0 16px 16px;
+  }
+}
+
+/* ==========================================================================
+   Dashboard Topbar Stackly Logo (Hidden on laptop/desktop, shown on mobile only)
+   ========================================================================== */
+.topbar-stackly-logo,
+.mobile-topbar-logo {
+  display: none;
+  align-items: center;
+  margin-bottom: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.topbar-stackly-logo:hover,
+.mobile-topbar-logo:hover {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.topbar-stackly-logo img,
+.mobile-topbar-logo img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* ==========================================================================
+   Dashboard Mobile Modal Drawer, Backdrop & Close Button
+   ========================================================================== */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sidebar-close-btn {
+  display: none !important;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94A3B8;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: background 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.sidebar-close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #FFF;
+}
+
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 990 !important;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-backdrop.active {
+  display: block;
+  opacity: 1;
+}
+
+body.sidebar-open {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+.mob-toggle {
+  display: none !important;
+}
+
+@media (max-width: 992px) {
+  .sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 280px !important;
+    max-width: 85vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    z-index: 1000 !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4) !important;
+  }
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+  .sidebar-close-btn {
+    display: inline-flex !important;
+  }
+  .mob-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    position: fixed !important;
+    top: 14px !important;
+    left: 14px !important;
+    z-index: 120 !important;
+    width: 42px !important;
+    height: 38px !important;
+    background: #0b1120 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+  }
+  body.sidebar-open .mob-toggle,
+  body.sidebar-open #mob-toggle {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+  .topbar {
+    padding-left: 70px !important;
+  }
+  .topbar-stackly-logo,
+  .mobile-topbar-logo {
+    display: inline-flex !important;
+  }
+}
+
+/* ==========================================================================
+   Universal Responsive Grid, Card & Table Overflow Protection
+   ========================================================================== */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.main, .content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.mid-grid, .bot-grid, .platform-kpis, .kpi-grid {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.mid-grid > *, .bot-grid > *, .platform-kpis > *, .kpi-grid > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card, .table-card, .chart-card, .table-container {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.table-wrap, .table-responsive, div[style*="overflow-x:auto"], div[style*="overflow-x: auto"] {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .tracker-banner { padding: 20px 16px !important; }
+  .tracker-form { flex-direction: column !important; width: 100% !important; max-width: 100% !important; gap: 8px !important; }
+  .tracker-input { width: 100% !important; box-sizing: border-box !important; }
+  .tracker-btn { width: 100% !important; text-align: center !important; }
+  .live-tracking-card { padding: 16px 12px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; width: 100% !important; box-sizing: border-box !important; }
   .timeline { min-width: 440px !important; }
+  .table-toolbar, .table-card-header { flex-direction: column !important; align-items: stretch !important; gap: 12px !important; padding: 14px !important; }
+  .search-box { width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; }
+  .table-filters { width: 100% !important; flex-wrap: wrap !important; gap: 6px !important; }
+  .table-responsive { width: 100% !important; max-width: 100% !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; display: block !important; box-sizing: border-box !important; }
 }
 
 @media (max-width: 575px) {
@@ -2706,15 +2905,35 @@ html, body {
     overflow-x: hidden !important;
     box-sizing: border-box !important;
   }
-  .card, .table-card, .chart-card {
+  .card, .table-card, .chart-card, .table-container {
     padding: 14px 10px !important;
     border-radius: 10px !important;
     margin-bottom: 12px !important;
   }
-  .user-table, .data-table, table {
+  .table-toolbar, .table-card-header {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 12px 10px !important;
+  }
+  .search-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .table-filters {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  .filter-pill {
+    padding: 5px 10px !important;
+    font-size: 0.72rem !important;
+  }
+  .user-table, .data-table, .comparison-table, table {
     min-width: 540px !important;
   }
-  .table-wrap table, .table-responsive table, .table-card table, .table-container table, table {
+  .table-wrap table, .table-responsive table, .table-card table, .table-container table {
     min-width: 540px !important;
   }
 }
