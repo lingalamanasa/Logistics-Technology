@@ -405,10 +405,9 @@
         gap: 8px;
       }
       .date-badge { display: none; }
-      .kpi-grid { grid-template-columns: 1fr; gap: 12px; }
-      .content { padding: 14px 10px; }
-      .table-card { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 16px 12px; }
-      .inventory-table { min-width: 560px; }
+      .content { padding: 14px 10px; width: 100%; max-width: 100%; overflow-x: hidden; box-sizing: border-box; }
+      .table-container, .table-card { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 16px 12px; border-radius: 12px; }
+      .inventory-table, #inventory-table, table { min-width: 580px; }
     }
   </style>
 </head>
