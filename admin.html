@@ -854,15 +854,15 @@
       </a>
 
       <div class="nav-section-label">Data &amp; Content</div>
-      <a href="shipments.html" class="sidebar-link" id="nav-shipments-admin">
+      <a href="#shipments-admin-section" class="sidebar-link" id="nav-shipments-admin" title="Admin Shipments Overview">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         All Shipments
       </a>
-      <a href="carriers.html" class="sidebar-link" id="nav-carriers-admin">
+      <a href="#carriers-admin-section" class="sidebar-link" id="nav-carriers-admin" title="Admin Carrier Management">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
         Carriers
       </a>
-      <a href="blog.html" class="sidebar-link" id="nav-blog-admin">
+      <a href="#blog-admin-section" class="sidebar-link" id="nav-blog-admin" title="Admin Content & Announcements">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
         Blog &amp; Content
       </a>
@@ -907,7 +907,7 @@
   <div class="main">
     <header class="topbar">
       <div class="topbar-left">
-        <a href="dashboard.html" class="topbar-stackly-logo" title="Go to Stackly Dashboard">
+        <a href="admin.html" class="topbar-stackly-logo" title="Stackly Admin Panel">
           <img src="https://raw.githubusercontent.com/lingalamanasa/Logistics-Technology/main/images/logo.webp" alt="Stackly Logo" onerror="this.onerror=null; this.src='images/logo.webp';" />
         </a>
         <div class="topbar-heading">
@@ -1217,27 +1217,27 @@
             </div>
           </div>
           <div class="quick-actions">
-            <button class="qa-btn" id="qa-add-user" onclick="window.location.href='404.html'">
+            <button class="qa-btn" id="qa-add-user" onclick="document.querySelector('#user-management').scrollIntoView({behavior:'smooth'});">
               <div class="qa-icon" style="color:var(--accent);"><i class="fa-solid fa-user-plus"></i></div>
               <div class="qa-label">Add User</div>
             </button>
-            <button class="qa-btn" id="qa-export" onclick="window.location.href='404.html'">
+            <button class="qa-btn" id="qa-export" onclick="alert('Exporting system audit report...');">
               <div class="qa-icon" style="color:#0284C7;"><i class="fa-solid fa-file-export"></i></div>
               <div class="qa-label">Export Report</div>
             </button>
-            <button class="qa-btn" id="qa-backup" onclick="window.location.href='404.html'">
+            <button class="qa-btn" id="qa-backup" onclick="alert('Running automated platform database backup...');">
               <div class="qa-icon" style="color:#10B981;"><i class="fa-solid fa-hard-drive"></i></div>
               <div class="qa-label">Run Backup</div>
             </button>
-            <button class="qa-btn" id="qa-broadcast" onclick="window.location.href='404.html'">
+            <button class="qa-btn" id="qa-broadcast" onclick="alert('Opening platform broadcast notice console...');">
               <div class="qa-icon" style="color:#F59E0B;"><i class="fa-solid fa-bullhorn"></i></div>
               <div class="qa-label">Broadcast</div>
             </button>
-            <button class="qa-btn" id="qa-logs" onclick="window.location.href='reports.html'">
+            <button class="qa-btn" id="qa-logs" onclick="document.querySelector('#audit-logs').scrollIntoView({behavior:'smooth'});">
               <div class="qa-icon" style="color:#8B5CF6;"><i class="fa-solid fa-clipboard-list"></i></div>
               <div class="qa-label">Audit Logs</div>
             </button>
-            <button class="qa-btn" id="qa-config" onclick="window.location.href='settings.html'">
+            <button class="qa-btn" id="qa-config" onclick="document.querySelector('#system-config').scrollIntoView({behavior:'smooth'});">
               <div class="qa-icon" style="color:#64748B;"><i class="fa-solid fa-gear"></i></div>
               <div class="qa-label">Config</div>
             </button>
@@ -1270,6 +1270,135 @@
               <div class="notice-text">Latest platform update deployed with zero downtime. All services healthy.</div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Admin Shipments & Carriers Overview Row -->
+      <div class="mid-grid" style="margin-top: 24px;">
+        <!-- All Shipments Overview -->
+        <div class="card" id="shipments-admin-section" style="scroll-margin-top: 80px;">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Active Freight &amp; Fleet Operations</div>
+              <div class="card-subtitle">Live system-wide dispatch status</div>
+            </div>
+            <span class="role-badge admin">3,480 Active</span>
+          </div>
+          <div class="table-wrap" style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Tracking ID</th>
+                  <th>Carrier</th>
+                  <th>Origin / Dest</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>LTX-98214</strong></td>
+                  <td>Maersk Line</td>
+                  <td>Shanghai → Rotterdam</td>
+                  <td><span class="status-dot-active"></span>In Transit</td>
+                </tr>
+                <tr>
+                  <td><strong>LTX-87421</strong></td>
+                  <td>DHL Global</td>
+                  <td>Frankfurt → Chicago</td>
+                  <td><span class="status-dot-active"></span>Customs Cleared</td>
+                </tr>
+                <tr>
+                  <td><strong>LTX-65209</strong></td>
+                  <td>FedEx Freight</td>
+                  <td>Los Angeles → Dallas</td>
+                  <td><span class="status-dot-active"></span>Out for Delivery</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Carriers Management -->
+        <div class="card" id="carriers-admin-section" style="scroll-margin-top: 80px;">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Carrier Partner Network</div>
+              <div class="card-subtitle">Connected linehaul &amp; drayage integrations</div>
+            </div>
+            <span class="role-badge user">4 Connected</span>
+          </div>
+          <div class="table-wrap" style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Partner</th>
+                  <th>Mode</th>
+                  <th>SLA Rating</th>
+                  <th>API Health</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Maersk Ocean</strong></td>
+                  <td>Maritime</td>
+                  <td>99.4%</td>
+                  <td><span class="status-dot-active"></span>Operational</td>
+                </tr>
+                <tr>
+                  <td><strong>DHL Express</strong></td>
+                  <td>Air Cargo</td>
+                  <td>98.9%</td>
+                  <td><span class="status-dot-active"></span>Operational</td>
+                </tr>
+                <tr>
+                  <td><strong>FedEx Freight</strong></td>
+                  <td>Ground / Linehaul</td>
+                  <td>99.1%</td>
+                  <td><span class="status-dot-active"></span>Operational</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Blog & Content Section -->
+      <div class="card" id="blog-admin-section" style="margin-top: 24px; scroll-margin-top: 80px;">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Content &amp; Market Intelligence Bulletins</div>
+            <div class="card-subtitle">Published industry bulletins and platform announcements</div>
+          </div>
+          <button class="card-action" onclick="alert('Create new intelligence bulletin');">+ New Article</button>
+        </div>
+        <div class="table-wrap" style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Author</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>AI-Powered Route Optimization in Transpacific Lanes</strong></td>
+                <td>Technology</td>
+                <td>Logistics Engineering</td>
+                <td>Aug 24, 2026</td>
+                <td><span class="status-dot-active"></span>Published</td>
+              </tr>
+              <tr>
+                <td><strong>Global Freight Rate Trends &amp; Q3 Outlook</strong></td>
+                <td>Market Intelligence</td>
+                <td>Market Intelligence Team</td>
+                <td>Aug 18, 2026</td>
+                <td><span class="status-dot-active"></span>Published</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
