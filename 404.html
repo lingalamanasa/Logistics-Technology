@@ -46,50 +46,6 @@
       justify-content: space-between;
       min-height: 100vh;
     }
-    
-    /* Top Header */
-    .header-bar {
-      width: 100%;
-      padding: 20px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-    }
-    .header-logo {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-    }
-    .header-logo img {
-      height: 38px;
-      width: auto;
-      object-fit: contain;
-      display: block;
-    }
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .header-link {
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .header-link:hover {
-      color: var(--accent);
-      background: var(--accent-subtle);
-    }
 
     /* Main Container */
     .error-wrapper {
@@ -122,6 +78,22 @@
       text-align: center;
       position: relative;
       z-index: 1;
+    }
+    .error-logo {
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .error-logo img {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .error-logo img:hover {
+      transform: scale(1.03);
     }
     .error-badge {
       display: inline-flex;
@@ -221,8 +193,6 @@
 
     /* Responsive */
     @media (max-width: 576px) {
-      .header-bar { padding: 14px 16px; }
-      .header-logo img { height: 32px; }
       .error-wrapper { padding: 32px 16px; }
       .error-card { padding: 32px 18px; }
       .error-actions { flex-direction: column; width: 100%; }
@@ -232,24 +202,15 @@
 </head>
 <body>
 
-  <!-- Top Bar with Stackly Logo -->
-  <header class="header-bar">
-    <a href="index.html" class="header-logo" id="header-logo-link" title="Return to Home">
-      <img src="https://raw.githubusercontent.com/lingalamanasa/Logistics-Technology/main/images/logo.webp" alt="Stackly Logo" onerror="this.onerror=null; this.src='images/logo.webp';" />
-    </a>
-    <nav class="header-nav">
-      <a href="index.html" class="header-link" id="nav-return-home">
-        <i class="fa-solid fa-house"></i> Home
-      </a>
-      <a href="contact.html" class="header-link" id="nav-support">
-        <i class="fa-solid fa-headset"></i> Support
-      </a>
-    </nav>
-  </header>
-
   <!-- 404 Card Content -->
   <main class="error-wrapper">
     <div class="error-card">
+      <div class="error-logo">
+        <a href="index.html" title="Return to Home">
+          <img src="https://raw.githubusercontent.com/lingalamanasa/Logistics-Technology/main/images/logo.webp" alt="Stackly Logo" onerror="this.onerror=null; this.src='images/logo.webp';" />
+        </a>
+      </div>
+
       <div class="error-badge">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <span>Route Dispatch Notice</span>
