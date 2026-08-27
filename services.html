@@ -113,13 +113,13 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      min-width: 540px;
-    }
-    .scroll-hint {
-      display: none;
+      min-width: 580px;
     }
     .chain-flow-container {
       grid-template-columns: repeat(4, 1fr);
+    }
+    .mobile-matrix-cards {
+      display: none;
     }
     @media (max-width: 992px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
@@ -128,30 +128,77 @@
     @media (max-width: 768px) {
       .services-grid { grid-template-columns: 1fr; gap: 18px; }
       .chain-flow-container { grid-template-columns: 1fr; gap: 16px; }
-      .scroll-hint {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.78rem;
-        font-weight: 600;
-        color: var(--color-primary);
-        background: rgba(139, 0, 0, 0.08);
-        padding: 5px 12px;
-        border-radius: 9999px;
-        margin-top: 12px;
-      }
-    }
-    @media (max-width: 575px) {
       .table-responsive {
-        margin-top: 16px;
-        border-radius: var(--radius-sm);
+        display: none !important;
       }
-      .comparison-table {
-        min-width: 480px;
+      .mobile-matrix-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 24px;
+        width: 100%;
       }
-      .comparison-table th, .comparison-table td {
-        padding: 10px 10px;
-        font-size: 0.775rem;
+      .matrix-card {
+        background: var(--color-white);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: 24px 20px;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        text-align: left;
+      }
+      .matrix-card.featured {
+        border-color: var(--color-primary);
+        box-shadow: 0 8px 24px -4px rgba(139, 0, 0, 0.12);
+      }
+      .matrix-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .matrix-card-title {
+        font-family: var(--font-serif);
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--color-dark);
+      }
+      .matrix-card-badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: var(--radius-full);
+        background: var(--color-bg-2);
+        color: var(--color-dark);
+      }
+      .matrix-card.featured .matrix-card-badge {
+        background: rgba(139, 0, 0, 0.1);
+        color: var(--color-primary);
+      }
+      .matrix-feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .matrix-feature-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.875rem;
+        color: var(--color-text);
+      }
+      .matrix-feature-label {
+        color: #64748B;
+        font-size: 0.825rem;
+      }
+      .matrix-feature-val {
+        font-weight: 600;
+        text-align: right;
       }
     }
   </style>
@@ -388,6 +435,99 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- Mobile-Optimized Tier Cards (Zero Overflow) -->
+      <div class="mobile-matrix-cards slide-up">
+        <!-- Standard Freight -->
+        <div class="matrix-card">
+          <div class="matrix-card-header">
+            <div class="matrix-card-title">Standard Freight</div>
+            <span class="matrix-card-badge">Economy</span>
+          </div>
+          <ul class="matrix-feature-list">
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Transit Time SLA</span>
+              <span class="matrix-feature-val">5 – 12 Days</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">IoT Telemetry</span>
+              <span class="matrix-feature-val">Checkpoint updates</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Customs Pre-clearance</span>
+              <span class="matrix-feature-val check-yes"><i class="fa-solid fa-check"></i> Included</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Cold-Chain Log</span>
+              <span class="matrix-feature-val check-no">Optional Add-on</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Control Tower Lead</span>
+              <span class="matrix-feature-val check-no"><i class="fa-solid fa-minus" style="font-size:11px; opacity:0.4;"></i></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Priority Air Express -->
+        <div class="matrix-card featured">
+          <div class="matrix-card-header">
+            <div class="matrix-card-title" style="color:var(--color-primary);">Priority Air Express</div>
+            <span class="matrix-card-badge">Most Popular</span>
+          </div>
+          <ul class="matrix-feature-list">
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Transit Time SLA</span>
+              <span class="matrix-feature-val" style="color:var(--color-primary);">24 – 48 Hours</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">IoT Telemetry</span>
+              <span class="matrix-feature-val">Real-time (15-min sync)</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Customs Pre-clearance</span>
+              <span class="matrix-feature-val check-yes"><i class="fa-solid fa-check"></i> Expedited</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Cold-Chain Log</span>
+              <span class="matrix-feature-val check-yes"><i class="fa-solid fa-check"></i> Included</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Control Tower Lead</span>
+              <span class="matrix-feature-val check-no"><i class="fa-solid fa-minus" style="font-size:11px; opacity:0.4;"></i></span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Enterprise Custom SLA -->
+        <div class="matrix-card">
+          <div class="matrix-card-header">
+            <div class="matrix-card-title">Enterprise Custom SLA</div>
+            <span class="matrix-card-badge">Enterprise</span>
+          </div>
+          <ul class="matrix-feature-list">
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Transit Time SLA</span>
+              <span class="matrix-feature-val">Guaranteed Custom</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">IoT Telemetry</span>
+              <span class="matrix-feature-val">Continuous Sub-second</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Customs Pre-clearance</span>
+              <span class="matrix-feature-val check-yes"><i class="fa-solid fa-check"></i> Dedicated Broker</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Cold-Chain Log</span>
+              <span class="matrix-feature-val check-yes"><i class="fa-solid fa-check"></i> Multi-zone Array</span>
+            </li>
+            <li class="matrix-feature-item">
+              <span class="matrix-feature-label">Control Tower Lead</span>
+              <span class="matrix-feature-val check-yes"><i class="fa-solid fa-check"></i> 24/7 Dedicated Lead</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
