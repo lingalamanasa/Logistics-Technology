@@ -832,7 +832,7 @@
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         Control Panel
       </a>
-      <a href="analytics.html" class="sidebar-link" id="nav-platform">
+      <a href="#system-health" class="sidebar-link" id="nav-platform">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         Platform Health
       </a>
@@ -1092,7 +1092,7 @@
         </div>
 
         <!-- System Health -->
-        <div class="card">
+        <div class="card" id="system-health" style="scroll-margin-top: 80px;">
           <div class="card-header">
             <div>
               <div class="card-title">System Health</div>
@@ -1370,7 +1370,30 @@
     document.querySelectorAll('.sidebar-link').forEach(link => {
       link.addEventListener('click', function(e) {
         if (this.id === 'logout-link' || this.id === 'nav-github' || this.getAttribute('target') === '_blank' || (this.getAttribute('href') && this.getAttribute('href').startsWith('http')) || this.getAttribute('href') === '404.html') return;
-        if (this.getAttribute('href') === '#' || !this.getAttribute('href')) {
+        
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          if (href === '#' || href === '#!') {
+            e.preventDefault();
+            window.location.href = '404.html';
+            return;
+          }
+          const targetEl = document.querySelector(href);
+          if (targetEl) {
+            e.preventDefault();
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            targetEl.style.transition = 'box-shadow 0.4s ease, border-color 0.4s ease';
+            targetEl.style.boxShadow = '0 0 0 3px rgba(139,0,0,0.35)';
+            setTimeout(() => {
+              targetEl.style.boxShadow = '';
+            }, 1800);
+            return;
+          }
+        }
+
+        if (!href) {
           e.preventDefault();
           window.location.href = '404.html';
           return;
