@@ -828,7 +828,7 @@
 
     <nav class="sidebar-nav">
       <div class="nav-section-label">Overview</div>
-      <a href="admin.html" class="sidebar-link active" id="nav-overview">
+      <a href="#overview-top" class="sidebar-link active" id="nav-overview">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         Control Panel
       </a>
@@ -838,16 +838,16 @@
       </a>
 
       <div class="nav-section-label">User Management</div>
-      <a href="user.html" class="sidebar-link" id="nav-users" title="Switch to User Portal">
+      <a href="#user-management" class="sidebar-link" id="nav-users" title="User Management Table">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
         All Users
         <span class="sidebar-count">512</span>
       </a>
-      <a href="settings.html" class="sidebar-link" id="nav-roles">
+      <a href="#user-management" class="sidebar-link" id="nav-roles" title="Roles and Permissions">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Roles &amp; Permissions
       </a>
-      <a href="shipments.html" class="sidebar-link" id="nav-pending">
+      <a href="#pending-approvals" class="sidebar-link" id="nav-pending" title="Pending Approvals">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         Pending Approvals
         <span class="sidebar-count alert">7</span>
@@ -868,11 +868,11 @@
       </a>
 
       <div class="nav-section-label">System</div>
-      <a href="reports.html" class="sidebar-link" id="nav-logs">
+      <a href="#audit-logs" class="sidebar-link" id="nav-logs" title="System Audit Logs">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Audit Logs
       </a>
-      <a href="settings.html" class="sidebar-link" id="nav-config">
+      <a href="#system-config" class="sidebar-link" id="nav-config" title="System Configuration">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
         System Config
       </a>
@@ -931,7 +931,7 @@
       </div>
     </header>
 
-    <div class="content">
+    <div class="content" id="overview-top">
 
       <!-- Platform KPIs -->
       <div class="platform-kpis">
@@ -970,7 +970,7 @@
       <!-- Middle Row -->
       <div class="mid-grid">
         <!-- Users Table -->
-        <div class="card">
+        <div class="card" id="user-management" style="scroll-margin-top: 80px;">
           <div class="card-header">
             <div>
               <div class="card-title">User Management</div>
@@ -1161,7 +1161,7 @@
       <!-- Bottom Row -->
       <div class="bot-grid">
         <!-- Activity Feed -->
-        <div class="card">
+        <div class="card" id="audit-logs" style="scroll-margin-top: 80px;">
           <div class="card-header">
             <div>
               <div class="card-title">Recent Activity</div>
@@ -1209,7 +1209,7 @@
         </div>
 
         <!-- Quick Actions -->
-        <div class="card">
+        <div class="card" id="system-config" style="scroll-margin-top: 80px;">
           <div class="card-header">
             <div>
               <div class="card-title">Quick Actions</div>
@@ -1245,7 +1245,7 @@
         </div>
 
         <!-- Platform Notices -->
-        <div class="card">
+        <div class="card" id="pending-approvals" style="scroll-margin-top: 80px;">
           <div class="card-header">
             <div>
               <div class="card-title">Platform Notices</div>
