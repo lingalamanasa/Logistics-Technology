@@ -55,6 +55,9 @@
       padding: 28px 20px;
       transition: all var(--transition);
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .team-card:hover {
       transform: translateY(-6px);
@@ -64,30 +67,35 @@
     .team-avatar {
       width: 104px;
       height: 104px;
+      min-width: 104px;
+      min-height: 104px;
+      max-width: 104px;
+      max-height: 104px;
       border-radius: 50%;
       overflow: hidden;
       margin: 0 auto 18px;
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12), 0 0 0 4px #FFFFFF, 0 0 0 6px rgba(139,0,0,0.22);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
+      position: relative;
       background: #F1F5F9;
-      color: #FFF;
-      font-size: 1.5rem;
-      font-weight: 700;
+      transform: translateZ(0);
+      -webkit-mask-image: -webkit-radial-gradient(white, black);
+      mask-image: radial-gradient(white, black);
       transition: transform var(--transition), box-shadow var(--transition);
     }
     .team-card:hover .team-avatar {
-      transform: scale(1.08);
+      transform: scale(1.08) translateZ(0);
       box-shadow: 0 12px 28px rgba(139, 0, 0, 0.25), 0 0 0 4px #FFFFFF, 0 0 0 7px var(--color-primary);
     }
     .team-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      border-radius: 50%;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      object-fit: cover !important;
+      object-position: center top !important;
+      display: block !important;
+      border-radius: 50% !important;
     }
     .team-card h4 {
       font-size: 1.1rem;
@@ -296,7 +304,7 @@
       <div class="team-grid">
         <div class="team-card slide-left">
           <div class="team-avatar">
-            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=400&q=80" alt="Alexander King - CEO" onerror="this.onerror=null; this.src='images/team_alexander.svg';" />
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=400&q=80" alt="Alexander King - CEO" width="104" height="104" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.onerror=null; this.src='images/team_alexander.svg';" />
           </div>
           <h4>Alexander King</h4>
           <div class="team-role">Chief Executive Officer</div>
@@ -305,7 +313,7 @@
 
         <div class="team-card slide-up" style="transition-delay:0.1s;">
           <div class="team-avatar">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80" alt="Sarah Chen - CTO" onerror="this.onerror=null; this.src='images/team_sarah.svg';" />
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&h=400&q=80" alt="Sarah Chen - CTO" width="104" height="104" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.onerror=null; this.src='images/team_sarah.svg';" />
           </div>
           <h4>Sarah Chen</h4>
           <div class="team-role">Chief Technology Officer</div>
@@ -314,7 +322,7 @@
 
         <div class="team-card slide-up" style="transition-delay:0.2s;">
           <div class="team-avatar">
-            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=400&q=80" alt="Marcus Davies - Head of 3PL" onerror="this.onerror=null; this.src='images/team_marcus.svg';" />
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&h=400&q=80" alt="Marcus Davies - Head of 3PL" width="104" height="104" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.onerror=null; this.src='images/team_marcus.svg';" />
           </div>
           <h4>Marcus Davies</h4>
           <div class="team-role">Head of 3PL & Robotics</div>
@@ -323,7 +331,7 @@
 
         <div class="team-card slide-right" style="transition-delay:0.3s;">
           <div class="team-avatar">
-            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&h=400&q=80" alt="Elena Rostova - Director of Operations" onerror="this.onerror=null; this.src='images/team_elena.svg';" />
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&h=400&q=80" alt="Elena Rostova - Director of Operations" width="104" height="104" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.onerror=null; this.src='images/team_elena.svg';" />
           </div>
           <h4>Elena Rostova</h4>
           <div class="team-role">Director of Global Operations</div>
