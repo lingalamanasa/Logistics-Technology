@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-elena" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4C0519"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <linearGradient id="suit-elena" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <clipPath id="circle-clip-elena">
+      <circle cx="100" cy="100" r="96"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#circle-clip-elena)">
+    <!-- Background Circle -->
+    <rect width="200" height="200" fill="url(#bg-elena)"/>
+    <circle cx="100" cy="100" r="85" fill="#BE123C" opacity="0.25"/>
+
+    <!-- Long Blonde/Chestnut Flowing Hair Backing -->
+    <path d="M52 68 C48 115 52 175 62 200 L138 200 C148 175 152 115 148 68 Z" fill="#92400E"/>
+
+    <!-- Body & Executive Burgundy Blazer -->
+    <path d="M30 200 C30 158 60 146 100 146 C140 146 170 158 170 200 Z" fill="url(#suit-elena)"/>
+
+    <!-- Crisp White Collar Shirt -->
+    <polygon points="100,146 84,170 94,195 100,190 106,195 116,170" fill="#FFFFFF"/>
+
+    <!-- Blazer Lapels -->
+    <path d="M68 152 L90 186 L78 200 L42 200 Z" fill="#881337"/>
+    <path d="M132 152 L110 186 L122 200 L158 200 Z" fill="#881337"/>
+
+    <!-- Gold Chain Necklace Accent -->
+    <path d="M90 156 Q100 166 110 156" stroke="#F59E0B" stroke-width="2" fill="none"/>
+
+    <!-- Neck -->
+    <rect x="88" y="118" width="24" height="30" rx="3" fill="#FCE7F3"/>
+
+    <!-- Head & Ears -->
+    <circle cx="68" cy="100" r="8.5" fill="#FCE7F3"/>
+    <circle cx="132" cy="100" r="8.5" fill="#FCE7F3"/>
+    <!-- Gold Hoop Earrings -->
+    <circle cx="68" cy="104" r="4.5" fill="none" stroke="#F59E0B" stroke-width="2"/>
+    <circle cx="132" cy="104" r="4.5" fill="none" stroke="#F59E0B" stroke-width="2"/>
+
+    <ellipse cx="100" cy="96" rx="32" ry="38" fill="#FFF1F2"/>
+
+    <!-- Elegant Flowing Hair Front Waves -->
+    <path d="M62 86 C58 50 74 44 100 44 C126 44 142 50 138 86 C134 68 126 56 100 56 C74 56 66 68 62 86 Z" fill="#B45309"/>
+    <path d="M60 80 Q74 50 100 48 Q126 50 140 80 Q126 58 100 56 Q74 58 60 80 Z" fill="#92400E"/>
+    <path d="M60 80 C56 110 62 145 70 155 C64 135 60 110 62 82 Z" fill="#B45309"/>
+    <path d="M140 80 C144 110 138 145 130 155 C136 135 140 110 138 82 Z" fill="#B45309"/>
+
+    <!-- Eyebrows -->
+    <path d="M76 80 Q84 76 92 80" stroke="#78350F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M108 80 Q116 76 124 80" stroke="#78350F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Eyes (Blue-Gray Alert) -->
+    <ellipse cx="84" cy="89" rx="4.5" ry="3.2" fill="#0284C7"/>
+    <ellipse cx="116" cy="89" rx="4.5" ry="3.2" fill="#0284C7"/>
+    <circle cx="84" cy="89" r="2.2" fill="#0F172A"/>
+    <circle cx="116" cy="89" r="2.2" fill="#0F172A"/>
+    <circle cx="85.5" cy="88" r="1.2" fill="#FFFFFF"/>
+    <circle cx="117.5" cy="88" r="1.2" fill="#FFFFFF"/>
+
+    <!-- Lashes -->
+    <path d="M78 86 Q84 83 90 86" stroke="#09090B" stroke-width="1.5" fill="none"/>
+    <path d="M110 86 Q116 83 122 86" stroke="#09090B" stroke-width="1.5" fill="none"/>
+
+    <!-- Nose -->
+    <path d="M100 87 L98 102 Q100 104 102 102" stroke="#BE185D" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+
+    <!-- Smile (Subtle Ruby Red) -->
+    <path d="M89 116 Q100 124 111 116" stroke="#BE123C" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <circle cx="100" cy="100" r="97" fill="none" stroke="rgba(139,0,0,0.4)" stroke-width="3"/>
+</svg>

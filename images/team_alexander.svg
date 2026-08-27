@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-alex" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="skin-alex" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="suit-alex" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="tie-alex" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B0000"/>
+      <stop offset="100%" stop-color="#5B0000"/>
+    </linearGradient>
+    <clipPath id="circle-clip-alex">
+      <circle cx="100" cy="100" r="96"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#circle-clip-alex)">
+    <!-- Background Circle -->
+    <rect width="200" height="200" fill="url(#bg-alex)"/>
+    <circle cx="100" cy="100" r="85" fill="#334155" opacity="0.3"/>
+
+    <!-- Body & Suit -->
+    <path d="M30 200 C30 155 60 142 100 142 C140 142 170 155 170 200 Z" fill="url(#suit-alex)"/>
+    
+    <!-- White Shirt Collar -->
+    <polygon points="100,142 80,165 92,185 100,180 108,185 120,165" fill="#FFFFFF"/>
+    
+    <!-- Tie -->
+    <polygon points="96,166 104,166 107,192 100,200 93,192" fill="url(#tie-alex)"/>
+
+    <!-- Suit Lapels -->
+    <path d="M72 152 L90 188 L78 200 L45 200 Z" fill="#111827"/>
+    <path d="M128 152 L110 188 L122 200 L155 200 Z" fill="#111827"/>
+
+    <!-- Neck -->
+    <rect x="86" y="118" width="28" height="30" rx="4" fill="#E59866"/>
+
+    <!-- Head & Ears -->
+    <circle cx="68" cy="98" r="10" fill="#E59866"/>
+    <circle cx="132" cy="98" r="10" fill="#E59866"/>
+    <ellipse cx="100" cy="94" rx="34" ry="40" fill="#F0B27A"/>
+
+    <!-- Hair (Mature Executive Gray/Black) -->
+    <path d="M66 84 C66 56 80 48 100 48 C120 48 134 56 134 84 C134 68 126 58 100 58 C74 58 66 68 66 84 Z" fill="#4B5563"/>
+    <path d="M65 84 Q68 62 100 54 Q132 62 135 84 Q131 70 100 62 Q69 70 65 84 Z" fill="#374151"/>
+
+    <!-- Eyebrows -->
+    <rect x="76" y="78" width="16" height="3.5" rx="1.5" fill="#374151" transform="rotate(-3 84 80)"/>
+    <rect x="108" y="78" width="16" height="3.5" rx="1.5" fill="#374151" transform="rotate(3 116 80)"/>
+
+    <!-- Eyes -->
+    <circle cx="84" cy="88" r="4" fill="#1E293B"/>
+    <circle cx="116" cy="88" r="4" fill="#1E293B"/>
+    <circle cx="85" cy="87" r="1.2" fill="#FFFFFF"/>
+    <circle cx="117" cy="87" r="1.2" fill="#FFFFFF"/>
+
+    <!-- Nose -->
+    <path d="M100 86 L97 102 L103 102" stroke="#CA6F1E" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Glasses (Sophisticated Executive Frame) -->
+    <rect x="73" y="82" width="22" height="14" rx="3" fill="none" stroke="#94A3B8" stroke-width="2"/>
+    <rect x="105" y="82" width="22" height="14" rx="3" fill="none" stroke="#94A3B8" stroke-width="2"/>
+    <line x1="95" y1="88" x2="105" y2="88" stroke="#94A3B8" stroke-width="2"/>
+
+    <!-- Smile / Mouth -->
+    <path d="M90 114 Q100 122 110 114" stroke="#B03A2E" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+  <circle cx="100" cy="100" r="97" fill="none" stroke="rgba(139,0,0,0.4)" stroke-width="3"/>
+</svg>
