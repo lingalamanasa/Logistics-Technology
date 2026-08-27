@@ -106,14 +106,17 @@
       background: var(--color-white);
       border-radius: var(--radius-md);
       border: 1px solid var(--color-border);
-      box-shadow: var(--shadow-sm);
-      margin-top: 32px;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+      margin-top: 24px;
     }
     .comparison-table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      min-width: 580px;
+      min-width: 540px;
+    }
+    .scroll-hint {
+      display: none;
     }
     .chain-flow-container {
       grid-template-columns: repeat(4, 1fr);
@@ -125,15 +128,30 @@
     @media (max-width: 768px) {
       .services-grid { grid-template-columns: 1fr; gap: 18px; }
       .chain-flow-container { grid-template-columns: 1fr; gap: 16px; }
+      .scroll-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--color-primary);
+        background: rgba(139, 0, 0, 0.08);
+        padding: 5px 12px;
+        border-radius: 9999px;
+        margin-top: 12px;
+      }
     }
     @media (max-width: 575px) {
       .table-responsive {
-        margin-top: 20px;
+        margin-top: 16px;
         border-radius: var(--radius-sm);
       }
+      .comparison-table {
+        min-width: 480px;
+      }
       .comparison-table th, .comparison-table td {
-        padding: 10px 12px;
-        font-size: 0.8rem;
+        padding: 10px 10px;
+        font-size: 0.775rem;
       }
     }
   </style>
@@ -324,13 +342,14 @@
         <span class="section-tag">Feature Matrix</span>
         <h2 class="section-title">Tiered Service Comparison</h2>
         <p class="section-subtitle" style="margin:0 auto;">Select the tier that matches your shipment volume and transit urgency.</p>
+        <span class="scroll-hint"><i class="fa-solid fa-arrows-left-right"></i> Swipe table left/right to compare tiers</span>
       </div>
 
       <div class="table-responsive slide-up">
         <table class="comparison-table">
           <thead>
             <tr>
-              <th>Feature & Capability</th>
+              <th>Feature &amp; Capability</th>
               <th>Standard Freight</th>
               <th>Priority Air Express</th>
               <th>Enterprise Custom SLA</th>
@@ -356,15 +375,15 @@
               <td><span class="check-yes"><i class="fa-solid fa-check"></i> Dedicated Customs Broker</span></td>
             </tr>
             <tr>
-              <td><strong>Cold-Chain & Temperature Log</strong></td>
+              <td><strong>Cold-Chain &amp; Temperature Log</strong></td>
               <td><span class="check-no">Optional Add-on</span></td>
               <td><span class="check-yes"><i class="fa-solid fa-check"></i> Included</span></td>
               <td><span class="check-yes"><i class="fa-solid fa-check"></i> Multi-zone Sensor Array</span></td>
             </tr>
             <tr>
               <td><strong>Dedicated Control Tower Manager</strong></td>
-              <td><span class="check-no">—</span></td>
-              <td><span class="check-no">—</span></td>
+              <td><span class="check-no"><i class="fa-solid fa-minus" style="font-size:11px; opacity:0.4;"></i></span></td>
+              <td><span class="check-no"><i class="fa-solid fa-minus" style="font-size:11px; opacity:0.4;"></i></span></td>
               <td><span class="check-yes"><i class="fa-solid fa-check"></i> 24/7 Dedicated Ops Lead</span></td>
             </tr>
           </tbody>
