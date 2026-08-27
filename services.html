@@ -115,6 +115,9 @@
       text-align: left;
       min-width: 580px;
     }
+    .chain-flow-container {
+      grid-template-columns: repeat(4, 1fr);
+    }
     @media (max-width: 992px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .chain-flow-container { grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -280,7 +283,7 @@
         <p class="section-subtitle" style="margin:0 auto;">Four seamless steps to streamline your supply chain from procurement to final destination.</p>
       </div>
 
-      <div class="chain-flow-container">
+      <div class="chain-flow-container" style="grid-template-columns: repeat(4, 1fr);">
         <div class="chain-node slide-up">
           <div class="chain-node-num">1</div>
           <div class="chain-node-icon"><i class="fa-solid fa-bolt"></i></div>

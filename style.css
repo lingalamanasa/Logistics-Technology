@@ -899,6 +899,11 @@ p {
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.chain-flow-container:has(> .chain-node:nth-child(4):last-child),
+.chain-flow-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 /* Connecting Telemetry Signal Line */
 .chain-flow-container::before {
   content: '';
