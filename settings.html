@@ -581,28 +581,28 @@
           <div class="settings-title">Account & Profile Information</div>
           <div class="settings-desc">Your verified logistics enterprise credentials</div>
         </div>
-        <form onsubmit="event.preventDefault(); alert('Profile settings saved successfully!');">
+        <form id="profile-form" onsubmit="saveProfileSettings(event)">
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
             <div class="form-group">
               <label class="form-label">Full Name</label>
-              <input type="text" class="form-input" id="settings-name-input" value="LINGALA MANASA" />
+              <input type="text" class="form-input" id="settings-name-input" value="Lingalamanasa123" required />
             </div>
             <div class="form-group">
               <label class="form-label">Work Email</label>
-              <input type="email" class="form-input" id="settings-email-input" value="lingalamanasa123@gmail.com" />
+              <input type="email" class="form-input" id="settings-email-input" value="lingalamanasa123@gmail.com" required />
             </div>
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
             <div class="form-group">
               <label class="form-label">Enterprise Organization</label>
-              <input type="text" class="form-input" value="Stackly Global Logistics" />
+              <input type="text" class="form-input" id="settings-org-input" value="Stackly Global Logistics" />
             </div>
             <div class="form-group">
               <label class="form-label">Assigned Role</label>
-              <input type="text" class="form-input" value="Logistics Manager (Admin)" disabled style="background:#F1F5F9;" />
+              <input type="text" class="form-input" id="settings-role-display" value="Logistics Manager (Admin)" disabled style="background:#F1F5F9; cursor:not-allowed;" />
             </div>
           </div>
-          <button type="submit" class="btn-save">Save Profile Changes</button>
+          <button type="submit" class="btn-save" id="btn-save-profile">Save Profile Changes</button>
         </form>
       </div>
 
@@ -612,24 +612,78 @@
           <div class="settings-title">Telemetry Sensor Alert Thresholds</div>
           <div class="settings-desc">Configure automated SMS/Email dispatch when cargo exceeds parameters</div>
         </div>
-        <form onsubmit="event.preventDefault(); alert('Telemetry thresholds updated!');">
+        <form id="threshold-form" onsubmit="updateThresholdSettings(event)">
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
             <div class="form-group">
               <label class="form-label">Cold Chain Temp Variance (&plusmn;&deg;C)</label>
-              <input type="number" class="form-input" value="2.0" step="0.1" />
+              <input type="number" class="form-input" id="threshold-temp" value="2.0" step="0.1" required />
             </div>
             <div class="form-group">
               <label class="form-label">G-Force Shock Limit (G)</label>
-              <input type="number" class="form-input" value="0.08" step="0.01" />
+              <input type="number" class="form-input" id="threshold-shock" value="0.08" step="0.01" required />
             </div>
           </div>
-          <button type="submit" class="btn-save">Update Thresholds</button>
+          <button type="submit" class="btn-save" id="btn-update-thresholds">Update Thresholds</button>
         </form>
       </div>
     </div>
   </div>
 
   <script>
+    function showToast(message, isSuccess = true) {
+      let toast = document.getElementById('settings-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'settings-toast';
+        toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#0F172A;color:#FFF;padding:14px 22px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.3);border-left:5px solid #10B981;font-size:0.875rem;font-weight:600;display:flex;align-items:center;gap:10px;z-index:9999;transition:opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);opacity:0;transform:translateY(20px);pointer-events:none;';
+        document.body.appendChild(toast);
+      }
+      toast.style.borderLeftColor = isSuccess ? '#10B981' : '#EF4444';
+      toast.innerHTML = `<i class="fa-solid ${isSuccess ? 'fa-circle-check' : 'fa-triangle-exclamation'}" style="color:${isSuccess ? '#10B981' : '#EF4444'};font-size:1.1rem;"></i> <span>${message}</span>`;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(20px)';
+      }, 3200);
+    }
+
+    function saveProfileSettings(e) {
+      if (e) e.preventDefault();
+      const nameInp = document.getElementById('settings-name-input');
+      const emailInp = document.getElementById('settings-email-input');
+      const newName = nameInp ? nameInp.value.trim() : 'Lingalamanasa123';
+      const newEmail = emailInp ? emailInp.value.trim() : 'lingalamanasa123@gmail.com';
+      
+      let user = {};
+      try {
+        const stored = localStorage.getItem('logitech_user') || sessionStorage.getItem('logitech_user');
+        if (stored) user = JSON.parse(stored);
+      } catch(err) {}
+      
+      user.name = newName;
+      user.email = newEmail;
+      user.role = user.role || 'Logistics Manager';
+      localStorage.setItem('logitech_user', JSON.stringify(user));
+      
+      document.querySelectorAll('#sidebar-user-name, #topbar-user-name').forEach(el => el.textContent = newName);
+      document.querySelectorAll('#sidebar-email-text, #topbar-user-email').forEach(el => el.textContent = newEmail);
+      
+      let initials = 'LM';
+      if (newName) {
+        const parts = newName.trim().split(/\s+/);
+        initials = parts.length >= 2 ? (parts[0][0] + parts[1][0]).toUpperCase() : newName.substring(0, 2).toUpperCase();
+      }
+      document.querySelectorAll('#sidebar-avatar, #topbar-avatar').forEach(el => el.textContent = initials);
+      
+      showToast('Account & Profile settings saved successfully!');
+    }
+
+    function updateThresholdSettings(e) {
+      if (e) e.preventDefault();
+      showToast('Telemetry alert sensor thresholds updated successfully!');
+    }
+
     try {
       const stored = localStorage.getItem('logitech_user') || sessionStorage.getItem('logitech_user');
       if (stored) {
@@ -655,7 +709,7 @@
     } catch(e) {}
 
     function handleLogout(e) {
-      e.preventDefault();
+      if (e) e.preventDefault();
       localStorage.removeItem('logitech_user');
       sessionStorage.removeItem('logitech_user');
       window.location.href = 'login.html';
@@ -713,7 +767,6 @@
         closeSidebar();
       }
     });
-    // Ensure clean state on load
     closeSidebar();
 
     const now = new Date();
