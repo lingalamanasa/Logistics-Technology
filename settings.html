@@ -578,18 +578,18 @@
       <!-- Profile Card -->
       <div class="settings-card">
         <div class="settings-header">
-          <div class="settings-title">Account & Profile Information</div>
+          <div class="settings-title">Account &amp; Profile Information</div>
           <div class="settings-desc">Your verified logistics enterprise credentials</div>
         </div>
-        <form id="profile-form" onsubmit="saveProfileSettings(event); return false;">
+        <div id="profile-form">
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
             <div class="form-group">
               <label class="form-label">Full Name</label>
-              <input type="text" class="form-input" id="settings-name-input" value="Lingalamanasa123" required />
+              <input type="text" class="form-input" id="settings-name-input" value="Lingalamanasa123" />
             </div>
             <div class="form-group">
               <label class="form-label">Work Email</label>
-              <input type="email" class="form-input" id="settings-email-input" value="lingalamanasa123@gmail.com" required />
+              <input type="email" class="form-input" id="settings-email-input" value="lingalamanasa123@gmail.com" />
             </div>
           </div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
@@ -602,8 +602,8 @@
               <input type="text" class="form-input" id="settings-role-display" value="Logistics Manager (Admin)" disabled style="background:#F1F5F9; cursor:not-allowed;" />
             </div>
           </div>
-          <button type="button" class="btn-save" id="btn-save-profile" onclick="saveProfileSettings(event)">Save Profile Changes</button>
-        </form>
+          <button type="button" class="btn-save" id="btn-save-profile" onclick="saveProfileSettings()">Save Profile Changes</button>
+        </div>
       </div>
 
       <!-- Telemetry Triggers -->
@@ -612,19 +612,19 @@
           <div class="settings-title">Telemetry Sensor Alert Thresholds</div>
           <div class="settings-desc">Configure automated SMS/Email dispatch when cargo exceeds parameters</div>
         </div>
-        <form id="threshold-form" onsubmit="updateThresholdSettings(event); return false;">
+        <div id="threshold-form">
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
             <div class="form-group">
               <label class="form-label">Cold Chain Temp Variance (&plusmn;&deg;C)</label>
-              <input type="number" class="form-input" id="threshold-temp" value="2.0" step="0.1" required />
+              <input type="number" class="form-input" id="threshold-temp" value="2.0" step="0.1" />
             </div>
             <div class="form-group">
               <label class="form-label">G-Force Shock Limit (G)</label>
-              <input type="number" class="form-input" id="threshold-shock" value="0.08" step="0.01" required />
+              <input type="number" class="form-input" id="threshold-shock" value="0.08" step="0.01" />
             </div>
           </div>
-          <button type="button" class="btn-save" id="btn-update-thresholds" onclick="updateThresholdSettings(event)">Update Thresholds</button>
-        </form>
+          <button type="button" class="btn-save" id="btn-update-thresholds" onclick="updateThresholdSettings()">Update Thresholds</button>
+        </div>
       </div>
     </div>
   </div>
@@ -648,8 +648,7 @@
       }, 3200);
     }
 
-    function saveProfileSettings(e) {
-      if (e) e.preventDefault();
+    function saveProfileSettings() {
       const nameInp = document.getElementById('settings-name-input');
       const emailInp = document.getElementById('settings-email-input');
       const newName = nameInp ? nameInp.value.trim() : 'Lingalamanasa123';
@@ -679,8 +678,7 @@
       showToast('Account & Profile settings saved successfully!');
     }
 
-    function updateThresholdSettings(e) {
-      if (e) e.preventDefault();
+    function updateThresholdSettings() {
       showToast('Telemetry alert sensor thresholds updated successfully!');
     }
 
