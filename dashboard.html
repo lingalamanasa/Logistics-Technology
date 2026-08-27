@@ -1200,8 +1200,8 @@
     // Sidebar active links
     document.querySelectorAll('.sidebar-link').forEach(link => {
       link.addEventListener('click', function(e) {
-        if (this.id === 'logout-link' || this.getAttribute('href') === '404.html') return;
-        if (this.getAttribute('href') === '#') {
+        if (this.id === 'logout-link' || this.id === 'nav-github' || this.getAttribute('target') === '_blank' || (this.getAttribute('href') && this.getAttribute('href').startsWith('http')) || this.getAttribute('href') === '404.html') return;
+        if (this.getAttribute('href') === '#' || !this.getAttribute('href')) {
           e.preventDefault();
           window.location.href = '404.html';
           return;
